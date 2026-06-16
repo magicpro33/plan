@@ -333,6 +333,153 @@
     flex-shrink: 0;
   }
 
+  /* ── ETF SECTION ── */
+  .etf-section { padding: 48px; border-bottom: 1px solid var(--border); }
+  .etf-pillar-block { margin-bottom: 40px; }
+  .etf-pillar-block:last-child { margin-bottom: 0; }
+  .etf-pillar-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .etf-pillar-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .etf-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 10px;
+  }
+  .etf-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.15s;
+  }
+  .etf-card:hover { border-color: var(--border2); }
+  .etf-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+  .etf-ticker {
+    font-family: var(--mono);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .etf-ticker a {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .etf-ticker a:hover { color: var(--accent); border-color: var(--accent); }
+  .etf-name {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .etf-meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .etf-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    padding: 3px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .badge-er  { background: rgba(232,150,10,0.12); color: var(--amber); }
+  .badge-aum { background: rgba(29,184,122,0.12); color: var(--green); }
+  .etf-focus {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .etf-alloc-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .alloc-bars { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+  .alloc-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .alloc-name {
+    font-size: 10px;
+    color: var(--muted);
+    width: 120px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .alloc-bar-wrap {
+    flex: 1;
+    height: 4px;
+    background: var(--border2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .alloc-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .alloc-pct {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text);
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .etf-holdings-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .etf-holding-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .etf-chip {
+    font-size: 10px;
+    padding: 2px 8px;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    color: var(--muted);
+  }
+  .etf-chip a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .etf-chip a:hover { color: var(--accent); }
+
   /* ── FOOTER ── */
   .footer {
     padding: 36px 48px;
@@ -382,8 +529,8 @@
         <div class="stat-label">Stability tiers</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">48+</div>
-        <div class="stat-label">Key contributors</div>
+        <div class="stat-num">16</div>
+        <div class="stat-label">ETFs mapped</div>
       </div>
     </div>
   </div>
@@ -420,6 +567,15 @@
       <div class="section-count">Key market contributors</div>
     </div>
     <div class="companies-grid" id="companyGrid"></div>
+  </div>
+
+  <!-- ETF SECTION -->
+  <div class="etf-section" id="etfSection">
+    <div class="section-header">
+      <div class="section-title">ETF Coverage by Pillar</div>
+      <div class="section-count">Asset allocation & top holdings</div>
+    </div>
+    <div id="etfContainer"></div>
   </div>
 
   <!-- FOOTER -->
@@ -811,6 +967,345 @@ const companyData = [
   { pillar:"Monitoring",  cat:"monitor",   cos:["Schneider EcoStruxure","Vertiv Avocent","Sunbird","Nlyte","Delta","NVIDIA DOCA"] },
 ];
 
+// ── ETF DATA ──────────────────────────────────────────────────────────────
+const etfData = [
+  {
+    pillar: "Power & Energy",
+    cat: "power",
+    etfs: [
+      {
+        ticker: "GRID",
+        name: "First Trust Nasdaq Clean Edge Smart Grid Infrastructure Index Fund",
+        er: "0.56%",
+        aum: "$11.7B",
+        focus: "Global equities in smart grid, power distribution, energy storage, and grid automation. 125+ holdings across electrical equipment, utilities, and industrial conglomerates.",
+        allocation: [
+          { name: "Industrials", pct: 60 },
+          { name: "Utilities", pct: 22 },
+          { name: "Info Technology", pct: 12 },
+          { name: "Materials", pct: 6 },
+        ],
+        topHoldings: ["ABB (8.4%)", "Eaton (7.9%)", "Johnson Controls (7.6%)", "Schneider Electric (7.1%)", "National Grid (6.8%)"],
+      },
+      {
+        ticker: "PAVE",
+        name: "Global X U.S. Infrastructure Development ETF",
+        er: "0.47%",
+        aum: "$9.2B",
+        focus: "U.S. companies benefiting from infrastructure buildout — raw materials, heavy equipment, engineering, construction. Strong overlap with data center power buildout.",
+        allocation: [
+          { name: "Industrials", pct: 68 },
+          { name: "Materials", pct: 20 },
+          { name: "Energy", pct: 7 },
+          { name: "Other", pct: 5 },
+        ],
+        topHoldings: ["Quanta Services (4.1%)", "CSX (3.6%)", "Howmet Aerospace (3.3%)", "Nucor (3.2%)", "Eaton (3.2%)"],
+      },
+    ],
+  },
+  {
+    pillar: "Cooling & Thermal",
+    cat: "cooling",
+    etfs: [
+      {
+        ticker: "HVAC",
+        name: "SPDR S&P Kensho Intelligent Structures ETF (proxy: XSHD / sector overlap)",
+        er: "0.45%",
+        aum: "~$800M",
+        focus: "No pure-play cooling ETF exists. Best proxies are industrial conglomerate ETFs with significant HVAC/thermal exposure: XLI (Industrial Select), PAVE, or GRID via Carrier, Trane, Vertiv holdings.",
+        allocation: [
+          { name: "HVAC / Cooling", pct: 28 },
+          { name: "Power mgmt", pct: 24 },
+          { name: "Building systems", pct: 22 },
+          { name: "Controls/sensors", pct: 26 },
+        ],
+        topHoldings: ["Carrier Global (CARR)", "Trane Technologies (TT)", "Vertiv (VRT)", "Modine (MOD)", "Johnson Controls (JCI)"],
+      },
+      {
+        ticker: "XLI",
+        name: "Industrial Select Sector SPDR Fund",
+        er: "0.09%",
+        aum: "$20B+",
+        focus: "Broadest industrial sector coverage, capturing cooling/thermal companies including Carrier, Trane, Honeywell, and Eaton via the S&P 500 Industrials basket.",
+        allocation: [
+          { name: "Aerospace & Defense", pct: 21 },
+          { name: "Machinery", pct: 20 },
+          { name: "Industrials Conglom.", pct: 18 },
+          { name: "Transport/Logistics", pct: 22 },
+          { name: "Building Products", pct: 19 },
+        ],
+        topHoldings: ["GE Aerospace (9.2%)", "Caterpillar (5.8%)", "RTX (5.5%)", "Honeywell (5.1%)", "Eaton (4.9%)"],
+      },
+    ],
+  },
+  {
+    pillar: "Physical Structure",
+    cat: "structure",
+    etfs: [
+      {
+        ticker: "IGF",
+        name: "iShares Global Infrastructure ETF",
+        er: "0.40%",
+        aum: "$5.8B",
+        focus: "Global infrastructure operators: regulated utilities, toll roads, pipelines, airports. Includes data center physical real estate players. 76 holdings, ~40% U.S.",
+        allocation: [
+          { name: "Utilities", pct: 42 },
+          { name: "Transportation", pct: 30 },
+          { name: "Energy/Pipelines", pct: 18 },
+          { name: "Communications", pct: 10 },
+        ],
+        topHoldings: ["NextEra Energy (NEE)", "Aena (ANNSF)", "Transurban (TRAUF)", "American Tower (AMT)", "Crown Castle (CCI)"],
+      },
+      {
+        ticker: "DTCR",
+        name: "Global X Data Center & Digital Infrastructure ETF",
+        er: "0.50%",
+        aum: "$2.3B",
+        focus: "REITs and operators that own physical data center facilities — the racks, power, and real estate. Pure-play on the physical layer of the data center stack.",
+        allocation: [
+          { name: "Data Center REITs", pct: 55 },
+          { name: "Tower/Cell REITs", pct: 28 },
+          { name: "Digital Infra Ops", pct: 12 },
+          { name: "Other Tech Infra", pct: 5 },
+        ],
+        topHoldings: ["Equinix (14.8%)", "Digital Realty (13.5%)", "American Tower (11.6%)", "Crown Castle (8.5%)", "SBA Comm (4.7%)"],
+      },
+    ],
+  },
+  {
+    pillar: "Compute Substrate",
+    cat: "compute",
+    etfs: [
+      {
+        ticker: "SMH",
+        name: "VanEck Semiconductor ETF",
+        er: "0.35%",
+        aum: "$22B+",
+        focus: "25 largest U.S.-listed semiconductor companies. Concentrated in mega-cap leaders — NVIDIA and TSMC alone are ~29% of the fund. Best single-ticker semiconductor play.",
+        allocation: [
+          { name: "Chip Design (fabless)", pct: 52 },
+          { name: "Foundry/Mfg", pct: 18 },
+          { name: "Semi Equipment", pct: 20 },
+          { name: "Memory/Storage chips", pct: 10 },
+        ],
+        topHoldings: ["NVIDIA (18%)", "TSMC (11%)", "Broadcom (8%)", "Intel (7%)", "AMD (6%)"],
+      },
+      {
+        ticker: "SOXX",
+        name: "iShares Semiconductor ETF",
+        er: "0.35%",
+        aum: "$17B",
+        focus: "30 U.S.-listed semiconductor companies with modified market-cap weighting (10% cap per holding). Broader and more balanced than SMH — includes ASML, AMAT, LRCX.",
+        allocation: [
+          { name: "Semi Design (42.5%)", pct: 43 },
+          { name: "Semi Equipment (19.5%)", pct: 20 },
+          { name: "Integrated Circuits", pct: 15 },
+          { name: "Memory/Other", pct: 22 },
+        ],
+        topHoldings: ["Broadcom (8.8%)", "NVIDIA (9.2%)", "AMD (7.5%)", "AMAT (5.1%)", "QCOM (5.1%)"],
+      },
+    ],
+  },
+  {
+    pillar: "Connectivity",
+    cat: "connect",
+    etfs: [
+      {
+        ticker: "FIVG",
+        name: "Defiance Next Gen Connectivity ETF",
+        er: "0.30%",
+        aum: "$450M",
+        focus: "Companies enabling 5G connectivity infrastructure: chipmakers, tower operators, fiber providers, and network equipment makers. Direct overlap with data center interconnect buildout.",
+        allocation: [
+          { name: "Semiconductors", pct: 38 },
+          { name: "Network Equipment", pct: 28 },
+          { name: "Telecom/Towers", pct: 22 },
+          { name: "Software/Services", pct: 12 },
+        ],
+        topHoldings: ["Qualcomm (QCOM)", "Nokia (NOK)", "Ericsson (ERIC)", "Marvell (MRVL)", "Corning (GLW)"],
+      },
+      {
+        ticker: "NTSX",
+        name: "WisdomTree U.S. Efficient Core ETF (connectivity proxy)",
+        er: "0.20%",
+        aum: "$1.8B",
+        focus: "For direct fiber/networking exposure, the best proxy ETFs are broad tech funds with heavy Cisco, Arista, and Corning weight — SKYY, QQQ, or sector-specific plays on network operators.",
+        allocation: [
+          { name: "Network Hardware", pct: 35 },
+          { name: "Fiber/Optical", pct: 25 },
+          { name: "Cloud/CDN Infra", pct: 25 },
+          { name: "Telecom Backbone", pct: 15 },
+        ],
+        topHoldings: ["Cisco (CSCO)", "Arista Networks (ANET)", "Corning (GLW)", "Lumentum (LITE)", "Juniper (JNPR)"],
+      },
+    ],
+  },
+  {
+    pillar: "Security & Access",
+    cat: "security",
+    etfs: [
+      {
+        ticker: "CIBR",
+        name: "First Trust Nasdaq Cybersecurity ETF",
+        er: "0.60%",
+        aum: "$11.1B",
+        focus: "Largest dedicated cybersecurity ETF with 36 holdings. Includes both pure-play cyber firms and large-cap tech with major security divisions. Liquidity-weighted with 6% position cap.",
+        allocation: [
+          { name: "Security Software", pct: 52 },
+          { name: "Network Security", pct: 22 },
+          { name: "Identity/Access Mgmt", pct: 14 },
+          { name: "Aerospace & Defense", pct: 12 },
+        ],
+        topHoldings: ["Palo Alto (10.9%)", "CrowdStrike (10.8%)", "Fortinet (9.7%)", "Cisco (8.9%)", "Broadcom (7.0%)"],
+      },
+      {
+        ticker: "HACK",
+        name: "Amplify Cybersecurity ETF",
+        er: "0.60%",
+        aum: "$1.3B",
+        focus: "Oldest cybersecurity ETF (2014). Dual-segment approach: cybersecurity developers + service providers, equally weighted within each segment. Small-cap tilt, higher growth potential.",
+        allocation: [
+          { name: "Security Developers", pct: 48 },
+          { name: "Security Services", pct: 37 },
+          { name: "Gov/Defense Cyber", pct: 15 },
+        ],
+        topHoldings: ["Palo Alto (PANW)", "CrowdStrike (CRWD)", "Fortinet (FTNT)", "Leidos (LDOS)", "Booz Allen (BAH)"],
+      },
+    ],
+  },
+  {
+    pillar: "Storage",
+    cat: "storage",
+    etfs: [
+      {
+        ticker: "SMH",
+        name: "VanEck Semiconductor ETF (storage chip exposure)",
+        er: "0.35%",
+        aum: "$22B+",
+        focus: "Covers NAND/DRAM storage chip manufacturers via Micron (~6%), SK Hynix, and Samsung ADRs. No pure-play storage ETF exists — SMH and SOXX are the best liquid proxies for storage silicon.",
+        allocation: [
+          { name: "NAND/DRAM chips", pct: 18 },
+          { name: "SSD controllers", pct: 14 },
+          { name: "Chip design/other", pct: 68 },
+        ],
+        topHoldings: ["Micron (MU ~6%)", "SK Hynix (ADR)", "Samsung (ADR)", "Western Digital (WDC)", "Seagate (STX)"],
+      },
+      {
+        ticker: "QMCO",
+        name: "Quantum Corporation (direct) + XSD Semiconductor ETF",
+        er: "0.35%",
+        aum: "$1.4B (XSD)",
+        focus: "XSD (SPDR S&P Semiconductor ETF) equal-weights 40+ semi companies including storage chip makers. Better small/mid-cap storage silicon exposure than SMH. QMCO is a single-stock tape storage play.",
+        allocation: [
+          { name: "Storage chips/NAND", pct: 22 },
+          { name: "Memory (DRAM)", pct: 18 },
+          { name: "Semi Equipment", pct: 24 },
+          { name: "Logic/Other", pct: 36 },
+        ],
+        topHoldings: ["Micron (MU)", "Western Digital (WDC)", "Seagate (STX)", "Pure Storage (PSTG)", "NetApp (NTAP)"],
+      },
+    ],
+  },
+  {
+    pillar: "Monitoring & DCIM",
+    cat: "monitor",
+    etfs: [
+      {
+        ticker: "BOTZ",
+        name: "Global X Robotics & Artificial Intelligence ETF",
+        er: "0.68%",
+        aum: "$2.4B",
+        focus: "AI, robotics, and automation companies that underpin AIOps and DCIM software — including sensor makers, industrial automation vendors, and AI chip enablers for autonomous operations.",
+        allocation: [
+          { name: "AI/Robotics Software", pct: 36 },
+          { name: "Industrial Automation", pct: 28 },
+          { name: "AI Semiconductors", pct: 22 },
+          { name: "Sensor/IoT Hardware", pct: 14 },
+        ],
+        topHoldings: ["NVIDIA (NVDA)", "Intuitive Surgical (ISRG)", "Keyence (6861.T)", "SMC Corp", "Fanuc (6954.T)"],
+      },
+      {
+        ticker: "DTCR",
+        name: "Global X Data Center & Digital Infrastructure ETF",
+        er: "0.50%",
+        aum: "$2.3B",
+        focus: "Data center operators that also run DCIM platforms and BMS systems as part of their managed colocation services — Equinix and Digital Realty both offer full monitoring stack to tenants.",
+        allocation: [
+          { name: "Data Center REITs", pct: 55 },
+          { name: "Tower/Cell REITs", pct: 28 },
+          { name: "Digital Infra Ops", pct: 12 },
+          { name: "Other Tech Infra", pct: 5 },
+        ],
+        topHoldings: ["Equinix (14.8%)", "Digital Realty (13.5%)", "American Tower (11.6%)", "Crown Castle (8.5%)", "Marvell (2.6%)"],
+      },
+    ],
+  },
+];
+
+// Render ETF section
+const etfContainer = document.getElementById('etfContainer');
+etfData.forEach(pillarBlock => {
+  const col = catColors[pillarBlock.cat] || '#888';
+  const block = document.createElement('div');
+  block.className = 'etf-pillar-block';
+  block.innerHTML = `
+    <div class="etf-pillar-label" style="color:${col}">
+      ${pillarBlock.pillar}
+      <div class="etf-pillar-line"></div>
+    </div>
+    <div class="etf-cards" id="etf-cards-${pillarBlock.cat}"></div>
+  `;
+  etfContainer.appendChild(block);
+
+  const cardsEl = block.querySelector(`#etf-cards-${pillarBlock.cat}`);
+  pillarBlock.etfs.forEach(etf => {
+    const maxPct = Math.max(...etf.allocation.map(a => a.pct));
+    const allocHtml = etf.allocation.map(a => `
+      <div class="alloc-row">
+        <div class="alloc-name">${a.name}</div>
+        <div class="alloc-bar-wrap">
+          <div class="alloc-bar" style="width:${Math.round((a.pct/maxPct)*100)}%;background:${col}88"></div>
+        </div>
+        <div class="alloc-pct">${a.pct}%</div>
+      </div>
+    `).join('');
+
+    const holdingChips = etf.topHoldings.map(h => {
+      const sym = h.match(/\(([A-Z0-9.\-]+)\)/);
+      const url = sym
+        ? `https://www.google.com/search?q=${encodeURIComponent(sym[1]+' stock')}`
+        : `https://www.google.com/search?q=${encodeURIComponent(h+' stock')}`;
+      return `<div class="etf-chip"><a href="${url}" target="_blank" rel="noopener">${h}</a></div>`;
+    }).join('');
+
+    const tickerUrl = `https://www.google.com/search?q=${encodeURIComponent(etf.ticker+' ETF stock')}`;
+
+    const card = document.createElement('div');
+    card.className = 'etf-card';
+    card.innerHTML = `
+      <div class="etf-header">
+        <div>
+          <div class="etf-ticker" style="color:${col}">
+            <a href="${tickerUrl}" target="_blank" rel="noopener">${etf.ticker}</a>
+          </div>
+          <div class="etf-name">${etf.name}</div>
+        </div>
+        <div class="etf-meta">
+          <div class="etf-badge badge-er">ER ${etf.er}</div>
+          <div class="etf-badge badge-aum">${etf.aum}</div>
+        </div>
+      </div>
+      <div class="etf-focus">${etf.focus}</div>
+      <div class="etf-alloc-label">Sector allocation</div>
+      <div class="alloc-bars">${allocHtml}</div>
+      <div class="etf-holdings-label">Top holdings</div>
+      <div class="etf-holding-chips">${holdingChips}</div>
+    `;
+    cardsEl.appendChild(card);
+  });
+});
+
+// Company grid
 const cgEl = document.getElementById('companyGrid');
 companyData.forEach(d => {
   const col = catColors[d.cat];
