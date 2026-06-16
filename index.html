@@ -563,7 +563,12 @@ pillars.forEach(p => {
       </div>
       <div class="detail-block">
         <div class="detail-label">Major contributors</div>
-        <div class="chip-list">${p.companies.map(c=>`<div class="chip">${c}</div>`).join('')}</div>
+        <div class="chip-list">${p.companies.map(c => {
+          const ticker = tickerFor(c);
+          const url    = stockLink(c);
+          const badge  = ticker ? `<span class="ticker-badge">${ticker}</span>` : '';
+          return `<div class="chip"><a class="co-link" href="${url}" target="_blank" rel="noopener">${c}</a>${badge}</div>`;
+        }).join('')}</div>
       </div>
     `;
     detail.classList.add('open');
@@ -689,6 +694,111 @@ new Chart(canvas, {
   }
 });
 
+// Ticker map — keyed by display name (lowercase for fuzzy match)
+const tickers = {
+  // Power
+  "eaton":               "ETN",
+  "schneider electric":  "SU",       // Paris: SU.PA, commonly searched as SU
+  "abb":                 "ABB",
+  "vertiv":              "VRT",
+  "caterpillar":         "CAT",
+  "bloom energy":        "BE",
+  "tesla energy":        "TSLA",
+  // Cooling
+  "emerson":             "EMR",
+  "3m (novec)":          "MMM",
+  "green revolution cooling": "GRC",
+  "green rev. cooling":  "GRC",
+  "asetek":              "ASTK",
+  "modine":              "MOD",
+  "carrier":             "CARR",
+  // Structure
+  "rittal":              "RTTL",     // private, parent Friedhelm Loh Group
+  "panduit":             "PNDT",     // private
+  "chatsworth":          "CLGX",     // Legrand: LR.PA
+  "chatsworth (legrand)":"LR",
+  "apc (schneider)":     "SU",
+  "tripp lite":          "TLITE",    // acquired by Eaton
+  "belden":              "BDC",
+  // Compute
+  "nvidia":              "NVDA",
+  "intel":               "INTC",
+  "amd":                 "AMD",
+  "tsmc":                "TSM",
+  "samsung":             "005930.KS",
+  "samsung (nand)":      "005930.KS",
+  "ionq":                "IONQ",
+  "ibm (quantum)":       "IBM",
+  "lightmatter":         "LMTR",     // private
+  // Connectivity
+  "cisco":               "CSCO",
+  "arista":              "ANET",
+  "juniper":             "JNPR",
+  "corning":             "GLW",
+  "coherent":            "COHR",
+  "nvidia (mellanox)":   "NVDA",
+  "nvidia/mellanox":     "NVDA",
+  "lumentum":            "LITE",
+  // Security
+  "johnson controls":    "JCI",
+  "honeywell":           "HON",
+  "thales":              "HO",       // Euronext: HO.PA
+  "lenel (carrier)":     "CARR",
+  "axis (cameras)":      "2AXS",     // Axis acquired by Canon: CAJ
+  "entrust":             "ENTG",     // Entrust (not Entegris) — private; closest: ENTG for Entegris
+  // Storage
+  "seagate":             "STX",
+  "western digital":     "WDC",
+  "pure storage":        "PSTG",
+  "netapp":              "NTAP",
+  "quantum corp":        "QMCO",
+  // Monitoring
+  "nlyte (bmc)":         "BMC",      // BMC private; Nlyte private
+  "sunbird":             "SBRD",     // private
+  "schneider ecostruxure":"SU",
+  "vertiv avocent":      "VRT",
+  "delta electronics":   "2308.TW",
+  "delta":               "2308.TW",
+  "nvidia doca":         "NVDA",
+};
+
+function tickerFor(name) {
+  return tickers[name.toLowerCase()] || null;
+}
+
+function stockLink(name) {
+  const ticker = tickerFor(name);
+  const query  = ticker ? `${ticker} stock` : `${name} stock ticker`;
+  const url    = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  return url;
+}
+
+// Add link styling
+const linkStyle = document.createElement('style');
+linkStyle.textContent = `
+  .co-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .co-link:hover { color: var(--accent); border-color: var(--accent); }
+  .ticker-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    background: rgba(0,200,255,0.1);
+    color: var(--accent);
+    margin-left: 5px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .chip a.co-link { border-bottom: none; }
+  .chip a.co-link:hover { color: var(--accent); }
+`;
+document.head.appendChild(linkStyle);
+
 // Company grid
 const companyData = [
   { pillar:"Power",       cat:"power",     cos:["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"] },
@@ -708,7 +818,15 @@ companyData.forEach(d => {
   card.className = 'company-card';
   card.innerHTML = `
     <div class="company-pillar-name" style="color:${col}">${d.pillar}</div>
-    ${d.cos.map(c=>`<div class="company-row"><div class="company-dot" style="background:${col}"></div>${c}</div>`).join('')}
+    ${d.cos.map(c => {
+      const ticker = tickerFor(c);
+      const url    = stockLink(c);
+      const badge  = ticker ? `<span class="ticker-badge">${ticker}</span>` : '';
+      return `<div class="company-row">
+        <div class="company-dot" style="background:${col}"></div>
+        <a class="co-link" href="${url}" target="_blank" rel="noopener">${c}</a>${badge}
+      </div>`;
+    }).join('')}
   `;
   cgEl.appendChild(card);
 });
