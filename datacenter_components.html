@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Data Center Components</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --bg:        #0A0C0F;
+    --bg2:       #111418;
+    --bg3:       #181C22;
+    --bg4:       #1E2330;
+    --border:    rgba(255,255,255,0.07);
+    --border2:   rgba(255,255,255,0.14);
+    --text:      #E8E6DF;
+    --muted:     #7A8090;
+    --accent:    #00C8FF;
+    --accent2:   #0057A8;
+    --green:     #1DB87A;
+    --amber:     #E8960A;
+    --red:       #E85D24;
+    --purple:    #8B7FE8;
+    --pink:      #D4537E;
+    --teal:      #1D9E75;
+
+    --mono:      'Space Mono', monospace;
+    --display:   'Syne', sans-serif;
+    --body:      'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    border-bottom: 1px solid var(--border);
+    padding: 60px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    max-width: 720px;
+    margin-bottom: 20px;
+  }
+  .hero-title span { color: var(--accent); }
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 28px;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 1280px; margin: 0 auto; }
+  .section { padding: 48px; border-bottom: 1px solid var(--border); }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .section-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .pillar-card {
+    background: var(--bg2);
+    padding: 24px;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .pillar-card:hover { background: var(--bg3); }
+  .pillar-card.active { background: var(--bg4); }
+  .pillar-card.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 0;
+  }
+
+  .p-power.active::before    { background: var(--green); }
+  .p-cooling.active::before  { background: var(--accent); }
+  .p-structure.active::before{ background: var(--muted); }
+  .p-compute.active::before  { background: var(--purple); }
+  .p-connect.active::before  { background: var(--amber); }
+  .p-security.active::before { background: var(--pink); }
+  .p-storage.active::before  { background: var(--red); }
+  .p-monitor.active::before  { background: var(--teal); }
+
+  .pillar-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .pillar-name {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .pillar-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .badge-eternal   { background: rgba(29,184,122,0.15); color: var(--green); }
+  .badge-evolving  { background: rgba(232,150,10,0.15); color: var(--amber); }
+  .badge-emerging  { background: rgba(0,200,255,0.12); color: var(--accent); }
+
+  .pillar-sub {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .pillar-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border2);
+  }
+  .p-power    .dot.on { background: var(--green); }
+  .p-cooling  .dot.on { background: var(--accent); }
+  .p-structure .dot.on { background: #888; }
+  .p-compute  .dot.on { background: var(--purple); }
+  .p-connect  .dot.on { background: var(--amber); }
+  .p-security .dot.on { background: var(--pink); }
+  .p-storage  .dot.on { background: var(--red); }
+  .p-monitor  .dot.on { background: var(--teal); }
+
+  /* ── DETAIL PANEL ── */
+  .detail-panel {
+    display: none;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 28px;
+    margin-top: 12px;
+    animation: fadeIn 0.15s ease;
+    grid-column: 1 / -1;
+  }
+  .detail-panel.open { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 800px) { .detail-inner { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .detail-inner { grid-template-columns: 1fr; } }
+
+  .detail-block { }
+  .detail-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .detail-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .detail-why {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .chip-list { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 9px;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section { padding: 48px; border-bottom: 1px solid var(--border); }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend-sq {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .chart-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 24px 16px;
+    overflow-x: auto;
+  }
+  #timelineCanvas {
+    min-width: 600px;
+    display: block;
+  }
+
+  /* ── COMPANY GRID ── */
+  .companies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .company-card {
+    background: var(--bg2);
+    padding: 22px;
+  }
+  .company-pillar-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .company-row {
+    font-size: 13px;
+    color: var(--muted);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .company-row:last-child { border-bottom: none; }
+  .company-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 36px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .footer-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 700px) {
+    .hero, .section, .timeline-section, .footer { padding: 32px 20px; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Infrastructure Intelligence Report</div>
+    <h1 class="hero-title">Universal Data Center <span>Components</span></h1>
+    <p class="hero-sub">Eight pillars that every data center — from 1960 mainframes to 2050 quantum facilities — will always require. No matter how radically compute evolves, these foundations do not disappear.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Universal pillars</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">90yr</div>
+        <div class="stat-label">Timeline covered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Stability tiers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">48+</div>
+        <div class="stat-label">Key contributors</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">The 8 Universal Pillars</div>
+      <div class="section-count">Click any card to expand</div>
+    </div>
+
+    <div class="pillars-grid" id="pillarGrid"></div>
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-inner" id="detailInner"></div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div class="section-header">
+      <div class="section-title">Component Evolution Timeline</div>
+      <div class="section-count">1960 → 2050+</div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chart-wrap">
+      <canvas id="timelineCanvas" role="img" aria-label="Horizontal bar timeline showing data center components from 1960 to 2050"></canvas>
+    </div>
+  </div>
+
+  <!-- COMPANIES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Dominant Companies by Pillar</div>
+      <div class="section-count">Key market contributors</div>
+    </div>
+    <div class="companies-grid" id="companyGrid"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-note">Data center infrastructure analysis · Universal component framework</div>
+    <div class="footer-tag">AI UPSCALE LLC</div>
+  </div>
+
+</div>
+
+<script>
+const pillars = [
+  {
+    id: "power", cls: "p-power", name: "Power", dots: 5,
+    badge: "eternal", badgeLabel: "Eternal",
+    sub: "Generation, UPS, distribution, grid tie, backup",
+    why: "Every computation requires energy transfer. No matter the technology — classical silicon, quantum, photonic, or biological — energy must be delivered, regulated, and backed up. Thermodynamics and Ohm's Law do not negotiate.",
+    materials: "Copper busbars, steel transformers, lithium/lead-acid cells, silicon rectifiers, superconducting wire (future)",
+    future: "On-site SMR nuclear, hydrogen fuel cells, solid-state UPS, lossless superconducting buses",
+    companies: ["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"]
+  },
+  {
+    id: "cooling", cls: "p-cooling", name: "Cooling", dots: 5,
+    badge: "eternal", badgeLabel: "Eternal",
+    sub: "Air, liquid, immersion, phase-change, geothermal",
+    why: "The second law of thermodynamics guarantees waste heat from every computation. Heat must move — from chip to air, water, or earth — regardless of the technology era or compute substrate.",
+    materials: "Copper/aluminum heat exchangers, refrigerants, dielectric fluids, thermal interface materials, water",
+    future: "Two-phase immersion at rack level, chip-level microfluidics, thermoelectric Peltier arrays, waste heat energy reuse",
+    companies: ["Vertiv","Emerson","3M (Novec)","Green Revolution Cooling","Asetek","Modine","Carrier"]
+  },
+  {
+    id: "structure", cls: "p-structure", name: "Physical Structure", dots: 4,
+    badge: "eternal", badgeLabel: "Eternal",
+    sub: "Racks, cages, cabinets, raised floor, containment",
+    why: "Compute components need physical housing, mounting, organization, and access paths. Even quantum or photonic systems will require precision enclosures and structural support infrastructure.",
+    materials: "Steel, aluminum, concrete, raised-floor tiles, anti-static flooring, cable management trays",
+    future: "Modular prefab data halls, hyperscale liquid-cooled rack systems, nano-scale server enclosures",
+    companies: ["Rittal","Panduit","Chatsworth (Legrand)","APC (Schneider)","Tripp Lite","Belden"]
+  },
+  {
+    id: "compute", cls: "p-compute", name: "Compute Substrate", dots: 5,
+    badge: "evolving", badgeLabel: "Evolving fast",
+    sub: "CPUs, GPUs, ASICs, FPGAs → quantum/photonic",
+    why: "The form changes dramatically — vacuum tubes to silicon to quantum — but something must always perform the computation. The substrate evolves; the fundamental need is eternal and inseparable from what a data center is.",
+    materials: "Silicon, gallium nitride, silicon carbide, indium phosphide, diamond substrate (future), photonic waveguides",
+    future: "Neuromorphic chips, photonic co-processors, cryogenic quantum processors, 3D stacked silicon",
+    companies: ["NVIDIA","Intel","AMD","TSMC","Samsung","IONQ","IBM (quantum)","Lightmatter"]
+  },
+  {
+    id: "connect", cls: "p-connect", name: "Connectivity", dots: 5,
+    badge: "eternal", badgeLabel: "Eternal",
+    sub: "Copper, fiber, InfiniBand, silicon photonics",
+    why: "Data must move between chips, racks, buildings, regions, and users. The medium changes (copper → fiber → photonic → quantum entanglement) but interconnect is inseparable from computation itself.",
+    materials: "Copper cabling, optical fiber, silicon photonic chips, SFP transceivers, PCB backplanes",
+    future: "Co-packaged optics, terabit wireless backhaul, quantum entanglement links, silicon photonic fabrics at scale",
+    companies: ["Cisco","Arista","Juniper","Corning","Coherent","NVIDIA (Mellanox)","Lumentum"]
+  },
+  {
+    id: "security", cls: "p-security", name: "Security & Access", dots: 4,
+    badge: "eternal", badgeLabel: "Eternal",
+    sub: "Physical access, surveillance, crypto, biometrics",
+    why: "Data and compute have always been targets. Physical security (who enters), logical security (who accesses data), and environmental monitoring are required regardless of what technology era the facility belongs to.",
+    materials: "Steel doors, biometric hardware, copper/fiber sensor wiring, HSMs, silicon security chips, camera systems",
+    future: "AI-driven threat detection, post-quantum cryptographic hardware, zero-trust silicon, quantum key distribution",
+    companies: ["Johnson Controls","Honeywell","Thales","Lenel (Carrier)","Axis (cameras)","Entrust"]
+  },
+  {
+    id: "storage", cls: "p-storage", name: "Storage", dots: 5,
+    badge: "evolving", badgeLabel: "Evolving fast",
+    sub: "Tape → HDD → SSD → DNA/holographic future",
+    why: "State must persist. Whether magnetic tape, spinning disk, NAND flash, or molecular storage — the universal need to retain data between computations never goes away. Only the medium changes.",
+    materials: "Magnetic alloys, silicon NAND, rare earth magnets, glass substrates (DNA storage), phase-change materials",
+    future: "DNA data storage, holographic memory, 3D NAND beyond 300 layers, persistent memory at DRAM speeds",
+    companies: ["Seagate","Western Digital","Samsung (NAND)","Pure Storage","NetApp","Quantum Corp"]
+  },
+  {
+    id: "monitor", cls: "p-monitor", name: "Monitoring & DCIM", dots: 3,
+    badge: "emerging", badgeLabel: "Emerging layer",
+    sub: "Sensors, DCIM software, BMS, AIOps, telemetry",
+    why: "As complexity grows, the data center itself becomes a managed system. Temperature, power draw, airflow, humidity, vibration — all must be sensed, logged, and acted upon continuously to prevent cascading failure.",
+    materials: "Sensor silicon, CAT5/fiber sensor wiring, server management chips (BMCs), smart rack PDUs",
+    future: "Fully autonomous AIOps, digital twin-managed facilities, predictive failure detection before hardware degrades",
+    companies: ["Nlyte (BMC)","Sunbird","Schneider EcoStruxure","Vertiv Avocent","Delta Electronics","NVIDIA DOCA"]
+  }
+];
+
+const colors = {
+  power:"#1DB87A", cooling:"#00C8FF", structure:"#6B7280",
+  compute:"#8B7FE8", connect:"#E8960A", security:"#D4537E",
+  storage:"#E85D24", monitor:"#1D9E75"
+};
+
+// Build pillar cards
+const grid = document.getElementById('pillarGrid');
+const detail = document.getElementById('detailPanel');
+const detailInner = document.getElementById('detailInner');
+
+let activeId = null;
+
+pillars.forEach(p => {
+  const card = document.createElement('div');
+  card.className = `pillar-card ${p.cls}`;
+  card.setAttribute('data-id', p.id);
+
+  const dotsHtml = Array.from({length:5}, (_,i) =>
+    `<div class="dot${i < p.dots ? ' on' : ''}"></div>`
+  ).join('');
+
+  const badgeClass = p.badge === 'eternal' ? 'badge-eternal' : p.badge === 'evolving' ? 'badge-evolving' : 'badge-emerging';
+
+  card.innerHTML = `
+    <div class="pillar-top">
+      <div class="pillar-name">${p.name}</div>
+      <div class="pillar-badge ${badgeClass}">${p.badgeLabel}</div>
+    </div>
+    <div class="pillar-sub">${p.sub}</div>
+    <div class="pillar-dots">${dotsHtml}</div>
+  `;
+
+  card.addEventListener('click', () => {
+    if (activeId === p.id) {
+      card.classList.remove('active');
+      detail.classList.remove('open');
+      activeId = null;
+      return;
+    }
+    document.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    activeId = p.id;
+    const col = colors[p.id];
+
+    detailInner.innerHTML = `
+      <div class="detail-why">${p.why}</div>
+      <div class="detail-block">
+        <div class="detail-label">Key materials</div>
+        <div class="detail-text">${p.materials}</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Future direction</div>
+        <div class="detail-text">${p.future}</div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Major contributors</div>
+        <div class="chip-list">${p.companies.map(c=>`<div class="chip">${c}</div>`).join('')}</div>
+      </div>
+    `;
+    detail.classList.add('open');
+    card.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  });
+
+  grid.appendChild(card);
+});
+
+// Timeline
+const timelineData = [
+  { label:"Steel racks & structure",         start:1960, end:2060, cat:"structure" },
+  { label:"Raised floor systems",            start:1965, end:2060, cat:"structure" },
+  { label:"AC power distribution (UPS)",     start:1960, end:2060, cat:"power" },
+  { label:"Diesel generator backup",         start:1960, end:2060, cat:"power" },
+  { label:"On-site solar/wind + battery",    start:2010, end:2060, cat:"power" },
+  { label:"SMR nuclear on-site",             start:2030, end:2060, cat:"power" },
+  { label:"CRAC / air cooling",              start:1960, end:2060, cat:"cooling" },
+  { label:"Hot/cold aisle containment",      start:1995, end:2060, cat:"cooling" },
+  { label:"Liquid cooling (rear-door/DLC)",  start:2008, end:2060, cat:"cooling" },
+  { label:"Immersion cooling (single-phase)",start:2015, end:2060, cat:"cooling" },
+  { label:"Two-phase immersion",             start:2022, end:2060, cat:"cooling" },
+  { label:"Vacuum tube / mainframe compute", start:1960, end:1985, cat:"compute" },
+  { label:"Silicon CPU/server",              start:1975, end:2060, cat:"compute" },
+  { label:"GPU / ASIC accelerator",          start:2010, end:2060, cat:"compute" },
+  { label:"Photonic co-processor",           start:2025, end:2060, cat:"compute" },
+  { label:"Cryogenic quantum processor",     start:2030, end:2060, cat:"compute" },
+  { label:"Copper LAN / coax",               start:1960, end:2010, cat:"connect" },
+  { label:"Fiber optic backbone",            start:1985, end:2060, cat:"connect" },
+  { label:"High-speed ethernet (100G+)",     start:2015, end:2060, cat:"connect" },
+  { label:"Co-packaged / silicon photonic",  start:2026, end:2060, cat:"connect" },
+  { label:"Physical security (badge/CCTV)",  start:1960, end:2060, cat:"security" },
+  { label:"Hardware security module (HSM)",  start:1990, end:2060, cat:"security" },
+  { label:"Zero-trust / AI-driven security", start:2018, end:2060, cat:"security" },
+  { label:"Magnetic tape storage",           start:1960, end:2060, cat:"storage" },
+  { label:"HDD (spinning disk)",             start:1968, end:2045, cat:"storage" },
+  { label:"NAND SSD / NVMe",                 start:2008, end:2060, cat:"storage" },
+  { label:"DNA / holographic storage",       start:2032, end:2060, cat:"storage" },
+  { label:"Environmental sensors / BMS",     start:1980, end:2060, cat:"monitor" },
+  { label:"DCIM software",                   start:2005, end:2060, cat:"monitor" },
+  { label:"AI-driven AIOps (digital twin)",  start:2022, end:2060, cat:"monitor" },
+];
+
+const catColors = {
+  structure:"#6B7280", power:"#1DB87A", cooling:"#00C8FF",
+  compute:"#8B7FE8", connect:"#E8960A", security:"#D4537E",
+  storage:"#E85D24", monitor:"#1D9E75"
+};
+const catNames = {
+  structure:"Physical / mechanical", power:"Power & energy",
+  cooling:"Thermal management", compute:"Compute substrate",
+  connect:"Connectivity", security:"Security & control",
+  storage:"Storage", monitor:"Monitoring & DCIM"
+};
+
+// Legend
+const legendEl = document.getElementById('legend');
+Object.entries(catNames).forEach(([k,v]) => {
+  legendEl.innerHTML += `<div class="legend-item"><div class="legend-sq" style="background:${catColors[k]}"></div>${v}</div>`;
+});
+
+// Chart
+const barH = 22;
+const gap = 4;
+const totalH = timelineData.length * (barH + gap) + 60;
+const canvas = document.getElementById('timelineCanvas');
+canvas.height = totalH;
+
+new Chart(canvas, {
+  type: 'bar',
+  data: {
+    labels: timelineData.map(d => d.label),
+    datasets: [{
+      label: 'Active era',
+      data: timelineData.map(d => [d.start, d.end]),
+      backgroundColor: timelineData.map(d => catColors[d.cat] + 'BB'),
+      borderColor:     timelineData.map(d => catColors[d.cat]),
+      borderWidth: 1,
+      borderRadius: 3,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#111418',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        titleColor: '#E8E6DF',
+        bodyColor: '#7A8090',
+        callbacks: {
+          label: ctx => {
+            const d = timelineData[ctx.dataIndex];
+            return ` ${d.start} → ${d.end >= 2060 ? '2050+' : d.end}`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        min: 1960, max: 2060,
+        ticks: {
+          stepSize: 10,
+          color: '#7A8090',
+          font: { family: "'Space Mono', monospace", size: 10 },
+          callback: v => v >= 2060 ? '2050+' : v
+        },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      y: {
+        ticks: {
+          color: '#7A8090',
+          font: { family: "'DM Sans', sans-serif", size: 11 },
+          autoSkip: false
+        },
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// Company grid
+const companyData = [
+  { pillar:"Power",       cat:"power",     cos:["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"] },
+  { pillar:"Cooling",     cat:"cooling",   cos:["Vertiv","Emerson","3M (Novec)","Asetek","Modine","Green Rev. Cooling"] },
+  { pillar:"Structure",   cat:"structure", cos:["Rittal","Panduit","Chatsworth","APC (Schneider)","Tripp Lite","Belden"] },
+  { pillar:"Compute",     cat:"compute",   cos:["NVIDIA","Intel","AMD","TSMC","IBM (quantum)","Lightmatter","IONQ"] },
+  { pillar:"Connectivity",cat:"connect",   cos:["Cisco","Arista","Corning","Coherent","NVIDIA/Mellanox","Lumentum","Juniper"] },
+  { pillar:"Security",    cat:"security",  cos:["Honeywell","Johnson Controls","Thales","Axis","Entrust","Lenel (Carrier)"] },
+  { pillar:"Storage",     cat:"storage",   cos:["Seagate","Western Digital","Samsung","Pure Storage","NetApp","Quantum Corp"] },
+  { pillar:"Monitoring",  cat:"monitor",   cos:["Schneider EcoStruxure","Vertiv Avocent","Sunbird","Nlyte","Delta","NVIDIA DOCA"] },
+];
+
+const cgEl = document.getElementById('companyGrid');
+companyData.forEach(d => {
+  const col = catColors[d.cat];
+  const card = document.createElement('div');
+  card.className = 'company-card';
+  card.innerHTML = `
+    <div class="company-pillar-name" style="color:${col}">${d.pillar}</div>
+    ${d.cos.map(c=>`<div class="company-row"><div class="company-dot" style="background:${col}"></div>${c}</div>`).join('')}
+  `;
+  cgEl.appendChild(card);
+});
+</script>
+</body>
+</html>
