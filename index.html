@@ -480,6 +480,126 @@
   }
   .etf-chip a:hover { color: var(--accent); }
 
+  /* ── PAGE KEY ── */
+  .key-section { padding: 48px; border-bottom: 1px solid var(--border); }
+  .key-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    margin-top: 0;
+  }
+  .key-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .key-card-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .key-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .key-row:last-child { border-bottom: none; }
+  .key-swatch {
+    flex-shrink: 0;
+    width: 28px;
+    height: 18px;
+    border-radius: 3px;
+    margin-top: 2px;
+  }
+  .key-badge-sample {
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    padding: 3px 7px;
+    border-radius: 3px;
+    margin-top: 1px;
+    white-space: nowrap;
+  }
+  .key-symbol {
+    flex-shrink: 0;
+    width: 28px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 1px;
+  }
+  .key-dot-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 28px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .key-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .key-dot.on { background: var(--accent); }
+  .key-text { }
+  .key-term {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .key-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .key-font-sample {
+    flex-shrink: 0;
+    width: 28px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    margin-top: 1px;
+  }
+  .key-bar-sample {
+    flex-shrink: 0;
+    width: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 3px;
+  }
+  .key-bar-line {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+  .key-ticker-sample {
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    width: 28px;
+    text-align: center;
+    margin-top: 1px;
+    border-bottom: 1px solid rgba(0,200,255,0.3);
+  }
+
   /* ── FOOTER ── */
   .footer {
     padding: 36px 48px;
@@ -576,6 +696,235 @@
       <div class="section-count">Asset allocation & top holdings</div>
     </div>
     <div id="etfContainer"></div>
+  </div>
+
+  <!-- PAGE KEY -->
+  <div class="key-section">
+    <div class="section-header">
+      <div class="section-title">Page Key</div>
+      <div class="section-count">A guide to every color, label, symbol, and element used on this page</div>
+    </div>
+    <div class="key-grid">
+
+      <!-- PILLAR COLORS -->
+      <div class="key-card">
+        <div class="key-card-title">Pillar colors — used throughout all sections</div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#1DB87A"></div>
+          <div class="key-text"><div class="key-term">Green — Power &amp; Energy</div><div class="key-desc">Assigned to all power generation, UPS, distribution, and backup systems. Appears on pillar cards, timeline bars, company dots, and ETF headers.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#00C8FF"></div>
+          <div class="key-text"><div class="key-term">Cyan — Cooling &amp; Thermal</div><div class="key-desc">Assigned to all thermal management systems: air, liquid, immersion, and phase-change cooling. The page's primary accent color.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#6B7280"></div>
+          <div class="key-text"><div class="key-term">Gray — Physical Structure</div><div class="key-desc">Assigned to racks, cages, raised floors, and physical containment systems. Gray signals structural/inert elements.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#8B7FE8"></div>
+          <div class="key-text"><div class="key-term">Purple — Compute Substrate</div><div class="key-desc">Assigned to compute hardware across all eras: vacuum tubes, silicon CPUs, GPUs, ASICs, and future photonic/quantum processors.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#E8960A"></div>
+          <div class="key-text"><div class="key-term">Amber — Connectivity</div><div class="key-desc">Assigned to all interconnect technologies: copper, fiber, InfiniBand, silicon photonics, and future co-packaged optics.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#D4537E"></div>
+          <div class="key-text"><div class="key-term">Pink — Security &amp; Access Control</div><div class="key-desc">Assigned to physical security, cybersecurity hardware, biometrics, HSMs, and surveillance systems.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#E85D24"></div>
+          <div class="key-text"><div class="key-term">Orange/Red — Storage</div><div class="key-desc">Assigned to all data persistence technologies: magnetic tape, HDD, NAND SSD, NVMe, and future DNA/holographic storage.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#1D9E75"></div>
+          <div class="key-text"><div class="key-term">Teal — Monitoring &amp; DCIM</div><div class="key-desc">Assigned to environmental sensors, DCIM software, building management systems (BMS), and AI-driven autonomous operations (AIOps).</div></div>
+        </div>
+      </div>
+
+      <!-- STABILITY BADGES -->
+      <div class="key-card">
+        <div class="key-card-title">Stability tier badges — shown on each pillar card</div>
+        <div class="key-row">
+          <div class="key-badge-sample" style="background:rgba(29,184,122,0.15);color:#1DB87A;">Eternal</div>
+          <div class="key-text"><div class="key-term">Eternal</div><div class="key-desc">This pillar is required by every data center regardless of the compute technology inside — past, present, or future. Rooted in physics (thermodynamics, electromagnetism) or fundamental operational necessity. Will not be engineered away.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-badge-sample" style="background:rgba(232,150,10,0.15);color:#E8960A;">Evolving fast</div>
+          <div class="key-text"><div class="key-term">Evolving fast</div><div class="key-desc">The need is eternal but the technology that fulfills it changes dramatically each generation. The substrate or medium transforms — silicon → photonic, HDD → DNA — while the underlying function (compute, remember) stays constant.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-badge-sample" style="background:rgba(0,200,255,0.12);color:#00C8FF;">Emerging layer</div>
+          <div class="key-text"><div class="key-term">Emerging layer</div><div class="key-desc">This pillar is becoming universal as complexity scales. Not always present in early data centers, but now mission-critical and growing in importance with every generation of infrastructure.</div></div>
+        </div>
+
+        <div class="key-card-title" style="margin-top:18px;">ETF badges — shown on each ETF card</div>
+        <div class="key-row">
+          <div class="key-badge-sample badge-er" style="background:rgba(232,150,10,0.12);color:#E8960A;">ER 0.50%</div>
+          <div class="key-text"><div class="key-term">ER — Expense Ratio</div><div class="key-desc">The annual fee charged by the ETF as a percentage of your investment. A 0.50% ER means you pay $5/year per $1,000 invested. Lower is better for long-term holders.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-badge-sample" style="background:rgba(29,184,122,0.12);color:#1DB87A;">$11.7B</div>
+          <div class="key-text"><div class="key-term">AUM — Assets Under Management</div><div class="key-desc">Total market value of all assets held by the ETF. Higher AUM generally means better liquidity, tighter bid-ask spreads, and lower risk of the fund closing.</div></div>
+        </div>
+      </div>
+
+      <!-- PILLAR DOTS -->
+      <div class="key-card">
+        <div class="key-card-title">Relevance dots — shown on pillar cards (bottom row)</div>
+        <div class="key-row">
+          <div class="key-dot-row">
+            <div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div>
+          </div>
+          <div class="key-text"><div class="key-term">5 filled dots — Maximum criticality</div><div class="key-desc">This pillar is the single most direct constraint on all data center operation. No workaround exists. Power and cooling both score 5 — remove either and the facility fails instantly.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-dot-row">
+            <div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot"></div>
+          </div>
+          <div class="key-text"><div class="key-term">4 filled dots — High criticality</div><div class="key-desc">Essential but slightly less immediate than 5-dot pillars. The facility can tolerate brief degradation, but long-term operation is impossible without it. Physical structure and security score 4.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-dot-row">
+            <div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot"></div><div class="key-dot"></div>
+          </div>
+          <div class="key-text"><div class="key-term">3 filled dots — Important / growing</div><div class="key-desc">Critical at scale but relatively newer as a mandatory layer. Monitoring and DCIM score 3 — small facilities operated without formal DCIM for decades, but modern hyperscale operations cannot.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-dot-row">
+            <div class="key-dot"></div><div class="key-dot"></div><div class="key-dot"></div><div class="key-dot"></div><div class="key-dot"></div>
+          </div>
+          <div class="key-text"><div class="key-term">Empty dots — Not applicable</div><div class="key-desc">Unfilled dots represent unused criticality slots. The scale runs 1–5; no pillar scores below 3 on this page because all 8 were selected for being universally required.</div></div>
+        </div>
+
+        <div class="key-card-title" style="margin-top:18px;">Left accent bar — on active/expanded pillar cards</div>
+        <div class="key-row">
+          <div style="flex-shrink:0;width:4px;height:36px;border-radius:2px;background:#1DB87A;margin-top:2px;"></div>
+          <div class="key-text"><div class="key-term">Colored left border</div><div class="key-desc">Appears when you click a pillar card to expand its detail panel. The bar color matches that pillar's assigned color from the pillar color key above, providing a visual anchor while reading the expanded content.</div></div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="key-card">
+        <div class="key-card-title">Timeline chart — component evolution 1960–2050+</div>
+        <div class="key-row">
+          <div class="key-bar-sample">
+            <div class="key-bar-line" style="width:100%;background:#1DB87A;"></div>
+            <div class="key-bar-line" style="width:70%;background:#00C8FF;"></div>
+            <div class="key-bar-line" style="width:40%;background:#8B7FE8;"></div>
+          </div>
+          <div class="key-text"><div class="key-term">Bar length = active era span</div><div class="key-desc">Each horizontal bar starts at the year the technology entered mainstream data center use and ends at the year it is expected to remain relevant (2060 = 2050+ on the axis label). Longer bar = longer-lived technology.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-bar-sample">
+            <div class="key-bar-line" style="width:100%;background:#6B7280;opacity:0.5;"></div>
+          </div>
+          <div class="key-text"><div class="key-term">Bar color = pillar category</div><div class="key-desc">Timeline bar colors map directly to the pillar color system (green = power, cyan = cooling, gray = structure, etc.). Hover any bar to see the exact year range in a tooltip.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-symbol" style="color:var(--muted);font-size:10px;">2050+</div>
+          <div class="key-text"><div class="key-term">2050+ axis label</div><div class="key-desc">Any technology bar reaching the right edge of the chart (year 2060 internally) is labeled "2050+" to indicate it is not projected to be obsolete within the planning horizon of this analysis.</div></div>
+        </div>
+      </div>
+
+      <!-- COMPANY ELEMENTS -->
+      <div class="key-card">
+        <div class="key-card-title">Company links &amp; ticker badges</div>
+        <div class="key-row">
+          <div class="key-ticker-sample">NVDA</div>
+          <div class="key-text"><div class="key-term">Cyan ticker badge</div><div class="key-desc">The stock exchange ticker symbol for that company. Appears next to the company name in both the pillar detail chips and the company grid. Click the company name or ticker badge to open a Google search for that stock.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-symbol" style="color:var(--text);font-size:11px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,0.2);">Eaton</div>
+          <div class="key-text"><div class="key-term">Underlined company name</div><div class="key-desc">Every company name is a clickable hyperlink. Clicking opens a Google search for that company's stock ticker in a new tab. Hover to see the link highlight in cyan.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-symbol" style="color:var(--muted);font-size:10px;font-family:var(--mono);">GRC</div>
+          <div class="key-text"><div class="key-term">Gray ticker (no exchange listing)</div><div class="key-desc">Some companies are privately held or subsidiaries. Their ticker codes are approximate or parent-company references. The Google search link will return relevant investor information even when no direct ticker exists.</div></div>
+        </div>
+
+        <div class="key-card-title" style="margin-top:18px;">Company grid color dots</div>
+        <div class="key-row">
+          <div style="flex-shrink:0;width:7px;height:7px;border-radius:50%;background:#1DB87A;margin-top:5px;"></div>
+          <div class="key-text"><div class="key-term">Colored dot beside company name</div><div class="key-desc">The dot color in the "Dominant Companies by Pillar" grid identifies which pillar that company primarily serves. Matches the pillar color system — green dot = power pillar, cyan = cooling, etc.</div></div>
+        </div>
+      </div>
+
+      <!-- ETF SECTION -->
+      <div class="key-card">
+        <div class="key-card-title">ETF coverage cards</div>
+        <div class="key-row">
+          <div class="key-ticker-sample" style="font-size:14px;font-weight:700;">SMH</div>
+          <div class="key-text"><div class="key-term">Large colored ETF ticker</div><div class="key-desc">The ETF's exchange ticker symbol, colored to match its pillar. Clicking it opens a Google search for that ETF. Each ETF is grouped under the pillar it most directly provides investment exposure to.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-bar-sample" style="width:28px;">
+            <div style="display:flex;align-items:center;gap:3px;margin-bottom:3px;"><div style="width:60%;height:4px;border-radius:2px;background:#8B7FE8;opacity:0.7;"></div></div>
+            <div style="display:flex;align-items:center;gap:3px;margin-bottom:3px;"><div style="width:35%;height:4px;border-radius:2px;background:#8B7FE8;opacity:0.7;"></div></div>
+            <div style="display:flex;align-items:center;gap:3px;"><div style="width:20%;height:4px;border-radius:2px;background:#8B7FE8;opacity:0.7;"></div></div>
+          </div>
+          <div class="key-text"><div class="key-term">Sector allocation bars</div><div class="key-desc">Horizontal bars show the ETF's approximate portfolio allocation across sectors. Bar length is proportional — the longest bar is always the largest sector allocation. Percentages are shown to the right of each bar.</div></div>
+        </div>
+        <div class="key-row">
+          <div style="flex-shrink:0;width:28px;display:flex;align-items:center;justify-content:center;margin-top:2px;">
+            <div style="font-size:10px;padding:2px 5px;border:1px solid var(--border2);border-radius:3px;color:var(--muted);font-family:var(--mono);white-space:nowrap;">NVDA</div>
+          </div>
+          <div class="key-text"><div class="key-term">Top holding chips</div><div class="key-desc">Small labeled chips listing the ETF's largest individual stock positions. Percentages shown in parentheses where available. Each chip is clickable and links to a Google stock search for that holding.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-symbol" style="color:var(--muted);font-size:9px;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;width:28px;">Proxy</div>
+          <div class="key-text"><div class="key-term">Proxy ETF notation</div><div class="key-desc">Some pillars (Cooling, Storage, Connectivity) have no dedicated pure-play ETF. In these cases the listed ETF is the best available proxy — a fund with significant but not exclusive exposure to that pillar's companies.</div></div>
+        </div>
+      </div>
+
+      <!-- TYPOGRAPHY -->
+      <div class="key-card">
+        <div class="key-card-title">Typography &amp; text styles</div>
+        <div class="key-row">
+          <div class="key-font-sample" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;">Aa</div>
+          <div class="key-text"><div class="key-term">Syne — Display / headings</div><div class="key-desc">Used for all major section titles, pillar names, and the hero headline. Heavy weight (800) conveys structural authority. Chosen for its geometric, technical character.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-font-sample" style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;">Aa</div>
+          <div class="key-text"><div class="key-term">DM Sans — Body text</div><div class="key-desc">Used for all descriptive text, pillar sub-labels, ETF focus descriptions, and explanatory copy. Optimized for readability at small sizes on dark backgrounds.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-font-sample" style="font-family:'Space Mono',monospace;font-size:12px;">01</div>
+          <div class="key-text"><div class="key-term">Space Mono — Data / labels</div><div class="key-desc">Used for all data-forward elements: ticker symbols, expense ratios, AUM figures, stat numbers, section counts, and badge text. Monospace ensures numerical alignment and a technical, data-dense aesthetic.</div></div>
+        </div>
+        <div class="key-row">
+          <div style="flex-shrink:0;width:28px;margin-top:2px;"><div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">LABEL</div></div>
+          <div class="key-text"><div class="key-term">Small caps mono label</div><div class="key-desc">Section sub-labels and category dividers appear in uppercase Space Mono at 9–11px with wide letter-spacing. These act as organizational signposts without competing with content text.</div></div>
+        </div>
+      </div>
+
+      <!-- BACKGROUND LAYERS -->
+      <div class="key-card">
+        <div class="key-card-title">Background depth layers</div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#0A0C0F;border:1px solid rgba(255,255,255,0.1);"></div>
+          <div class="key-text"><div class="key-term">Page background (#0A0C0F)</div><div class="key-desc">The deepest layer. Near-black with a very slight cool blue tint. All content sits above this. Chosen to reduce eye strain for extended reading while maintaining strong contrast with text.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#111418;border:1px solid rgba(255,255,255,0.1);"></div>
+          <div class="key-text"><div class="key-term">Card background (#111418)</div><div class="key-desc">Used for pillar cards, company cards, ETF cards, and the timeline chart wrapper. One step lighter than the page background, creating subtle depth without harsh contrast.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#181C22;border:1px solid rgba(255,255,255,0.1);"></div>
+          <div class="key-text"><div class="key-term">Expanded panel background (#181C22)</div><div class="key-desc">Used for the pillar detail panel that opens when you click a card, and for hover states. A third depth layer that signals "this content is nested inside the card above."</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:#1E2330;border:1px solid rgba(255,255,255,0.1);"></div>
+          <div class="key-text"><div class="key-term">Active card background (#1E2330)</div><div class="key-desc">The currently selected/active pillar card shifts to this slightly blue-tinted dark layer to indicate selection, distinguishing it from all other cards in the grid.</div></div>
+        </div>
+        <div class="key-row">
+          <div class="key-swatch" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);"></div>
+          <div class="key-text"><div class="key-term">Grid separator / gap color</div><div class="key-desc">The 2px gaps between cards in the pillar and company grids use this semi-transparent white. The grid background itself is this color, so the gaps appear as thin glowing lines between cards.</div></div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- FOOTER -->
