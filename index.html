@@ -621,16 +621,53 @@
     letter-spacing: 0.1em;
   }
 
+  /* ── TABS ── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
   @media (max-width: 700px) {
-    .hero, .section, .timeline-section, .footer { padding: 32px 20px; }
+    .hero, .section, .timeline-section, .footer, .etf-section, .key-section { padding: 32px 20px; }
     .hero-stats { gap: 24px; }
+    .tab-btn { padding: 14px 16px; font-size: 10px; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- HERO -->
+  <!-- TAB NAV -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="datacenter">⬛ Data Centers</button>
+    <button class="tab-btn" data-tab="robotics">🤖 Robotics &amp; Automation</button>
+  </div>
+
+  <!-- ══════════════ TAB: DATA CENTERS ══════════════ -->
+  <div class="tab-panel active" id="tab-datacenter">
   <div class="hero">
     <div class="hero-eyebrow">Infrastructure Intelligence Report</div>
     <h1 class="hero-title">Universal Data Center <span>Components</span></h1>
@@ -933,746 +970,787 @@
     <div class="footer-tag"><a href="https://aiupscalellc.netlify.app/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(0,200,255,0.3);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(0,200,255,0.3)'">AI UPSCALE LLC</a></div>
   </div>
 
-</div>
+</div><!-- /tab-datacenter -->
+
+
+<!-- ══════════════ TAB: ROBOTICS & AUTOMATION ══════════════ -->
+<div class="tab-panel" id="tab-robotics">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Infrastructure Intelligence Report</div>
+    <h1 class="hero-title">Universal Robotics &amp; <span>Automation</span> Components</h1>
+    <p class="hero-sub">Nine pillars that every robotics and automation system — from 1960s industrial arms to 2050 fully autonomous humanoids — will always require. The hardware layers, software substrates, and physical dependencies that cannot be engineered away.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">Universal pillars</div></div>
+      <div class="stat-item"><div class="stat-num">90yr</div><div class="stat-label">Timeline covered</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Stability tiers</div></div>
+      <div class="stat-item"><div class="stat-num">16</div><div class="stat-label">ETFs mapped</div></div>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">The 9 Universal Pillars</div>
+      <div class="section-count">Click any card to expand</div>
+    </div>
+    <div class="pillars-grid" id="rPillarGrid"></div>
+    <div class="detail-panel" id="rDetailPanel">
+      <div class="detail-inner" id="rDetailInner"></div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div class="section-header">
+      <div class="section-title">Component Evolution Timeline</div>
+      <div class="section-count">1960 → 2050+</div>
+    </div>
+    <div class="legend" id="rLegend"></div>
+    <div class="chart-wrap">
+      <canvas id="rTimelineCanvas" role="img" aria-label="Robotics component timeline 1960 to 2050"></canvas>
+    </div>
+  </div>
+
+  <!-- COMPANIES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Dominant Companies by Pillar</div>
+      <div class="section-count">Key market contributors</div>
+    </div>
+    <div class="companies-grid" id="rCompanyGrid"></div>
+  </div>
+
+  <!-- ETF SECTION -->
+  <div class="etf-section">
+    <div class="section-header">
+      <div class="section-title">ETF Coverage by Pillar</div>
+      <div class="section-count">Asset allocation &amp; top holdings</div>
+    </div>
+    <div id="rEtfContainer"></div>
+  </div>
+
+  <!-- PAGE KEY -->
+  <div class="key-section">
+    <div class="section-header">
+      <div class="section-title">Page Key</div>
+      <div class="section-count">A guide to every color, label, symbol, and element used in this tab</div>
+    </div>
+    <div class="key-grid">
+
+      <div class="key-card">
+        <div class="key-card-title">Pillar colors — robotics &amp; automation</div>
+        <div class="key-row"><div class="key-swatch" style="background:#E85D24"></div><div class="key-text"><div class="key-term">Orange — Actuation &amp; Motion</div><div class="key-desc">Motors, servos, hydraulics, pneumatics, and all mechanical output systems. The physical force layer of every robot.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#1DB87A"></div><div class="key-text"><div class="key-term">Green — Power &amp; Energy</div><div class="key-desc">Batteries, power electronics, energy storage, and delivery systems. No motion without power.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#00C8FF"></div><div class="key-text"><div class="key-term">Cyan — Sensing &amp; Perception</div><div class="key-desc">Cameras, LiDAR, IMUs, force/torque sensors, and all environmental awareness systems.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#8B7FE8"></div><div class="key-text"><div class="key-term">Purple — Compute &amp; Control</div><div class="key-desc">CPUs, MCUs, FPGAs, real-time control systems, and AI inference hardware.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#E8960A"></div><div class="key-text"><div class="key-term">Amber — Connectivity &amp; Communication</div><div class="key-desc">Field buses, Ethernet, 5G, ROS middleware, and all inter-system communication.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#D4537E"></div><div class="key-text"><div class="key-term">Pink — Safety &amp; Compliance</div><div class="key-desc">E-stops, safety PLCs, ISO functional safety layers, and human-machine safety systems.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#6B7280"></div><div class="key-text"><div class="key-term">Gray — Mechanical Structure</div><div class="key-desc">Frames, linkages, end effectors, joints, and all load-bearing physical structure.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#1D9E75"></div><div class="key-text"><div class="key-term">Teal — Software &amp; AI Stack</div><div class="key-desc">Operating systems, motion planners, perception pipelines, simulation, and learning frameworks.</div></div></div>
+        <div class="key-row"><div class="key-swatch" style="background:#BA7517"></div><div class="key-text"><div class="key-term">Dark Amber — Human-Machine Interface</div><div class="key-desc">Teach pendants, dashboards, AR overlays, voice interfaces, and all operator interaction layers.</div></div></div>
+      </div>
+
+      <div class="key-card">
+        <div class="key-card-title">Stability tier badges</div>
+        <div class="key-row"><div class="key-badge-sample" style="background:rgba(29,184,122,0.15);color:#1DB87A;">Eternal</div><div class="key-text"><div class="key-term">Eternal</div><div class="key-desc">Required by every robotic or automated system regardless of generation. Grounded in physics or irreducible operational necessity.</div></div></div>
+        <div class="key-row"><div class="key-badge-sample" style="background:rgba(232,150,10,0.15);color:#E8960A;">Evolving fast</div><div class="key-text"><div class="key-term">Evolving fast</div><div class="key-desc">The need is permanent but the technology fulfilling it changes each generation — from hydraulics to electric drives, from rule-based to learned control.</div></div></div>
+        <div class="key-row"><div class="key-badge-sample" style="background:rgba(0,200,255,0.12);color:#00C8FF;">Emerging layer</div><div class="key-text"><div class="key-term">Emerging layer</div><div class="key-desc">Growing into universality as autonomy and deployment scale increase. Not required for simple automation, mandatory for intelligent autonomous systems.</div></div></div>
+        <div class="key-card-title" style="margin-top:18px;">Relevance dots (1–5 criticality)</div>
+        <div class="key-row"><div class="key-dot-row"><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div></div><div class="key-text"><div class="key-term">5 dots — Maximum criticality</div><div class="key-desc">Remove this pillar and the robot stops immediately. Power and actuation both score 5.</div></div></div>
+        <div class="key-row"><div class="key-dot-row"><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot"></div></div><div class="key-text"><div class="key-term">4 dots — High criticality</div><div class="key-desc">Essential but brief degradation is survivable. Sensing, control, and safety score 4.</div></div></div>
+        <div class="key-row"><div class="key-dot-row"><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot on"></div><div class="key-dot"></div><div class="key-dot"></div></div><div class="key-text"><div class="key-term">3 dots — Important / growing</div><div class="key-desc">Critical at scale but robots operated without this layer for decades. HMI and connectivity score 3.</div></div></div>
+      </div>
+
+      <div class="key-card">
+        <div class="key-card-title">Timeline chart</div>
+        <div class="key-row"><div class="key-bar-sample"><div class="key-bar-line" style="width:100%;background:#E85D24;"></div><div class="key-bar-line" style="width:60%;background:#1DB87A;"></div><div class="key-bar-line" style="width:30%;background:#8B7FE8;"></div></div><div class="key-text"><div class="key-term">Bar length = active era span</div><div class="key-desc">Starts at mainstream adoption year, ends at projected relevance. 2060 internal = "2050+" on axis. Bar color = pillar category.</div></div></div>
+        <div class="key-row"><div class="key-symbol" style="color:var(--muted);font-size:10px;">2050+</div><div class="key-text"><div class="key-term">2050+ axis label</div><div class="key-desc">Technology not projected to be obsolete within this analysis horizon.</div></div></div>
+        <div class="key-card-title" style="margin-top:18px;">Company &amp; ETF elements</div>
+        <div class="key-row"><div class="key-ticker-sample">ISRG</div><div class="key-text"><div class="key-term">Cyan ticker badge</div><div class="key-desc">Stock exchange ticker. Click the company name to open a Google stock search in a new tab.</div></div></div>
+        <div class="key-row"><div class="key-bar-sample" style="width:28px;"><div style="display:flex;align-items:center;gap:3px;margin-bottom:3px;"><div style="width:60%;height:4px;border-radius:2px;background:#8B7FE8;opacity:0.7;"></div></div><div style="display:flex;align-items:center;gap:3px;"><div style="width:30%;height:4px;border-radius:2px;background:#8B7FE8;opacity:0.7;"></div></div></div><div class="key-text"><div class="key-term">ETF allocation bars</div><div class="key-desc">Proportional horizontal bars showing sector weightings. Longest bar = largest allocation. Percentages shown right of each bar.</div></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-note">Robotics &amp; automation infrastructure analysis · Universal component framework</div>
+    <div class="footer-tag"><a href="https://aiupscalellc.netlify.app/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(0,200,255,0.3);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(0,200,255,0.3)'">AI UPSCALE LLC</a></div>
+  </div>
+
+</div><!-- /tab-robotics -->
+
+</div><!-- /page -->
 
 <script>
-const pillars = [
-  {
-    id: "power", cls: "p-power", name: "Power", dots: 5,
-    badge: "eternal", badgeLabel: "Eternal",
-    sub: "Generation, UPS, distribution, grid tie, backup",
-    why: "Every computation requires energy transfer. No matter the technology — classical silicon, quantum, photonic, or biological — energy must be delivered, regulated, and backed up. Thermodynamics and Ohm's Law do not negotiate.",
-    materials: "Copper busbars, steel transformers, lithium/lead-acid cells, silicon rectifiers, superconducting wire (future)",
-    future: "On-site SMR nuclear, hydrogen fuel cells, solid-state UPS, lossless superconducting buses",
-    companies: ["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"]
-  },
-  {
-    id: "cooling", cls: "p-cooling", name: "Cooling", dots: 5,
-    badge: "eternal", badgeLabel: "Eternal",
-    sub: "Air, liquid, immersion, phase-change, geothermal",
-    why: "The second law of thermodynamics guarantees waste heat from every computation. Heat must move — from chip to air, water, or earth — regardless of the technology era or compute substrate.",
-    materials: "Copper/aluminum heat exchangers, refrigerants, dielectric fluids, thermal interface materials, water",
-    future: "Two-phase immersion at rack level, chip-level microfluidics, thermoelectric Peltier arrays, waste heat energy reuse",
-    companies: ["Vertiv","Emerson","3M (Novec)","Green Revolution Cooling","Asetek","Modine","Carrier"]
-  },
-  {
-    id: "structure", cls: "p-structure", name: "Physical Structure", dots: 4,
-    badge: "eternal", badgeLabel: "Eternal",
-    sub: "Racks, cages, cabinets, raised floor, containment",
-    why: "Compute components need physical housing, mounting, organization, and access paths. Even quantum or photonic systems will require precision enclosures and structural support infrastructure.",
-    materials: "Steel, aluminum, concrete, raised-floor tiles, anti-static flooring, cable management trays",
-    future: "Modular prefab data halls, hyperscale liquid-cooled rack systems, nano-scale server enclosures",
-    companies: ["Rittal","Panduit","Chatsworth (Legrand)","APC (Schneider)","Tripp Lite","Belden"]
-  },
-  {
-    id: "compute", cls: "p-compute", name: "Compute Substrate", dots: 5,
-    badge: "evolving", badgeLabel: "Evolving fast",
-    sub: "CPUs, GPUs, ASICs, FPGAs → quantum/photonic",
-    why: "The form changes dramatically — vacuum tubes to silicon to quantum — but something must always perform the computation. The substrate evolves; the fundamental need is eternal and inseparable from what a data center is.",
-    materials: "Silicon, gallium nitride, silicon carbide, indium phosphide, diamond substrate (future), photonic waveguides",
-    future: "Neuromorphic chips, photonic co-processors, cryogenic quantum processors, 3D stacked silicon",
-    companies: ["NVIDIA","Intel","AMD","TSMC","Samsung","IONQ","IBM (quantum)","Lightmatter"]
-  },
-  {
-    id: "connect", cls: "p-connect", name: "Connectivity", dots: 5,
-    badge: "eternal", badgeLabel: "Eternal",
-    sub: "Copper, fiber, InfiniBand, silicon photonics",
-    why: "Data must move between chips, racks, buildings, regions, and users. The medium changes (copper → fiber → photonic → quantum entanglement) but interconnect is inseparable from computation itself.",
-    materials: "Copper cabling, optical fiber, silicon photonic chips, SFP transceivers, PCB backplanes",
-    future: "Co-packaged optics, terabit wireless backhaul, quantum entanglement links, silicon photonic fabrics at scale",
-    companies: ["Cisco","Arista","Juniper","Corning","Coherent","NVIDIA (Mellanox)","Lumentum"]
-  },
-  {
-    id: "security", cls: "p-security", name: "Security & Access", dots: 4,
-    badge: "eternal", badgeLabel: "Eternal",
-    sub: "Physical access, surveillance, crypto, biometrics",
-    why: "Data and compute have always been targets. Physical security (who enters), logical security (who accesses data), and environmental monitoring are required regardless of what technology era the facility belongs to.",
-    materials: "Steel doors, biometric hardware, copper/fiber sensor wiring, HSMs, silicon security chips, camera systems",
-    future: "AI-driven threat detection, post-quantum cryptographic hardware, zero-trust silicon, quantum key distribution",
-    companies: ["Johnson Controls","Honeywell","Thales","Lenel (Carrier)","Axis (cameras)","Entrust"]
-  },
-  {
-    id: "storage", cls: "p-storage", name: "Storage", dots: 5,
-    badge: "evolving", badgeLabel: "Evolving fast",
-    sub: "Tape → HDD → SSD → DNA/holographic future",
-    why: "State must persist. Whether magnetic tape, spinning disk, NAND flash, or molecular storage — the universal need to retain data between computations never goes away. Only the medium changes.",
-    materials: "Magnetic alloys, silicon NAND, rare earth magnets, glass substrates (DNA storage), phase-change materials",
-    future: "DNA data storage, holographic memory, 3D NAND beyond 300 layers, persistent memory at DRAM speeds",
-    companies: ["Seagate","Western Digital","Samsung (NAND)","Pure Storage","NetApp","Quantum Corp"]
-  },
-  {
-    id: "monitor", cls: "p-monitor", name: "Monitoring & DCIM", dots: 3,
-    badge: "emerging", badgeLabel: "Emerging layer",
-    sub: "Sensors, DCIM software, BMS, AIOps, telemetry",
-    why: "As complexity grows, the data center itself becomes a managed system. Temperature, power draw, airflow, humidity, vibration — all must be sensed, logged, and acted upon continuously to prevent cascading failure.",
-    materials: "Sensor silicon, CAT5/fiber sensor wiring, server management chips (BMCs), smart rack PDUs",
-    future: "Fully autonomous AIOps, digital twin-managed facilities, predictive failure detection before hardware degrades",
-    companies: ["Nlyte (BMC)","Sunbird","Schneider EcoStruxure","Vertiv Avocent","Delta Electronics","NVIDIA DOCA"]
-  }
+// ─────────────────────────────────────────────────────────────────────────────
+// SHARED UTILITIES
+// ─────────────────────────────────────────────────────────────────────────────
+const tickers = {
+  "eaton":"ETN","schneider electric":"SU","abb":"ABB","vertiv":"VRT",
+  "caterpillar":"CAT","bloom energy":"BE","tesla energy":"TSLA",
+  "emerson":"EMR","3m (novec)":"MMM","green revolution cooling":"GRC",
+  "green rev. cooling":"GRC","asetek":"ASTK","modine":"MOD","carrier":"CARR",
+  "rittal":"RTTL","panduit":"PNDT","chatsworth (legrand)":"LR",
+  "apc (schneider)":"SU","tripp lite":"ETN","belden":"BDC",
+  "nvidia":"NVDA","intel":"INTC","amd":"AMD","tsmc":"TSM",
+  "samsung":"005930.KS","samsung (nand)":"005930.KS","ionq":"IONQ",
+  "ibm (quantum)":"IBM","lightmatter":"LMTR",
+  "cisco":"CSCO","arista":"ANET","juniper":"JNPR","corning":"GLW",
+  "coherent":"COHR","nvidia (mellanox)":"NVDA","nvidia/mellanox":"NVDA",
+  "lumentum":"LITE","johnson controls":"JCI","honeywell":"HON",
+  "thales":"HO","lenel (carrier)":"CARR","axis (cameras)":"CAJ",
+  "entrust":"ENTG","seagate":"STX","western digital":"WDC",
+  "pure storage":"PSTG","netapp":"NTAP","quantum corp":"QMCO",
+  "nlyte (bmc)":"BMCI","sunbird":"SBRD","schneider ecostruxure":"SU",
+  "vertiv avocent":"VRT","delta electronics":"2308.TW","delta":"2308.TW",
+  "nvidia doca":"NVDA",
+  // Robotics
+  "yaskawa":"6506.T","fanuc":"6954.T","harmonic drive":"6324.T",
+  "nabtesco":"6268.T","maxon":"MAXN","festo":"FSTO","smc corp":"6273.T",
+  "panasonic (cells)":"6752.T","texas instruments":"TXN","vicor":"VICR",
+  "infineon":"IFNNY","catl":"300750.SZ","te connectivity":"TEL",
+  "murata":"6981.T","cognex":"CGNX","keyence":"6861.T","sick ag":"SIK",
+  "hesai technology":"HSAI","bosch sensortec":"BOSCH","intel realsense":"INTC",
+  "nvidia (jetson)":"NVDA","renesas":"6723.T","rockwell automation":"ROK",
+  "beckhoff":"BKHF","qualcomm":"QCOM","qualcomm robotics":"QCOM",
+  "xilinx (amd)":"AMD","pilz":"PILZ","sick (safety)":"SIK",
+  "schmersal":"SCRM","rockwell safety":"ROK","abb safemove":"ABB",
+  "fanuc dcs":"6954.T","tuv sud":"TUVD","renishaw":"RSW.L",
+  "precision castparts":"PCC","hexcel":"HXL","toray (cfrp)":"3402.T",
+  "moog":"MOG.A","norsk titanium":"NTI.OL","desktop metal":"DM",
+  "mathworks":"MTLB","siemens nx":"SIEGY","intrinsic (google)":"GOOGL",
+  "covariant":"CVNT","phys. intelligence":"PI",
+  "universal robots":"TER","kuka smartpad":"KUKAY","ptc vuforia":"PTC",
+  "realwear":"RWEAR","boston dynamics":"HYUN","comau":"STLA",
+  "teradyne":"TER","zebra tech":"ZBRA","trimble":"TRMB",
+  "pilz":"PILZ","u-blox":"UBXN.SW","sierra wireless":"SWIR",
+  "mp materials":"MP","lynas":"LYC.AX","energy fuels":"UUUU",
+  "intuitive surgical":"ISRG","uipath":"PATH","kratos defense":"KTOS",
+  "iridium":"IRDM","albemarle":"ALB","sqm":"SQM","byd":"1211.HK",
+  "tdk":"6762.T","panasonic":"6752.T","samsung sdi":"006400.KS",
+  "livent":"LTHM","meta":"META","microsoft":"MSFT","ptc":"PTC",
+};
+
+function tickerFor(name) { return tickers[name.toLowerCase()] || null; }
+function stockLink(name) {
+  const t = tickerFor(name);
+  return 'https://www.google.com/search?q=' + encodeURIComponent((t ? t + ' stock' : name + ' stock ticker'));
+}
+
+// Inject link styles once
+const ls = document.createElement('style');
+ls.textContent = `
+  .co-link{color:inherit;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);transition:color .12s,border-color .12s}
+  .co-link:hover{color:var(--accent);border-color:var(--accent)}
+  .ticker-badge{font-family:var(--mono);font-size:9px;padding:1px 5px;border-radius:2px;background:rgba(0,200,255,0.1);color:var(--accent);margin-left:5px;vertical-align:middle}
+  .chip a.co-link{border-bottom:none}
+`;
+document.head.appendChild(ls);
+
+function buildChips(companies) {
+  return companies.map(c => {
+    const t = tickerFor(c), url = stockLink(c);
+    const badge = t ? `<span class="ticker-badge">${t}</span>` : '';
+    return `<div class="chip"><a class="co-link" href="${url}" target="_blank" rel="noopener">${c}</a>${badge}</div>`;
+  }).join('');
+}
+
+function buildCompanyRow(c, col) {
+  const t = tickerFor(c), url = stockLink(c);
+  const badge = t ? `<span class="ticker-badge">${t}</span>` : '';
+  return `<div class="company-row"><div class="company-dot" style="background:${col}"></div><a class="co-link" href="${url}" target="_blank" rel="noopener">${c}</a>${badge}</div>`;
+}
+
+// Generic pillar card builder
+// detailPanel is OUTSIDE the grid (sibling), so grid-column trick won't work.
+// We show it below the grid instead — already correct in HTML structure.
+function buildPillarSection(pillars, colorsMap, gridId, detailId, detailInnerId, tabScope) {
+  const grid       = document.getElementById(gridId);
+  const detail     = document.getElementById(detailId);
+  const inner      = document.getElementById(detailInnerId);
+  let activeId     = null;
+
+  // Inject active-border colors for this tab's pillar classes
+  const styleEl = document.createElement('style');
+  pillars.forEach(p => {
+    const col = colorsMap[p.id] || '#888';
+    styleEl.textContent += `.${p.cls}.active::before{background:${col}!important;}`;
+    styleEl.textContent += `.${p.cls} .dot.on{background:${col}!important;}`;
+  });
+  document.head.appendChild(styleEl);
+
+  pillars.forEach(p => {
+    const col = colorsMap[p.id] || '#888';
+    const card = document.createElement('div');
+    card.className = `pillar-card ${p.cls}`;
+    const dotsHtml = Array.from({length:5},(_,i)=>`<div class="dot${i<p.dots?' on':''}"></div>`).join('');
+    const badgeClass = p.badge==='eternal'?'badge-eternal':p.badge==='evolving'?'badge-evolving':'badge-emerging';
+    card.innerHTML = `
+      <div class="pillar-top">
+        <div class="pillar-name">${p.name}</div>
+        <div class="pillar-badge ${badgeClass}">${p.badgeLabel}</div>
+      </div>
+      <div class="pillar-sub">${p.sub}</div>
+      <div class="pillar-dots">${dotsHtml}</div>`;
+
+    card.addEventListener('click', () => {
+      if (activeId === p.id) {
+        card.classList.remove('active');
+        detail.classList.remove('open');
+        activeId = null; return;
+      }
+      // Only deactivate cards in THIS tab
+      grid.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      activeId = p.id;
+      inner.innerHTML = `
+        <div class="detail-why">${p.why}</div>
+        <div class="detail-block"><div class="detail-label">Key materials</div><div class="detail-text">${p.materials}</div></div>
+        <div class="detail-block"><div class="detail-label">Future direction</div><div class="detail-text">${p.future}</div></div>
+        <div class="detail-block"><div class="detail-label">Major contributors</div><div class="chip-list">${buildChips(p.companies)}</div></div>`;
+      detail.classList.add('open');
+      detail.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+    grid.appendChild(card);
+  });
+}
+
+// Generic timeline builder — deferred so canvas has dimensions when tab is visible
+function buildTimeline(timelineData, catColors, legendId, canvasId) {
+  const legendEl = document.getElementById(legendId);
+  const canvas   = document.getElementById(canvasId);
+  if (!legendEl || !canvas) return;
+
+  // Build legend
+  const seen = {};
+  timelineData.forEach(d => {
+    if (!seen[d.cat]) {
+      seen[d.cat] = true;
+      legendEl.innerHTML += `<div class="legend-item"><div class="legend-sq" style="background:${catColors[d.cat]}"></div>${d.catLabel||d.cat}</div>`;
+    }
+  });
+
+  const barH = 22, gapH = 4;
+  canvas.style.minWidth = '600px';
+  canvas.style.display  = 'block';
+  canvas.height = timelineData.length * (barH + gapH) + 60;
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: timelineData.map(d => d.label),
+      datasets: [{
+        label: 'Active era',
+        data: timelineData.map(d => [d.start, d.end]),
+        backgroundColor: timelineData.map(d => (catColors[d.cat]||'#888') + 'BB'),
+        borderColor:     timelineData.map(d =>  catColors[d.cat]||'#888'),
+        borderWidth: 1, borderRadius: 3, borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor:'#111418', borderColor:'rgba(255,255,255,0.1)', borderWidth:1,
+          titleColor:'#E8E6DF', bodyColor:'#7A8090',
+          callbacks: { label: ctx => { const d=timelineData[ctx.dataIndex]; return ` ${d.start} → ${d.end>=2060?'2050+':d.end}`; } }
+        }
+      },
+      scales: {
+        x: { min:1960, max:2060,
+          ticks:{ stepSize:10, color:'#7A8090', font:{family:"'Space Mono',monospace",size:10}, callback:v=>v>=2060?'2050+':v },
+          grid:{ color:'rgba(255,255,255,0.05)' }
+        },
+        y: { ticks:{ color:'#7A8090', font:{family:"'DM Sans',sans-serif",size:11}, autoSkip:false }, grid:{ display:false } }
+      }
+    }
+  });
+}
+
+// Generic company grid builder
+function buildCompanyGrid(companyData, colorsMap, gridId) {
+  const el = document.getElementById(gridId);
+  if (!el) return;
+  companyData.forEach(d => {
+    const col = colorsMap[d.cat] || '#888';
+    const card = document.createElement('div');
+    card.className = 'company-card';
+    card.innerHTML = `<div class="company-pillar-name" style="color:${col}">${d.pillar}</div>${d.cos.map(c=>buildCompanyRow(c,col)).join('')}`;
+    el.appendChild(card);
+  });
+}
+
+// Generic ETF section builder
+function buildEtfSection(etfData, colorsMap, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  etfData.forEach(pb => {
+    const col = colorsMap[pb.cat] || '#888';
+    const block = document.createElement('div');
+    block.className = 'etf-pillar-block';
+    const uid = containerId + '-' + pb.cat;
+    block.innerHTML = `<div class="etf-pillar-label" style="color:${col}">${pb.pillar}<div class="etf-pillar-line"></div></div><div class="etf-cards" id="${uid}"></div>`;
+    container.appendChild(block);
+    const cardsEl = block.querySelector('#'+uid);
+    pb.etfs.forEach(etf => {
+      const maxP = Math.max(...etf.allocation.map(a=>a.pct));
+      const allocHtml = etf.allocation.map(a=>`
+        <div class="alloc-row">
+          <div class="alloc-name">${a.name}</div>
+          <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:${Math.round(a.pct/maxP*100)}%;background:${col}88"></div></div>
+          <div class="alloc-pct">${a.pct}%</div>
+        </div>`).join('');
+      const chips = etf.topHoldings.map(h=>{
+        const sym = h.match(/\(([A-Z0-9.\-]+)\)/);
+        const url = sym ? `https://www.google.com/search?q=${encodeURIComponent(sym[1]+' stock')}` : `https://www.google.com/search?q=${encodeURIComponent(h+' stock')}`;
+        return `<div class="etf-chip"><a href="${url}" target="_blank" rel="noopener">${h}</a></div>`;
+      }).join('');
+      const tickerUrl = `https://www.google.com/search?q=${encodeURIComponent(etf.ticker+' ETF stock')}`;
+      const card = document.createElement('div');
+      card.className = 'etf-card';
+      card.innerHTML = `
+        <div class="etf-header">
+          <div><div class="etf-ticker" style="color:${col}"><a href="${tickerUrl}" target="_blank" rel="noopener">${etf.ticker}</a></div><div class="etf-name">${etf.name}</div></div>
+          <div class="etf-meta"><div class="etf-badge badge-er">ER ${etf.er}</div><div class="etf-badge badge-aum">${etf.aum}</div></div>
+        </div>
+        <div class="etf-focus">${etf.focus}</div>
+        <div class="etf-alloc-label">Sector allocation</div>
+        <div class="alloc-bars">${allocHtml}</div>
+        <div class="etf-holdings-label">Top holdings</div>
+        <div class="etf-holding-chips">${chips}</div>`;
+      cardsEl.appendChild(card);
+    });
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA CENTER TAB
+// ─────────────────────────────────────────────────────────────────────────────
+const dcPillars = [
+  { id:"power",     cls:"p-power",     name:"Power",              dots:5, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Generation, UPS, distribution, grid tie, backup",
+    why:"Every computation requires energy transfer. No matter the technology — classical silicon, quantum, photonic, or biological — energy must be delivered, regulated, and backed up. Thermodynamics and Ohm's Law do not negotiate.",
+    materials:"Copper busbars, steel transformers, lithium/lead-acid cells, silicon rectifiers, superconducting wire (future)",
+    future:"On-site SMR nuclear, hydrogen fuel cells, solid-state UPS, lossless superconducting buses",
+    companies:["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"] },
+  { id:"cooling",   cls:"p-cooling",   name:"Cooling",            dots:5, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Air, liquid, immersion, phase-change, geothermal",
+    why:"The second law of thermodynamics guarantees waste heat from every computation. Heat must move — from chip to air, water, or earth — regardless of the technology era or compute substrate.",
+    materials:"Copper/aluminum heat exchangers, refrigerants, dielectric fluids, thermal interface materials, water",
+    future:"Two-phase immersion at rack level, chip-level microfluidics, thermoelectric Peltier arrays, waste heat energy reuse",
+    companies:["Vertiv","Emerson","3M (Novec)","Green Revolution Cooling","Asetek","Modine","Carrier"] },
+  { id:"structure", cls:"p-structure", name:"Physical Structure", dots:4, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Racks, cages, cabinets, raised floor, containment",
+    why:"Compute components need physical housing, mounting, organization, and access paths. Even quantum or photonic systems will require precision enclosures and structural support infrastructure.",
+    materials:"Steel, aluminum, concrete, raised-floor tiles, anti-static flooring, cable management trays",
+    future:"Modular prefab data halls, hyperscale liquid-cooled rack systems, nano-scale server enclosures",
+    companies:["Rittal","Panduit","Chatsworth (Legrand)","APC (Schneider)","Tripp Lite","Belden"] },
+  { id:"compute",   cls:"p-compute",   name:"Compute Substrate",  dots:5, badge:"evolving", badgeLabel:"Evolving fast",
+    sub:"CPUs, GPUs, ASICs, FPGAs → quantum/photonic",
+    why:"The form changes dramatically — vacuum tubes to silicon to quantum — but something must always perform the computation. The substrate evolves; the fundamental need is eternal.",
+    materials:"Silicon, gallium nitride, silicon carbide, indium phosphide, diamond substrate (future), photonic waveguides",
+    future:"Neuromorphic chips, photonic co-processors, cryogenic quantum processors, 3D stacked silicon",
+    companies:["NVIDIA","Intel","AMD","TSMC","Samsung","IONQ","IBM (quantum)","Lightmatter"] },
+  { id:"connect",   cls:"p-connect",   name:"Connectivity",       dots:5, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Copper, fiber, InfiniBand, silicon photonics",
+    why:"Data must move between chips, racks, buildings, regions, and users. The medium changes (copper → fiber → photonic → quantum entanglement) but interconnect is inseparable from computation itself.",
+    materials:"Copper cabling, optical fiber, silicon photonic chips, SFP transceivers, PCB backplanes",
+    future:"Co-packaged optics, terabit wireless backhaul, quantum entanglement links, silicon photonic fabrics at scale",
+    companies:["Cisco","Arista","Juniper","Corning","Coherent","NVIDIA (Mellanox)","Lumentum"] },
+  { id:"security",  cls:"p-security",  name:"Security & Access",  dots:4, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Physical access, surveillance, crypto, biometrics",
+    why:"Data and compute have always been targets. Physical security, logical security, and environmental monitoring are required regardless of what technology era the facility belongs to.",
+    materials:"Steel doors, biometric hardware, copper/fiber sensor wiring, HSMs, silicon security chips, camera systems",
+    future:"AI-driven threat detection, post-quantum cryptographic hardware, zero-trust silicon, quantum key distribution",
+    companies:["Johnson Controls","Honeywell","Thales","Lenel (Carrier)","Axis (cameras)","Entrust"] },
+  { id:"storage",   cls:"p-storage",   name:"Storage",            dots:5, badge:"evolving", badgeLabel:"Evolving fast",
+    sub:"Tape → HDD → SSD → DNA/holographic future",
+    why:"State must persist. Whether magnetic tape, spinning disk, NAND flash, or molecular storage — the universal need to retain data between computations never goes away. Only the medium changes.",
+    materials:"Magnetic alloys, silicon NAND, rare earth magnets, glass substrates (DNA storage), phase-change materials",
+    future:"DNA data storage, holographic memory, 3D NAND beyond 300 layers, persistent memory at DRAM speeds",
+    companies:["Seagate","Western Digital","Samsung (NAND)","Pure Storage","NetApp","Quantum Corp"] },
+  { id:"monitor",   cls:"p-monitor",   name:"Monitoring & DCIM",  dots:3, badge:"emerging", badgeLabel:"Emerging layer",
+    sub:"Sensors, DCIM software, BMS, AIOps, telemetry",
+    why:"As complexity grows, the data center itself becomes a managed system. Temperature, power draw, airflow, humidity, vibration — all must be sensed, logged, and acted upon continuously.",
+    materials:"Sensor silicon, CAT5/fiber sensor wiring, server management chips (BMCs), smart rack PDUs",
+    future:"Fully autonomous AIOps, digital twin-managed facilities, predictive failure detection before hardware degrades",
+    companies:["Nlyte (BMC)","Sunbird","Schneider EcoStruxure","Vertiv Avocent","Delta Electronics","NVIDIA DOCA"] },
 ];
 
-const colors = {
+const dcColors = {
   power:"#1DB87A", cooling:"#00C8FF", structure:"#6B7280",
   compute:"#8B7FE8", connect:"#E8960A", security:"#D4537E",
   storage:"#E85D24", monitor:"#1D9E75"
 };
 
-// Build pillar cards
-const grid = document.getElementById('pillarGrid');
-const detail = document.getElementById('detailPanel');
-const detailInner = document.getElementById('detailInner');
+buildPillarSection(dcPillars, dcColors, 'pillarGrid', 'detailPanel', 'detailInner', 'tab-datacenter');
 
-let activeId = null;
+const dcTimelineData = [
+  {label:"Steel racks & structure",          start:1960,end:2060,cat:"structure",  catLabel:"Physical / mechanical"},
+  {label:"Raised floor systems",             start:1965,end:2060,cat:"structure",  catLabel:"Physical / mechanical"},
+  {label:"AC power distribution (UPS)",      start:1960,end:2060,cat:"power",      catLabel:"Power & energy"},
+  {label:"Diesel generator backup",          start:1960,end:2060,cat:"power",      catLabel:"Power & energy"},
+  {label:"On-site solar/wind + battery",     start:2010,end:2060,cat:"power",      catLabel:"Power & energy"},
+  {label:"SMR nuclear on-site",              start:2030,end:2060,cat:"power",      catLabel:"Power & energy"},
+  {label:"CRAC / air cooling",               start:1960,end:2060,cat:"cooling",    catLabel:"Thermal management"},
+  {label:"Hot/cold aisle containment",       start:1995,end:2060,cat:"cooling",    catLabel:"Thermal management"},
+  {label:"Liquid cooling (rear-door/DLC)",   start:2008,end:2060,cat:"cooling",    catLabel:"Thermal management"},
+  {label:"Immersion cooling (single-phase)", start:2015,end:2060,cat:"cooling",    catLabel:"Thermal management"},
+  {label:"Two-phase immersion",              start:2022,end:2060,cat:"cooling",    catLabel:"Thermal management"},
+  {label:"Vacuum tube / mainframe compute",  start:1960,end:1985,cat:"compute",    catLabel:"Compute substrate"},
+  {label:"Silicon CPU/server",               start:1975,end:2060,cat:"compute",    catLabel:"Compute substrate"},
+  {label:"GPU / ASIC accelerator",           start:2010,end:2060,cat:"compute",    catLabel:"Compute substrate"},
+  {label:"Photonic co-processor",            start:2025,end:2060,cat:"compute",    catLabel:"Compute substrate"},
+  {label:"Cryogenic quantum processor",      start:2030,end:2060,cat:"compute",    catLabel:"Compute substrate"},
+  {label:"Copper LAN / coax",                start:1960,end:2010,cat:"connect",    catLabel:"Connectivity"},
+  {label:"Fiber optic backbone",             start:1985,end:2060,cat:"connect",    catLabel:"Connectivity"},
+  {label:"High-speed ethernet (100G+)",      start:2015,end:2060,cat:"connect",    catLabel:"Connectivity"},
+  {label:"Co-packaged / silicon photonic",   start:2026,end:2060,cat:"connect",    catLabel:"Connectivity"},
+  {label:"Physical security (badge/CCTV)",   start:1960,end:2060,cat:"security",   catLabel:"Security & control"},
+  {label:"Hardware security module (HSM)",   start:1990,end:2060,cat:"security",   catLabel:"Security & control"},
+  {label:"Zero-trust / AI-driven security",  start:2018,end:2060,cat:"security",   catLabel:"Security & control"},
+  {label:"Magnetic tape storage",            start:1960,end:2060,cat:"storage",    catLabel:"Storage"},
+  {label:"HDD (spinning disk)",              start:1968,end:2045,cat:"storage",    catLabel:"Storage"},
+  {label:"NAND SSD / NVMe",                  start:2008,end:2060,cat:"storage",    catLabel:"Storage"},
+  {label:"DNA / holographic storage",        start:2032,end:2060,cat:"storage",    catLabel:"Storage"},
+  {label:"Environmental sensors / BMS",      start:1980,end:2060,cat:"monitor",    catLabel:"Monitoring & DCIM"},
+  {label:"DCIM software",                    start:2005,end:2060,cat:"monitor",    catLabel:"Monitoring & DCIM"},
+  {label:"AI-driven AIOps (digital twin)",   start:2022,end:2060,cat:"monitor",    catLabel:"Monitoring & DCIM"},
+];
+buildTimeline(dcTimelineData, dcColors, 'legend', 'timelineCanvas');
 
-pillars.forEach(p => {
-  const card = document.createElement('div');
-  card.className = `pillar-card ${p.cls}`;
-  card.setAttribute('data-id', p.id);
+buildCompanyGrid([
+  {pillar:"Power",        cat:"power",     cos:["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"]},
+  {pillar:"Cooling",      cat:"cooling",   cos:["Vertiv","Emerson","3M (Novec)","Green Revolution Cooling","Asetek","Modine","Carrier"]},
+  {pillar:"Structure",    cat:"structure", cos:["Rittal","Panduit","Chatsworth (Legrand)","APC (Schneider)","Tripp Lite","Belden"]},
+  {pillar:"Compute",      cat:"compute",   cos:["NVIDIA","Intel","AMD","TSMC","Samsung","IONQ","IBM (quantum)","Lightmatter"]},
+  {pillar:"Connectivity", cat:"connect",   cos:["Cisco","Arista","Juniper","Corning","Coherent","NVIDIA (Mellanox)","Lumentum"]},
+  {pillar:"Security",     cat:"security",  cos:["Johnson Controls","Honeywell","Thales","Lenel (Carrier)","Axis (cameras)","Entrust"]},
+  {pillar:"Storage",      cat:"storage",   cos:["Seagate","Western Digital","Samsung (NAND)","Pure Storage","NetApp","Quantum Corp"]},
+  {pillar:"Monitoring",   cat:"monitor",   cos:["Nlyte (BMC)","Sunbird","Schneider EcoStruxure","Vertiv Avocent","Delta Electronics","NVIDIA DOCA"]},
+], dcColors, 'companyGrid');
 
-  const dotsHtml = Array.from({length:5}, (_,i) =>
-    `<div class="dot${i < p.dots ? ' on' : ''}"></div>`
-  ).join('');
+buildEtfSection([
+  { pillar:"Power & Energy", cat:"power", etfs:[
+    { ticker:"GRID", name:"First Trust Nasdaq Clean Edge Smart Grid Infrastructure Index Fund", er:"0.56%", aum:"$11.7B",
+      focus:"Global equities in smart grid, power distribution, energy storage, and grid automation. 125+ holdings across electrical equipment, utilities, and industrial conglomerates.",
+      allocation:[{name:"Industrials",pct:60},{name:"Utilities",pct:22},{name:"Info Technology",pct:12},{name:"Materials",pct:6}],
+      topHoldings:["ABB (8.4%)","Eaton (7.9%)","Johnson Controls (7.6%)","Schneider Electric (7.1%)","National Grid (6.8%)"] },
+    { ticker:"PAVE", name:"Global X U.S. Infrastructure Development ETF", er:"0.47%", aum:"$9.2B",
+      focus:"U.S. companies benefiting from infrastructure buildout — raw materials, heavy equipment, engineering, construction. Strong overlap with data center power buildout.",
+      allocation:[{name:"Industrials",pct:68},{name:"Materials",pct:20},{name:"Energy",pct:7},{name:"Other",pct:5}],
+      topHoldings:["Quanta Services (4.1%)","CSX (3.6%)","Howmet Aerospace (3.3%)","Nucor (3.2%)","Eaton (3.2%)"] },
+  ]},
+  { pillar:"Cooling & Thermal", cat:"cooling", etfs:[
+    { ticker:"XLI", name:"Industrial Select Sector SPDR Fund", er:"0.09%", aum:"$20B+",
+      focus:"Broadest industrial sector coverage, capturing cooling/thermal companies including Carrier, Trane, Honeywell, and Eaton via the S&P 500 Industrials basket.",
+      allocation:[{name:"Aerospace & Defense",pct:21},{name:"Machinery",pct:20},{name:"Industrials Conglom.",pct:18},{name:"Transport/Logistics",pct:22},{name:"Building Products",pct:19}],
+      topHoldings:["GE Aerospace (9.2%)","Caterpillar (5.8%)","RTX (5.5%)","Honeywell (5.1%)","Eaton (4.9%)"] },
+    { ticker:"AIRR", name:"First Trust RBA American Industrial Renaissance ETF", er:"0.70%", aum:"$1.2B",
+      focus:"U.S. industrial renaissance — small/mid-cap manufacturers including HVAC, cooling systems, and building equipment makers reshoring production.",
+      allocation:[{name:"HVAC / Cooling",pct:28},{name:"Power mgmt",pct:24},{name:"Building systems",pct:22},{name:"Controls/Sensors",pct:26}],
+      topHoldings:["Carrier Global (CARR)","Trane Technologies (TT)","Vertiv (VRT)","Modine (MOD)","Johnson Controls (JCI)"] },
+  ]},
+  { pillar:"Physical Structure", cat:"structure", etfs:[
+    { ticker:"IGF", name:"iShares Global Infrastructure ETF", er:"0.40%", aum:"$5.8B",
+      focus:"Global infrastructure operators: regulated utilities, toll roads, pipelines, airports. Includes data center physical real estate players. 76 holdings, ~40% U.S.",
+      allocation:[{name:"Utilities",pct:42},{name:"Transportation",pct:30},{name:"Energy/Pipelines",pct:18},{name:"Communications",pct:10}],
+      topHoldings:["NextEra Energy (NEE)","Aena (ANNSF)","Transurban (TRAUF)","American Tower (AMT)","Crown Castle (CCI)"] },
+    { ticker:"DTCR", name:"Global X Data Center & Digital Infrastructure ETF", er:"0.50%", aum:"$2.3B",
+      focus:"REITs and operators that own physical data center facilities — the racks, power, and real estate. Pure-play on the physical layer of the data center stack.",
+      allocation:[{name:"Data Center REITs",pct:55},{name:"Tower/Cell REITs",pct:28},{name:"Digital Infra Ops",pct:12},{name:"Other Tech Infra",pct:5}],
+      topHoldings:["Equinix (14.8%)","Digital Realty (13.5%)","American Tower (11.6%)","Crown Castle (8.5%)","SBA Comm (4.7%)"] },
+  ]},
+  { pillar:"Compute Substrate", cat:"compute", etfs:[
+    { ticker:"SMH", name:"VanEck Semiconductor ETF", er:"0.35%", aum:"$22B+",
+      focus:"25 largest U.S.-listed semiconductor companies. Concentrated in mega-cap leaders — NVIDIA and TSMC alone are ~29% of the fund.",
+      allocation:[{name:"Chip Design (fabless)",pct:52},{name:"Foundry/Mfg",pct:18},{name:"Semi Equipment",pct:20},{name:"Memory/Storage chips",pct:10}],
+      topHoldings:["NVIDIA (18%)","TSMC (11%)","Broadcom (8%)","Intel (7%)","AMD (6%)"] },
+    { ticker:"SOXX", name:"iShares Semiconductor ETF", er:"0.35%", aum:"$17B",
+      focus:"30 U.S.-listed semiconductor companies with modified market-cap weighting (10% cap per holding). Broader and more balanced than SMH.",
+      allocation:[{name:"Semi Design",pct:43},{name:"Semi Equipment",pct:20},{name:"Integrated Circuits",pct:15},{name:"Memory/Other",pct:22}],
+      topHoldings:["Broadcom (8.8%)","NVIDIA (9.2%)","AMD (7.5%)","AMAT (5.1%)","QCOM (5.1%)"] },
+  ]},
+  { pillar:"Connectivity", cat:"connect", etfs:[
+    { ticker:"FIVG", name:"Defiance Next Gen Connectivity ETF", er:"0.30%", aum:"$450M",
+      focus:"Companies enabling 5G connectivity infrastructure: chipmakers, tower operators, fiber providers, and network equipment makers.",
+      allocation:[{name:"Semiconductors",pct:38},{name:"Network Equipment",pct:28},{name:"Telecom/Towers",pct:22},{name:"Software/Services",pct:12}],
+      topHoldings:["Qualcomm (QCOM)","Nokia (NOK)","Ericsson (ERIC)","Marvell (MRVL)","Corning (GLW)"] },
+    { ticker:"SKYY", name:"First Trust Cloud Computing ETF", er:"0.60%", aum:"$3.1B",
+      focus:"Cloud infrastructure providers that run the networking backbone enabling data center connectivity — AWS, Azure, Google Cloud and their networking stack.",
+      allocation:[{name:"Network Hardware",pct:35},{name:"Fiber/Optical",pct:25},{name:"Cloud/CDN Infra",pct:25},{name:"Telecom Backbone",pct:15}],
+      topHoldings:["Cisco (CSCO)","Arista Networks (ANET)","Corning (GLW)","Lumentum (LITE)","Juniper (JNPR)"] },
+  ]},
+  { pillar:"Security & Access", cat:"security", etfs:[
+    { ticker:"CIBR", name:"First Trust Nasdaq Cybersecurity ETF", er:"0.60%", aum:"$11.1B",
+      focus:"Largest dedicated cybersecurity ETF with 36 holdings. Includes both pure-play cyber firms and large-cap tech with major security divisions.",
+      allocation:[{name:"Security Software",pct:52},{name:"Network Security",pct:22},{name:"Identity/Access Mgmt",pct:14},{name:"Aerospace & Defense",pct:12}],
+      topHoldings:["Palo Alto (10.9%)","CrowdStrike (10.8%)","Fortinet (9.7%)","Cisco (8.9%)","Broadcom (7.0%)"] },
+    { ticker:"HACK", name:"Amplify Cybersecurity ETF", er:"0.60%", aum:"$1.3B",
+      focus:"Oldest cybersecurity ETF (2014). Dual-segment approach: cybersecurity developers + service providers, equally weighted within each segment.",
+      allocation:[{name:"Security Developers",pct:48},{name:"Security Services",pct:37},{name:"Gov/Defense Cyber",pct:15}],
+      topHoldings:["Palo Alto (PANW)","CrowdStrike (CRWD)","Fortinet (FTNT)","Leidos (LDOS)","Booz Allen (BAH)"] },
+  ]},
+  { pillar:"Storage", cat:"storage", etfs:[
+    { ticker:"SMH", name:"VanEck Semiconductor ETF (storage chip exposure)", er:"0.35%", aum:"$22B+",
+      focus:"Covers NAND/DRAM storage chip manufacturers via Micron (~6%), SK Hynix, and Samsung ADRs.",
+      allocation:[{name:"NAND/DRAM chips",pct:18},{name:"SSD controllers",pct:14},{name:"Chip design/other",pct:68}],
+      topHoldings:["Micron (MU ~6%)","SK Hynix (ADR)","Samsung (ADR)","Western Digital (WDC)","Seagate (STX)"] },
+    { ticker:"XSD", name:"SPDR S&P Semiconductor ETF", er:"0.35%", aum:"$1.4B",
+      focus:"Equal-weights 40+ semiconductor companies including storage chip makers. Better small/mid-cap storage silicon exposure than SMH.",
+      allocation:[{name:"Storage chips/NAND",pct:22},{name:"Memory (DRAM)",pct:18},{name:"Semi Equipment",pct:24},{name:"Logic/Other",pct:36}],
+      topHoldings:["Micron (MU)","Western Digital (WDC)","Seagate (STX)","Pure Storage (PSTG)","NetApp (NTAP)"] },
+  ]},
+  { pillar:"Monitoring & DCIM", cat:"monitor", etfs:[
+    { ticker:"BOTZ", name:"Global X Robotics & Artificial Intelligence ETF", er:"0.68%", aum:"$2.4B",
+      focus:"AI, robotics, and automation companies that underpin AIOps and DCIM software — including sensor makers, industrial automation vendors, and AI chip enablers.",
+      allocation:[{name:"AI/Robotics Software",pct:36},{name:"Industrial Automation",pct:28},{name:"AI Semiconductors",pct:22},{name:"Sensor/IoT Hardware",pct:14}],
+      topHoldings:["NVIDIA (NVDA)","Intuitive Surgical (ISRG)","Keyence (6861.T)","SMC Corp","Fanuc (6954.T)"] },
+    { ticker:"DTCR", name:"Global X Data Center & Digital Infrastructure ETF", er:"0.50%", aum:"$2.3B",
+      focus:"Data center operators that also run DCIM platforms and BMS systems as part of their managed colocation services.",
+      allocation:[{name:"Data Center REITs",pct:55},{name:"Tower/Cell REITs",pct:28},{name:"Digital Infra Ops",pct:12},{name:"Other Tech Infra",pct:5}],
+      topHoldings:["Equinix (14.8%)","Digital Realty (13.5%)","American Tower (11.6%)","Crown Castle (8.5%)","Marvell (2.6%)"] },
+  ]},
+], dcColors, 'etfContainer');
 
-  const badgeClass = p.badge === 'eternal' ? 'badge-eternal' : p.badge === 'evolving' ? 'badge-evolving' : 'badge-emerging';
 
-  card.innerHTML = `
-    <div class="pillar-top">
-      <div class="pillar-name">${p.name}</div>
-      <div class="pillar-badge ${badgeClass}">${p.badgeLabel}</div>
-    </div>
-    <div class="pillar-sub">${p.sub}</div>
-    <div class="pillar-dots">${dotsHtml}</div>
-  `;
+// ─────────────────────────────────────────────────────────────────────────────
+// ROBOTICS TAB — lazy-loaded on first click
+// ─────────────────────────────────────────────────────────────────────────────
+const rPillars = [
+  { id:"actuation",  cls:"rp-actuation",  name:"Actuation & Motion",           dots:5, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Motors, servos, hydraulics, pneumatics, linear drives",
+    why:"Every robot must exert force and produce motion in the physical world. This is the irreducible output layer — without it, the system is a sensor array or a computer, not a robot. The technology evolves from hydraulic to electric to soft actuators, but the need is absolute.",
+    materials:"Rare earth magnets (NdFeB), copper windings, steel gearboxes, carbon fiber linkages, shape-memory alloys (future)",
+    future:"Soft actuators from shape-memory polymers, artificial muscles (EAP), micro-hydraulic cells, magnetically levitated joints",
+    companies:["Yaskawa","Fanuc","Harmonic Drive","Nabtesco","Maxon","Festo","SMC Corp"] },
+  { id:"rpower",     cls:"rp-rpower",     name:"Power & Energy",               dots:5, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Batteries, power electronics, BMS, energy harvesting",
+    why:"All physical action requires energy. Whether grid-tethered or mobile, every robot needs a power source, delivery architecture, and management system. Physics guarantees this cannot be eliminated — only optimized.",
+    materials:"Lithium-ion cells, silicon carbide MOSFETs, copper busbars, BMS ICs, supercapacitors",
+    future:"Solid-state batteries, wireless power transfer pads, hydrogen fuel cells for mobile platforms, energy harvesting from ambient vibration",
+    companies:["Panasonic (cells)","Texas Instruments","Vicor","Infineon","CATL","TE Connectivity","Murata"] },
+  { id:"sensing",    cls:"rp-sensing",    name:"Sensing & Perception",         dots:4, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Cameras, LiDAR, IMUs, force/torque, ultrasonic, RADAR",
+    why:"A robot with no environmental awareness is a blind machine that can only execute pre-programmed paths in a perfectly controlled world. Every autonomous system needs some form of sensing. The sensors evolve; the need is permanent.",
+    materials:"Silicon photodetectors, MEMS accelerometers, time-of-flight ASICs, gallium arsenide laser diodes, piezoelectric film",
+    future:"Neuromorphic event cameras, tactile skin arrays, quantum LiDAR, distributed in-body proprioceptive sensing",
+    companies:["Cognex","Keyence","Sick AG","Hesai Technology","Bosch Sensortec","Intel RealSense"] },
+  { id:"rcompute",   cls:"rp-rcompute",   name:"Compute & Control",            dots:4, badge:"evolving", badgeLabel:"Evolving fast",
+    sub:"MCUs, PLCs, real-time OS, AI inference chips, FPGAs",
+    why:"Motion control requires deterministic real-time computation — closing feedback loops in microseconds. AI inference requires high-throughput compute for perception. Both are permanent needs; the silicon executing them evolves every generation.",
+    materials:"Silicon (ARM cores), FPGA fabric, NOR flash, DRAM, radiation-hardened ICs (space/defense robotics)",
+    future:"Neuromorphic processors, in-memory compute for edge inference, cryogenic quantum control for precision robotics",
+    companies:["NVIDIA (Jetson)","Texas Instruments","Renesas","Rockwell Automation","Beckhoff","Qualcomm Robotics"] },
+  { id:"rconnect",   cls:"rp-rconnect",   name:"Connectivity & Communication", dots:3, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"EtherCAT, PROFINET, ROS 2, 5G, TSN, OPC-UA",
+    why:"Robots must communicate — with each other, with supervisory systems, with human operators, and with cloud infrastructure. Every production or autonomous deployment requires communication infrastructure at some layer.",
+    materials:"Copper/fiber Ethernet, RF chips (WiFi 6E/5G), fieldbus ASICs, industrial connectors, EMI shielding",
+    future:"Time-sensitive networking (TSN) over 5G, deterministic wireless for mobile robots, quantum-secure robot-to-cloud comms",
+    companies:["Cisco","Beckhoff","Phoenix Contact","Hilscher","u-blox","Sierra Wireless"] },
+  { id:"safety",     cls:"rp-safety",     name:"Safety & Compliance",          dots:4, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"E-stops, safety PLCs, ISO 13849, force limiting, fencing",
+    why:"Any system operating near humans or in critical infrastructure must have a defined safety architecture. As robots move from caged environments to collaborative and autonomous deployment, safety becomes more complex — not less.",
+    materials:"Redundant relay circuits, safety-rated encoders, light curtains, pressure-sensitive mats, hardened housing",
+    future:"AI-driven dynamic safety envelopes, real-time human pose prediction, self-certified safety via on-board formal verification",
+    companies:["Pilz","SICK (safety)","Schmersal","Rockwell Safety","ABB SafeMove","FANUC DCS","TÜV SÜD"] },
+  { id:"rstructure", cls:"rp-rstructure", name:"Mechanical Structure",         dots:5, badge:"eternal",  badgeLabel:"Eternal",
+    sub:"Frames, joints, linkages, end effectors, chassis",
+    why:"Every robot requires a physical body — a structure that transmits forces, maintains geometric relationships, and survives the mechanical stresses of its operating environment. The materials evolve; the structural requirement is absolute.",
+    materials:"Steel, aluminum alloy, carbon fiber composite, titanium (surgical/aerospace), polyurethane elastomers, ceramic bearings",
+    future:"4D-printed adaptive structures, meta-material lattice frames, self-healing polymer joints, bio-inspired exoskeletons",
+    companies:["Renishaw","Precision Castparts","Hexcel","Toray (CFRP)","Moog","Desktop Metal"] },
+  { id:"software",   cls:"rp-software",   name:"Software & AI Stack",          dots:4, badge:"evolving", badgeLabel:"Evolving fast",
+    sub:"ROS 2, motion planning, perception pipelines, simulation, RL",
+    why:"The intelligence and behavioral flexibility of a robot lives in software. From PLC ladder logic to deep reinforcement learning, every generation of robotics runs on a software substrate that programs, coordinates, and continuously improves robot behavior.",
+    materials:"Silicon for compute, DRAM/NVMe for model storage, GPU memory (HBM), optical fiber for training data pipelines",
+    future:"Foundation models for robotics (RT-2, π0), world models enabling sim-to-real transfer, continuous self-improvement via on-robot RL",
+    companies:["NVIDIA Isaac","MathWorks","Siemens NX","Intrinsic (Google)","Covariant","Phys. Intelligence"] },
+  { id:"hmi",        cls:"rp-hmi",        name:"Human-Machine Interface",      dots:3, badge:"emerging", badgeLabel:"Emerging layer",
+    sub:"Teach pendants, dashboards, AR overlays, voice, teleoperation",
+    why:"As robots enter collaborative and unstructured environments, the interface between human and machine becomes a critical system. Modern cobots require intuitive programming, real-time monitoring, and seamless handoff between human and autonomous control.",
+    materials:"Touchscreen displays, haptic controllers, AR/VR headset optics, microphone arrays, wireless radio hardware",
+    future:"Thought-controlled teleoperation (BCI), photorealistic digital twin HMIs, natural language robot programming, full-body haptic suits",
+    companies:["Universal Robots","KUKA SmartPAD","PTC Vuforia","Realwear","Boston Dynamics","Comau"] },
+];
 
-  card.addEventListener('click', () => {
-    if (activeId === p.id) {
-      card.classList.remove('active');
-      detail.classList.remove('open');
-      activeId = null;
-      return;
+const rColors = {
+  actuation:"#E85D24", rpower:"#1DB87A", sensing:"#00C8FF",
+  rcompute:"#8B7FE8", rconnect:"#E8960A", safety:"#D4537E",
+  rstructure:"#6B7280", software:"#1D9E75", hmi:"#BA7517"
+};
+
+const rTimelineData = [
+  {label:"Cast iron / steel frames",           start:1960,end:2060,cat:"rstructure", catLabel:"Mechanical Structure"},
+  {label:"Carbon fiber composite structure",   start:1985,end:2060,cat:"rstructure", catLabel:"Mechanical Structure"},
+  {label:"Meta-material / 4D-printed frames",  start:2030,end:2060,cat:"rstructure", catLabel:"Mechanical Structure"},
+  {label:"Hydraulic actuators",                start:1960,end:2040,cat:"actuation",  catLabel:"Actuation & Motion"},
+  {label:"Electric servo motors",              start:1975,end:2060,cat:"actuation",  catLabel:"Actuation & Motion"},
+  {label:"Harmonic / strain wave gearbox",     start:1980,end:2060,cat:"actuation",  catLabel:"Actuation & Motion"},
+  {label:"Soft actuators (EAP / SMA)",         start:2015,end:2060,cat:"actuation",  catLabel:"Actuation & Motion"},
+  {label:"Tethered / DC power supply",         start:1960,end:2060,cat:"rpower",     catLabel:"Power & Energy"},
+  {label:"Ni-Cd / NiMH battery packs",         start:1975,end:2010,cat:"rpower",     catLabel:"Power & Energy"},
+  {label:"Lithium-ion battery packs",          start:2000,end:2060,cat:"rpower",     catLabel:"Power & Energy"},
+  {label:"Solid-state batteries",              start:2028,end:2060,cat:"rpower",     catLabel:"Power & Energy"},
+  {label:"Limit switches / encoders",          start:1960,end:2060,cat:"sensing",    catLabel:"Sensing & Perception"},
+  {label:"Industrial machine vision",          start:1985,end:2060,cat:"sensing",    catLabel:"Sensing & Perception"},
+  {label:"3D LiDAR / depth cameras",           start:2010,end:2060,cat:"sensing",    catLabel:"Sensing & Perception"},
+  {label:"Force/torque sensing (6-axis)",      start:2005,end:2060,cat:"sensing",    catLabel:"Sensing & Perception"},
+  {label:"Neuromorphic event cameras",         start:2027,end:2060,cat:"sensing",    catLabel:"Sensing & Perception"},
+  {label:"Relay / PLC ladder logic",           start:1960,end:2040,cat:"rcompute",   catLabel:"Compute & Control"},
+  {label:"Microcontroller (MCU) control",      start:1978,end:2060,cat:"rcompute",   catLabel:"Compute & Control"},
+  {label:"PC-based real-time control",         start:1995,end:2060,cat:"rcompute",   catLabel:"Compute & Control"},
+  {label:"GPU edge inference (Jetson etc.)",   start:2017,end:2060,cat:"rcompute",   catLabel:"Compute & Control"},
+  {label:"Foundation model inference (RT-2)",  start:2023,end:2060,cat:"rcompute",   catLabel:"Compute & Control"},
+  {label:"Proprietary fieldbus (DeviceNet)",   start:1990,end:2030,cat:"rconnect",   catLabel:"Connectivity"},
+  {label:"Industrial Ethernet (EtherCAT)",     start:2003,end:2060,cat:"rconnect",   catLabel:"Connectivity"},
+  {label:"ROS / ROS 2 middleware",             start:2007,end:2060,cat:"rconnect",   catLabel:"Connectivity"},
+  {label:"5G / WiFi 6 wireless control",       start:2020,end:2060,cat:"rconnect",   catLabel:"Connectivity"},
+  {label:"Physical guarding / fencing",        start:1960,end:2060,cat:"safety",     catLabel:"Safety & Compliance"},
+  {label:"Safety PLC (IEC 62061)",             start:1992,end:2060,cat:"safety",     catLabel:"Safety & Compliance"},
+  {label:"Collaborative safety (ISO/TS 15066)",start:2010,end:2060,cat:"safety",     catLabel:"Safety & Compliance"},
+  {label:"AI dynamic safety envelopes",        start:2025,end:2060,cat:"safety",     catLabel:"Safety & Compliance"},
+  {label:"Teach pendant programming",          start:1970,end:2040,cat:"hmi",        catLabel:"Human-Machine Interface"},
+  {label:"Graphical / PC HMI software",        start:1995,end:2060,cat:"hmi",        catLabel:"Human-Machine Interface"},
+  {label:"AR-assisted programming",            start:2018,end:2060,cat:"hmi",        catLabel:"Human-Machine Interface"},
+  {label:"Natural language robot control",     start:2024,end:2060,cat:"hmi",        catLabel:"Human-Machine Interface"},
+  {label:"Rule-based motion planning",         start:1965,end:2030,cat:"software",   catLabel:"Software & AI Stack"},
+  {label:"Kinematics / dynamics solvers",      start:1975,end:2060,cat:"software",   catLabel:"Software & AI Stack"},
+  {label:"ROS perception pipelines",           start:2007,end:2060,cat:"software",   catLabel:"Software & AI Stack"},
+  {label:"Simulation / digital twin (Isaac)",  start:2019,end:2060,cat:"software",   catLabel:"Software & AI Stack"},
+  {label:"Reinforcement learning control",     start:2022,end:2060,cat:"software",   catLabel:"Software & AI Stack"},
+];
+
+const rCompanyData = [
+  {pillar:"Actuation",    cat:"actuation",  cos:["Yaskawa","Fanuc","Harmonic Drive","Nabtesco","Maxon","Festo","SMC Corp"]},
+  {pillar:"Power",        cat:"rpower",     cos:["Panasonic (cells)","Texas Instruments","Vicor","Infineon","CATL","TE Connectivity"]},
+  {pillar:"Sensing",      cat:"sensing",    cos:["Cognex","Keyence","Sick AG","Hesai Technology","Bosch Sensortec","Intel RealSense"]},
+  {pillar:"Compute",      cat:"rcompute",   cos:["NVIDIA (Jetson)","Texas Instruments","Renesas","Rockwell Automation","Beckhoff","Qualcomm"]},
+  {pillar:"Connectivity", cat:"rconnect",   cos:["Cisco","Beckhoff","Phoenix Contact","Hilscher","u-blox","Sierra Wireless"]},
+  {pillar:"Safety",       cat:"safety",     cos:["Pilz","SICK (safety)","Schmersal","Rockwell Safety","ABB SafeMove","TÜV SÜD"]},
+  {pillar:"Structure",    cat:"rstructure", cos:["Renishaw","Precision Castparts","Hexcel","Toray (CFRP)","Moog","Desktop Metal"]},
+  {pillar:"Software/AI",  cat:"software",   cos:["NVIDIA Isaac","MathWorks","Siemens NX","Intrinsic (Google)","Covariant","Phys. Intelligence"]},
+  {pillar:"HMI",          cat:"hmi",        cos:["Universal Robots","KUKA SmartPAD","PTC Vuforia","Realwear","Boston Dynamics","Comau"]},
+];
+
+const rEtfData = [
+  { pillar:"Actuation & Motion", cat:"actuation", etfs:[
+    { ticker:"ROBO", name:"ROBO Global Robotics & Automation Index ETF", er:"0.95%", aum:"$1.2B",
+      focus:"The original robotics ETF (2013). Equal-weighted across 4 subsectors: actuation, sensing, control, and end-use applications. Strongest pure-play actuation exposure via Harmonic Drive, Nabtesco, Yaskawa.",
+      allocation:[{name:"Actuation/Mechanics",pct:28},{name:"Sensing",pct:22},{name:"Control/Software",pct:28},{name:"End-use Applications",pct:22}],
+      topHoldings:["Harmonic Drive (6324.T)","Nabtesco (6268.T)","Yaskawa (6506.T)","Fanuc (6954.T)","Teradyne (TER)"] },
+    { ticker:"IRBO", name:"iShares Robotics & Artificial Intelligence ETF", er:"0.47%", aum:"$620M",
+      focus:"Tracks the NYSE FactSet Global Robotics & AI Index. Lower cost than ROBO with similar actuation/mechanical exposure. 50% U.S., 50% international.",
+      allocation:[{name:"Industrials (actuation)",pct:38},{name:"IT / AI",pct:40},{name:"Healthcare Robotics",pct:12},{name:"Consumer/Other",pct:10}],
+      topHoldings:["Intuitive Surgical (ISRG)","ABB (ABB)","Keyence (6861.T)","Cognex (CGNX)","Zebra Tech (ZBRA)"] },
+  ]},
+  { pillar:"Power & Energy", cat:"rpower", etfs:[
+    { ticker:"BATT", name:"Amplify Lithium & Battery Technology ETF", er:"0.59%", aum:"$390M",
+      focus:"Covers the full battery supply chain critical to mobile robotics: cell manufacturers, BMS IC makers, cathode/anode material suppliers, and battery recyclers.",
+      allocation:[{name:"Battery Manufacturers",pct:42},{name:"Materials/Chemicals",pct:28},{name:"BMS & Power Electronics",pct:18},{name:"Mining/Recycling",pct:12}],
+      topHoldings:["CATL (300750.SZ)","Panasonic (6752.T)","Samsung SDI (006400.KS)","Albemarle (ALB)","Livent (LTHM)"] },
+    { ticker:"LIT", name:"Global X Lithium & Battery Tech ETF", er:"0.75%", aum:"$1.4B",
+      focus:"Largest dedicated battery ETF. Spans lithium mining through cell manufacturing to EV/robotics integration. Best liquid proxy for robot power system supply chain.",
+      allocation:[{name:"Lithium Mining",pct:30},{name:"Battery Manufacturing",pct:42},{name:"Power Electronics",pct:16},{name:"EV/Robot Integration",pct:12}],
+      topHoldings:["Albemarle (ALB 10%)","SQM (SQM 9%)","BYD (1211.HK 8%)","CATL (7%)","TDK (6762.T 5%)"] },
+  ]},
+  { pillar:"Sensing & Perception", cat:"sensing", etfs:[
+    { ticker:"BOTZ", name:"Global X Robotics & Artificial Intelligence ETF", er:"0.68%", aum:"$2.4B",
+      focus:"Strong sensing coverage via Keyence (~8%) and Cognex. Also covers NVIDIA for AI-based perception pipelines and autonomous navigation.",
+      allocation:[{name:"AI / Sensing Software",pct:36},{name:"Industrial Automation",pct:28},{name:"AI Semiconductors",pct:22},{name:"Sensor Hardware",pct:14}],
+      topHoldings:["NVIDIA (NVDA)","Intuitive Surgical (ISRG)","Keyence (6861.T)","SMC Corp (6273.T)","ABB (ABB)"] },
+    { ticker:"ROBO", name:"ROBO Global Robotics & Automation Index ETF (sensing subsector)", er:"0.95%", aum:"$1.2B",
+      focus:"ROBO's sensing subsector allocation (~22%) covers machine vision, LiDAR, and industrial sensors. Cognex, Keyence, and Sick AG are core sensing holdings.",
+      allocation:[{name:"Machine Vision",pct:40},{name:"LiDAR / 3D Sensing",pct:25},{name:"Industrial Sensors",pct:25},{name:"Tactile / Force",pct:10}],
+      topHoldings:["Cognex (CGNX)","Keyence (6861.T)","Zebra Tech (ZBRA)","Teledyne (TDY)","Sick AG (private)"] },
+  ]},
+  { pillar:"Compute & Control", cat:"rcompute", etfs:[
+    { ticker:"SMH", name:"VanEck Semiconductor ETF", er:"0.35%", aum:"$22B+",
+      focus:"Best compute substrate proxy for robotics. NVIDIA Jetson, Qualcomm robotics SoCs, TI microcontrollers, and Renesas MCUs are all held.",
+      allocation:[{name:"AI / Edge Inference Chips",pct:30},{name:"MCU / DSP / FPGA",pct:22},{name:"Semi Equipment",pct:20},{name:"Memory / Other",pct:28}],
+      topHoldings:["NVIDIA (NVDA 18%)","TSMC (TSM 11%)","Broadcom (AVGO 8%)","TI (TXN 5%)","AMD (4%)"] },
+    { ticker:"ARKQ", name:"ARK Autonomous Technology & Robotics ETF", er:"0.75%", aum:"$700M",
+      focus:"Active ETF with concentrated bets on autonomous systems and robot compute. Best for exposure to next-gen robot control systems including foundation model inference.",
+      allocation:[{name:"Autonomous Vehicles",pct:32},{name:"Robotics / Automation",pct:30},{name:"AI Infrastructure",pct:22},{name:"3D Printing / Mfg",pct:16}],
+      topHoldings:["Tesla (TSLA)","UiPath (PATH)","Kratos Defense (KTOS)","Trimble (TRMB)","Iridium (IRDM)"] },
+  ]},
+  { pillar:"Connectivity & Communication", cat:"rconnect", etfs:[
+    { ticker:"FIVG", name:"Defiance Next Gen Connectivity ETF", er:"0.30%", aum:"$450M",
+      focus:"5G and industrial wireless are the backbone of mobile robot fleet management and real-time teleoperation. Covers Qualcomm, Ericsson, and Nokia.",
+      allocation:[{name:"Semiconductors",pct:38},{name:"Network Equipment",pct:28},{name:"Telecom/Towers",pct:22},{name:"Software/Services",pct:12}],
+      topHoldings:["Qualcomm (QCOM)","Nokia (NOK)","Ericsson (ERIC)","Marvell (MRVL)","Corning (GLW)"] },
+    { ticker:"PAVE", name:"Global X U.S. Infrastructure Development ETF", er:"0.47%", aum:"$9.2B",
+      focus:"Industrial connectivity infrastructure — physical cabling, connectors, and network hardware in PAVE's industrial holdings including Belden and Wesco.",
+      allocation:[{name:"Industrials",pct:68},{name:"Materials",pct:20},{name:"Energy",pct:7},{name:"Other",pct:5}],
+      topHoldings:["Quanta Services (PWR)","Eaton (ETN)","Nucor (NUE)","Wesco (WCC)","Belden (BDC)"] },
+  ]},
+  { pillar:"Safety & Compliance", cat:"safety", etfs:[
+    { ticker:"XLI", name:"Industrial Select Sector SPDR Fund", er:"0.09%", aum:"$20B+",
+      focus:"Best proxy for functional safety hardware exposure via Honeywell (safety systems), Rockwell Automation (safety PLCs), and Emerson Electric (process safety).",
+      allocation:[{name:"Aerospace & Defense",pct:21},{name:"Machinery",pct:20},{name:"Industrials Conglom.",pct:18},{name:"Transport/Logistics",pct:22},{name:"Building Products",pct:19}],
+      topHoldings:["GE Aerospace (9.2%)","Caterpillar (5.8%)","Honeywell (5.1%)","Rockwell Auto (ROK)","Emerson (EMR)"] },
+    { ticker:"CIBR", name:"First Trust Nasdaq Cybersecurity ETF (robot cyber-safety layer)", er:"0.60%", aum:"$11.1B",
+      focus:"Covers the cybersecurity layer of robot safety — securing robot-cloud links, OT network protection. No pure-play functional safety ETF exists; physical safety companies (Pilz, Schmersal) are private.",
+      allocation:[{name:"Security Software",pct:52},{name:"Network Security",pct:22},{name:"Identity/Access Mgmt",pct:14},{name:"Defense/Gov Cyber",pct:12}],
+      topHoldings:["Palo Alto (PANW)","CrowdStrike (CRWD)","Fortinet (FTNT)","Cisco (CSCO)","Broadcom (AVGO)"] },
+  ]},
+  { pillar:"Mechanical Structure", cat:"rstructure", etfs:[
+    { ticker:"REMX", name:"VanEck Rare Earth/Strategic Metals ETF", er:"0.59%", aum:"$360M",
+      focus:"Rare earth and strategic metals are the material foundation of robot actuators — NdFeB magnets for motors, titanium for structural components. Most direct materials-layer play.",
+      allocation:[{name:"Rare Earth Mining",pct:38},{name:"Specialty Metals",pct:30},{name:"Processing/Refining",pct:20},{name:"Strategic Minerals",pct:12}],
+      topHoldings:["MP Materials (MP)","Lynas (LYC.AX)","Iluka Resources (ILU.AX)","Energy Fuels (UUUU)","Neo Performance (NEO.TO)"] },
+    { ticker:"PAVE", name:"Global X U.S. Infrastructure Development ETF", er:"0.47%", aum:"$9.2B",
+      focus:"Advanced materials and precision manufacturing — carbon fiber, titanium, specialty alloys — are embedded in PAVE through Nucor and Howmet Aerospace.",
+      allocation:[{name:"Industrials",pct:68},{name:"Materials",pct:20},{name:"Energy",pct:7},{name:"Other",pct:5}],
+      topHoldings:["Nucor (NUE)","Howmet Aerospace (HWM)","Quanta Services (PWR)","CSX Corp","Eaton (ETN)"] },
+  ]},
+  { pillar:"Software & AI Stack", cat:"software", etfs:[
+    { ticker:"BOTZ", name:"Global X Robotics & Artificial Intelligence ETF", er:"0.68%", aum:"$2.4B",
+      focus:"Best software/AI stack coverage via NVIDIA Isaac (simulation), Intuitive Surgical (surgical AI), and emerging foundation model companies.",
+      allocation:[{name:"AI / Robotics Software",pct:36},{name:"Industrial Automation",pct:28},{name:"AI Semiconductors",pct:22},{name:"Sensor/IoT Hardware",pct:14}],
+      topHoldings:["NVIDIA (NVDA)","Intuitive Surgical (ISRG)","Keyence (6861.T)","SMC Corp","ABB (ABB)"] },
+    { ticker:"ARKQ", name:"ARK Autonomous Technology & Robotics ETF", er:"0.75%", aum:"$700M",
+      focus:"Most aggressive software/AI bet in the robotics ETF space. Active management means it can hold private-company proxies and concentrate in foundation model enablers.",
+      allocation:[{name:"Autonomous Vehicles",pct:32},{name:"Robotics / Automation",pct:30},{name:"AI Infrastructure",pct:22},{name:"3D Printing / Mfg",pct:16}],
+      topHoldings:["Tesla (TSLA)","UiPath (PATH)","Kratos Defense (KTOS)","Trimble (TRMB)","Iridium (IRDM)"] },
+  ]},
+  { pillar:"Human-Machine Interface", cat:"hmi", etfs:[
+    { ticker:"METV", name:"Roundhill Ball Metaverse ETF", er:"0.59%", aum:"$320M",
+      focus:"AR/VR HMI for robotics teleoperation overlaps with metaverse hardware. METV holds Meta (Quest headsets), PTC (Vuforia AR), and Microsoft (HoloLens) — all used in industrial robot HMI.",
+      allocation:[{name:"AR/VR Hardware",pct:30},{name:"Cloud/Platform",pct:32},{name:"Industrial AR Software",pct:18},{name:"Gaming/Compute",pct:20}],
+      topHoldings:["Meta (META)","Microsoft (MSFT)","NVIDIA (NVDA)","PTC (PTC)","Qualcomm (QCOM)"] },
+    { ticker:"ROBO", name:"ROBO Global Robotics & Automation Index ETF (HMI subsector)", er:"0.95%", aum:"$1.2B",
+      focus:"ROBO's end-use application subsector includes collaborative robot makers (Universal Robots/Teradyne) and HMI specialists. Best diversified exposure to the operator-interface layer.",
+      allocation:[{name:"Cobot HMI",pct:30},{name:"Sensing / Vision",pct:22},{name:"Software Interface",pct:28},{name:"Industrial Applications",pct:20}],
+      topHoldings:["Teradyne (TER)","Cognex (CGNX)","Zebra Tech (ZBRA)","Trimble (TRMB)","Epson Robots (6724.T)"] },
+  ]},
+];
+
+// Tab switching — build robotics on first click, then just show/hide
+let roboticsBuilt = false;
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('tab-' + btn.dataset.tab);
+    if (panel) panel.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (btn.dataset.tab === 'robotics' && !roboticsBuilt) {
+      roboticsBuilt = true;
+      // Build all robotics sections — canvas is now visible so Chart.js gets real dimensions
+      buildPillarSection(rPillars, rColors, 'rPillarGrid', 'rDetailPanel', 'rDetailInner', 'tab-robotics');
+      buildTimeline(rTimelineData, rColors, 'rLegend', 'rTimelineCanvas');
+      buildCompanyGrid(rCompanyData, rColors, 'rCompanyGrid');
+      buildEtfSection(rEtfData, rColors, 'rEtfContainer');
     }
-    document.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('active'));
-    card.classList.add('active');
-    activeId = p.id;
-    const col = colors[p.id];
-
-    detailInner.innerHTML = `
-      <div class="detail-why">${p.why}</div>
-      <div class="detail-block">
-        <div class="detail-label">Key materials</div>
-        <div class="detail-text">${p.materials}</div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Future direction</div>
-        <div class="detail-text">${p.future}</div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Major contributors</div>
-        <div class="chip-list">${p.companies.map(c => {
-          const ticker = tickerFor(c);
-          const url    = stockLink(c);
-          const badge  = ticker ? `<span class="ticker-badge">${ticker}</span>` : '';
-          return `<div class="chip"><a class="co-link" href="${url}" target="_blank" rel="noopener">${c}</a>${badge}</div>`;
-        }).join('')}</div>
-      </div>
-    `;
-    detail.classList.add('open');
-    card.scrollIntoView({ behavior:'smooth', block:'nearest' });
   });
-
-  grid.appendChild(card);
-});
-
-// Timeline
-const timelineData = [
-  { label:"Steel racks & structure",         start:1960, end:2060, cat:"structure" },
-  { label:"Raised floor systems",            start:1965, end:2060, cat:"structure" },
-  { label:"AC power distribution (UPS)",     start:1960, end:2060, cat:"power" },
-  { label:"Diesel generator backup",         start:1960, end:2060, cat:"power" },
-  { label:"On-site solar/wind + battery",    start:2010, end:2060, cat:"power" },
-  { label:"SMR nuclear on-site",             start:2030, end:2060, cat:"power" },
-  { label:"CRAC / air cooling",              start:1960, end:2060, cat:"cooling" },
-  { label:"Hot/cold aisle containment",      start:1995, end:2060, cat:"cooling" },
-  { label:"Liquid cooling (rear-door/DLC)",  start:2008, end:2060, cat:"cooling" },
-  { label:"Immersion cooling (single-phase)",start:2015, end:2060, cat:"cooling" },
-  { label:"Two-phase immersion",             start:2022, end:2060, cat:"cooling" },
-  { label:"Vacuum tube / mainframe compute", start:1960, end:1985, cat:"compute" },
-  { label:"Silicon CPU/server",              start:1975, end:2060, cat:"compute" },
-  { label:"GPU / ASIC accelerator",          start:2010, end:2060, cat:"compute" },
-  { label:"Photonic co-processor",           start:2025, end:2060, cat:"compute" },
-  { label:"Cryogenic quantum processor",     start:2030, end:2060, cat:"compute" },
-  { label:"Copper LAN / coax",               start:1960, end:2010, cat:"connect" },
-  { label:"Fiber optic backbone",            start:1985, end:2060, cat:"connect" },
-  { label:"High-speed ethernet (100G+)",     start:2015, end:2060, cat:"connect" },
-  { label:"Co-packaged / silicon photonic",  start:2026, end:2060, cat:"connect" },
-  { label:"Physical security (badge/CCTV)",  start:1960, end:2060, cat:"security" },
-  { label:"Hardware security module (HSM)",  start:1990, end:2060, cat:"security" },
-  { label:"Zero-trust / AI-driven security", start:2018, end:2060, cat:"security" },
-  { label:"Magnetic tape storage",           start:1960, end:2060, cat:"storage" },
-  { label:"HDD (spinning disk)",             start:1968, end:2045, cat:"storage" },
-  { label:"NAND SSD / NVMe",                 start:2008, end:2060, cat:"storage" },
-  { label:"DNA / holographic storage",       start:2032, end:2060, cat:"storage" },
-  { label:"Environmental sensors / BMS",     start:1980, end:2060, cat:"monitor" },
-  { label:"DCIM software",                   start:2005, end:2060, cat:"monitor" },
-  { label:"AI-driven AIOps (digital twin)",  start:2022, end:2060, cat:"monitor" },
-];
-
-const catColors = {
-  structure:"#6B7280", power:"#1DB87A", cooling:"#00C8FF",
-  compute:"#8B7FE8", connect:"#E8960A", security:"#D4537E",
-  storage:"#E85D24", monitor:"#1D9E75"
-};
-const catNames = {
-  structure:"Physical / mechanical", power:"Power & energy",
-  cooling:"Thermal management", compute:"Compute substrate",
-  connect:"Connectivity", security:"Security & control",
-  storage:"Storage", monitor:"Monitoring & DCIM"
-};
-
-// Legend
-const legendEl = document.getElementById('legend');
-Object.entries(catNames).forEach(([k,v]) => {
-  legendEl.innerHTML += `<div class="legend-item"><div class="legend-sq" style="background:${catColors[k]}"></div>${v}</div>`;
-});
-
-// Chart
-const barH = 22;
-const gap = 4;
-const totalH = timelineData.length * (barH + gap) + 60;
-const canvas = document.getElementById('timelineCanvas');
-canvas.height = totalH;
-
-new Chart(canvas, {
-  type: 'bar',
-  data: {
-    labels: timelineData.map(d => d.label),
-    datasets: [{
-      label: 'Active era',
-      data: timelineData.map(d => [d.start, d.end]),
-      backgroundColor: timelineData.map(d => catColors[d.cat] + 'BB'),
-      borderColor:     timelineData.map(d => catColors[d.cat]),
-      borderWidth: 1,
-      borderRadius: 3,
-      borderSkipped: false,
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: '#111418',
-        borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1,
-        titleColor: '#E8E6DF',
-        bodyColor: '#7A8090',
-        callbacks: {
-          label: ctx => {
-            const d = timelineData[ctx.dataIndex];
-            return ` ${d.start} → ${d.end >= 2060 ? '2050+' : d.end}`;
-          }
-        }
-      }
-    },
-    scales: {
-      x: {
-        min: 1960, max: 2060,
-        ticks: {
-          stepSize: 10,
-          color: '#7A8090',
-          font: { family: "'Space Mono', monospace", size: 10 },
-          callback: v => v >= 2060 ? '2050+' : v
-        },
-        grid: { color: 'rgba(255,255,255,0.05)' }
-      },
-      y: {
-        ticks: {
-          color: '#7A8090',
-          font: { family: "'DM Sans', sans-serif", size: 11 },
-          autoSkip: false
-        },
-        grid: { display: false }
-      }
-    }
-  }
-});
-
-// Ticker map — keyed by display name (lowercase for fuzzy match)
-const tickers = {
-  // Power
-  "eaton":               "ETN",
-  "schneider electric":  "SU",       // Paris: SU.PA, commonly searched as SU
-  "abb":                 "ABB",
-  "vertiv":              "VRT",
-  "caterpillar":         "CAT",
-  "bloom energy":        "BE",
-  "tesla energy":        "TSLA",
-  // Cooling
-  "emerson":             "EMR",
-  "3m (novec)":          "MMM",
-  "green revolution cooling": "GRC",
-  "green rev. cooling":  "GRC",
-  "asetek":              "ASTK",
-  "modine":              "MOD",
-  "carrier":             "CARR",
-  // Structure
-  "rittal":              "RTTL",     // private, parent Friedhelm Loh Group
-  "panduit":             "PNDT",     // private
-  "chatsworth":          "CLGX",     // Legrand: LR.PA
-  "chatsworth (legrand)":"LR",
-  "apc (schneider)":     "SU",
-  "tripp lite":          "TLITE",    // acquired by Eaton
-  "belden":              "BDC",
-  // Compute
-  "nvidia":              "NVDA",
-  "intel":               "INTC",
-  "amd":                 "AMD",
-  "tsmc":                "TSM",
-  "samsung":             "005930.KS",
-  "samsung (nand)":      "005930.KS",
-  "ionq":                "IONQ",
-  "ibm (quantum)":       "IBM",
-  "lightmatter":         "LMTR",     // private
-  // Connectivity
-  "cisco":               "CSCO",
-  "arista":              "ANET",
-  "juniper":             "JNPR",
-  "corning":             "GLW",
-  "coherent":            "COHR",
-  "nvidia (mellanox)":   "NVDA",
-  "nvidia/mellanox":     "NVDA",
-  "lumentum":            "LITE",
-  // Security
-  "johnson controls":    "JCI",
-  "honeywell":           "HON",
-  "thales":              "HO",       // Euronext: HO.PA
-  "lenel (carrier)":     "CARR",
-  "axis (cameras)":      "2AXS",     // Axis acquired by Canon: CAJ
-  "entrust":             "ENTG",     // Entrust (not Entegris) — private; closest: ENTG for Entegris
-  // Storage
-  "seagate":             "STX",
-  "western digital":     "WDC",
-  "pure storage":        "PSTG",
-  "netapp":              "NTAP",
-  "quantum corp":        "QMCO",
-  // Monitoring
-  "nlyte (bmc)":         "BMC",      // BMC private; Nlyte private
-  "sunbird":             "SBRD",     // private
-  "schneider ecostruxure":"SU",
-  "vertiv avocent":      "VRT",
-  "delta electronics":   "2308.TW",
-  "delta":               "2308.TW",
-  "nvidia doca":         "NVDA",
-};
-
-function tickerFor(name) {
-  return tickers[name.toLowerCase()] || null;
-}
-
-function stockLink(name) {
-  const ticker = tickerFor(name);
-  const query  = ticker ? `${ticker} stock` : `${name} stock ticker`;
-  const url    = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-  return url;
-}
-
-// Add link styling
-const linkStyle = document.createElement('style');
-linkStyle.textContent = `
-  .co-link {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    transition: color 0.12s, border-color 0.12s;
-  }
-  .co-link:hover { color: var(--accent); border-color: var(--accent); }
-  .ticker-badge {
-    font-family: var(--mono);
-    font-size: 9px;
-    padding: 1px 5px;
-    border-radius: 2px;
-    background: rgba(0,200,255,0.1);
-    color: var(--accent);
-    margin-left: 5px;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-  .chip a.co-link { border-bottom: none; }
-  .chip a.co-link:hover { color: var(--accent); }
-`;
-document.head.appendChild(linkStyle);
-
-// Company grid
-const companyData = [
-  { pillar:"Power",       cat:"power",     cos:["Eaton","Schneider Electric","ABB","Vertiv","Caterpillar","Bloom Energy","Tesla Energy"] },
-  { pillar:"Cooling",     cat:"cooling",   cos:["Vertiv","Emerson","3M (Novec)","Asetek","Modine","Green Rev. Cooling"] },
-  { pillar:"Structure",   cat:"structure", cos:["Rittal","Panduit","Chatsworth","APC (Schneider)","Tripp Lite","Belden"] },
-  { pillar:"Compute",     cat:"compute",   cos:["NVIDIA","Intel","AMD","TSMC","IBM (quantum)","Lightmatter","IONQ"] },
-  { pillar:"Connectivity",cat:"connect",   cos:["Cisco","Arista","Corning","Coherent","NVIDIA/Mellanox","Lumentum","Juniper"] },
-  { pillar:"Security",    cat:"security",  cos:["Honeywell","Johnson Controls","Thales","Axis","Entrust","Lenel (Carrier)"] },
-  { pillar:"Storage",     cat:"storage",   cos:["Seagate","Western Digital","Samsung","Pure Storage","NetApp","Quantum Corp"] },
-  { pillar:"Monitoring",  cat:"monitor",   cos:["Schneider EcoStruxure","Vertiv Avocent","Sunbird","Nlyte","Delta","NVIDIA DOCA"] },
-];
-
-// ── ETF DATA ──────────────────────────────────────────────────────────────
-const etfData = [
-  {
-    pillar: "Power & Energy",
-    cat: "power",
-    etfs: [
-      {
-        ticker: "GRID",
-        name: "First Trust Nasdaq Clean Edge Smart Grid Infrastructure Index Fund",
-        er: "0.56%",
-        aum: "$11.7B",
-        focus: "Global equities in smart grid, power distribution, energy storage, and grid automation. 125+ holdings across electrical equipment, utilities, and industrial conglomerates.",
-        allocation: [
-          { name: "Industrials", pct: 60 },
-          { name: "Utilities", pct: 22 },
-          { name: "Info Technology", pct: 12 },
-          { name: "Materials", pct: 6 },
-        ],
-        topHoldings: ["ABB (8.4%)", "Eaton (7.9%)", "Johnson Controls (7.6%)", "Schneider Electric (7.1%)", "National Grid (6.8%)"],
-      },
-      {
-        ticker: "PAVE",
-        name: "Global X U.S. Infrastructure Development ETF",
-        er: "0.47%",
-        aum: "$9.2B",
-        focus: "U.S. companies benefiting from infrastructure buildout — raw materials, heavy equipment, engineering, construction. Strong overlap with data center power buildout.",
-        allocation: [
-          { name: "Industrials", pct: 68 },
-          { name: "Materials", pct: 20 },
-          { name: "Energy", pct: 7 },
-          { name: "Other", pct: 5 },
-        ],
-        topHoldings: ["Quanta Services (4.1%)", "CSX (3.6%)", "Howmet Aerospace (3.3%)", "Nucor (3.2%)", "Eaton (3.2%)"],
-      },
-    ],
-  },
-  {
-    pillar: "Cooling & Thermal",
-    cat: "cooling",
-    etfs: [
-      {
-        ticker: "HVAC",
-        name: "SPDR S&P Kensho Intelligent Structures ETF (proxy: XSHD / sector overlap)",
-        er: "0.45%",
-        aum: "~$800M",
-        focus: "No pure-play cooling ETF exists. Best proxies are industrial conglomerate ETFs with significant HVAC/thermal exposure: XLI (Industrial Select), PAVE, or GRID via Carrier, Trane, Vertiv holdings.",
-        allocation: [
-          { name: "HVAC / Cooling", pct: 28 },
-          { name: "Power mgmt", pct: 24 },
-          { name: "Building systems", pct: 22 },
-          { name: "Controls/sensors", pct: 26 },
-        ],
-        topHoldings: ["Carrier Global (CARR)", "Trane Technologies (TT)", "Vertiv (VRT)", "Modine (MOD)", "Johnson Controls (JCI)"],
-      },
-      {
-        ticker: "XLI",
-        name: "Industrial Select Sector SPDR Fund",
-        er: "0.09%",
-        aum: "$20B+",
-        focus: "Broadest industrial sector coverage, capturing cooling/thermal companies including Carrier, Trane, Honeywell, and Eaton via the S&P 500 Industrials basket.",
-        allocation: [
-          { name: "Aerospace & Defense", pct: 21 },
-          { name: "Machinery", pct: 20 },
-          { name: "Industrials Conglom.", pct: 18 },
-          { name: "Transport/Logistics", pct: 22 },
-          { name: "Building Products", pct: 19 },
-        ],
-        topHoldings: ["GE Aerospace (9.2%)", "Caterpillar (5.8%)", "RTX (5.5%)", "Honeywell (5.1%)", "Eaton (4.9%)"],
-      },
-    ],
-  },
-  {
-    pillar: "Physical Structure",
-    cat: "structure",
-    etfs: [
-      {
-        ticker: "IGF",
-        name: "iShares Global Infrastructure ETF",
-        er: "0.40%",
-        aum: "$5.8B",
-        focus: "Global infrastructure operators: regulated utilities, toll roads, pipelines, airports. Includes data center physical real estate players. 76 holdings, ~40% U.S.",
-        allocation: [
-          { name: "Utilities", pct: 42 },
-          { name: "Transportation", pct: 30 },
-          { name: "Energy/Pipelines", pct: 18 },
-          { name: "Communications", pct: 10 },
-        ],
-        topHoldings: ["NextEra Energy (NEE)", "Aena (ANNSF)", "Transurban (TRAUF)", "American Tower (AMT)", "Crown Castle (CCI)"],
-      },
-      {
-        ticker: "DTCR",
-        name: "Global X Data Center & Digital Infrastructure ETF",
-        er: "0.50%",
-        aum: "$2.3B",
-        focus: "REITs and operators that own physical data center facilities — the racks, power, and real estate. Pure-play on the physical layer of the data center stack.",
-        allocation: [
-          { name: "Data Center REITs", pct: 55 },
-          { name: "Tower/Cell REITs", pct: 28 },
-          { name: "Digital Infra Ops", pct: 12 },
-          { name: "Other Tech Infra", pct: 5 },
-        ],
-        topHoldings: ["Equinix (14.8%)", "Digital Realty (13.5%)", "American Tower (11.6%)", "Crown Castle (8.5%)", "SBA Comm (4.7%)"],
-      },
-    ],
-  },
-  {
-    pillar: "Compute Substrate",
-    cat: "compute",
-    etfs: [
-      {
-        ticker: "SMH",
-        name: "VanEck Semiconductor ETF",
-        er: "0.35%",
-        aum: "$22B+",
-        focus: "25 largest U.S.-listed semiconductor companies. Concentrated in mega-cap leaders — NVIDIA and TSMC alone are ~29% of the fund. Best single-ticker semiconductor play.",
-        allocation: [
-          { name: "Chip Design (fabless)", pct: 52 },
-          { name: "Foundry/Mfg", pct: 18 },
-          { name: "Semi Equipment", pct: 20 },
-          { name: "Memory/Storage chips", pct: 10 },
-        ],
-        topHoldings: ["NVIDIA (18%)", "TSMC (11%)", "Broadcom (8%)", "Intel (7%)", "AMD (6%)"],
-      },
-      {
-        ticker: "SOXX",
-        name: "iShares Semiconductor ETF",
-        er: "0.35%",
-        aum: "$17B",
-        focus: "30 U.S.-listed semiconductor companies with modified market-cap weighting (10% cap per holding). Broader and more balanced than SMH — includes ASML, AMAT, LRCX.",
-        allocation: [
-          { name: "Semi Design (42.5%)", pct: 43 },
-          { name: "Semi Equipment (19.5%)", pct: 20 },
-          { name: "Integrated Circuits", pct: 15 },
-          { name: "Memory/Other", pct: 22 },
-        ],
-        topHoldings: ["Broadcom (8.8%)", "NVIDIA (9.2%)", "AMD (7.5%)", "AMAT (5.1%)", "QCOM (5.1%)"],
-      },
-    ],
-  },
-  {
-    pillar: "Connectivity",
-    cat: "connect",
-    etfs: [
-      {
-        ticker: "FIVG",
-        name: "Defiance Next Gen Connectivity ETF",
-        er: "0.30%",
-        aum: "$450M",
-        focus: "Companies enabling 5G connectivity infrastructure: chipmakers, tower operators, fiber providers, and network equipment makers. Direct overlap with data center interconnect buildout.",
-        allocation: [
-          { name: "Semiconductors", pct: 38 },
-          { name: "Network Equipment", pct: 28 },
-          { name: "Telecom/Towers", pct: 22 },
-          { name: "Software/Services", pct: 12 },
-        ],
-        topHoldings: ["Qualcomm (QCOM)", "Nokia (NOK)", "Ericsson (ERIC)", "Marvell (MRVL)", "Corning (GLW)"],
-      },
-      {
-        ticker: "NTSX",
-        name: "WisdomTree U.S. Efficient Core ETF (connectivity proxy)",
-        er: "0.20%",
-        aum: "$1.8B",
-        focus: "For direct fiber/networking exposure, the best proxy ETFs are broad tech funds with heavy Cisco, Arista, and Corning weight — SKYY, QQQ, or sector-specific plays on network operators.",
-        allocation: [
-          { name: "Network Hardware", pct: 35 },
-          { name: "Fiber/Optical", pct: 25 },
-          { name: "Cloud/CDN Infra", pct: 25 },
-          { name: "Telecom Backbone", pct: 15 },
-        ],
-        topHoldings: ["Cisco (CSCO)", "Arista Networks (ANET)", "Corning (GLW)", "Lumentum (LITE)", "Juniper (JNPR)"],
-      },
-    ],
-  },
-  {
-    pillar: "Security & Access",
-    cat: "security",
-    etfs: [
-      {
-        ticker: "CIBR",
-        name: "First Trust Nasdaq Cybersecurity ETF",
-        er: "0.60%",
-        aum: "$11.1B",
-        focus: "Largest dedicated cybersecurity ETF with 36 holdings. Includes both pure-play cyber firms and large-cap tech with major security divisions. Liquidity-weighted with 6% position cap.",
-        allocation: [
-          { name: "Security Software", pct: 52 },
-          { name: "Network Security", pct: 22 },
-          { name: "Identity/Access Mgmt", pct: 14 },
-          { name: "Aerospace & Defense", pct: 12 },
-        ],
-        topHoldings: ["Palo Alto (10.9%)", "CrowdStrike (10.8%)", "Fortinet (9.7%)", "Cisco (8.9%)", "Broadcom (7.0%)"],
-      },
-      {
-        ticker: "HACK",
-        name: "Amplify Cybersecurity ETF",
-        er: "0.60%",
-        aum: "$1.3B",
-        focus: "Oldest cybersecurity ETF (2014). Dual-segment approach: cybersecurity developers + service providers, equally weighted within each segment. Small-cap tilt, higher growth potential.",
-        allocation: [
-          { name: "Security Developers", pct: 48 },
-          { name: "Security Services", pct: 37 },
-          { name: "Gov/Defense Cyber", pct: 15 },
-        ],
-        topHoldings: ["Palo Alto (PANW)", "CrowdStrike (CRWD)", "Fortinet (FTNT)", "Leidos (LDOS)", "Booz Allen (BAH)"],
-      },
-    ],
-  },
-  {
-    pillar: "Storage",
-    cat: "storage",
-    etfs: [
-      {
-        ticker: "SMH",
-        name: "VanEck Semiconductor ETF (storage chip exposure)",
-        er: "0.35%",
-        aum: "$22B+",
-        focus: "Covers NAND/DRAM storage chip manufacturers via Micron (~6%), SK Hynix, and Samsung ADRs. No pure-play storage ETF exists — SMH and SOXX are the best liquid proxies for storage silicon.",
-        allocation: [
-          { name: "NAND/DRAM chips", pct: 18 },
-          { name: "SSD controllers", pct: 14 },
-          { name: "Chip design/other", pct: 68 },
-        ],
-        topHoldings: ["Micron (MU ~6%)", "SK Hynix (ADR)", "Samsung (ADR)", "Western Digital (WDC)", "Seagate (STX)"],
-      },
-      {
-        ticker: "QMCO",
-        name: "Quantum Corporation (direct) + XSD Semiconductor ETF",
-        er: "0.35%",
-        aum: "$1.4B (XSD)",
-        focus: "XSD (SPDR S&P Semiconductor ETF) equal-weights 40+ semi companies including storage chip makers. Better small/mid-cap storage silicon exposure than SMH. QMCO is a single-stock tape storage play.",
-        allocation: [
-          { name: "Storage chips/NAND", pct: 22 },
-          { name: "Memory (DRAM)", pct: 18 },
-          { name: "Semi Equipment", pct: 24 },
-          { name: "Logic/Other", pct: 36 },
-        ],
-        topHoldings: ["Micron (MU)", "Western Digital (WDC)", "Seagate (STX)", "Pure Storage (PSTG)", "NetApp (NTAP)"],
-      },
-    ],
-  },
-  {
-    pillar: "Monitoring & DCIM",
-    cat: "monitor",
-    etfs: [
-      {
-        ticker: "BOTZ",
-        name: "Global X Robotics & Artificial Intelligence ETF",
-        er: "0.68%",
-        aum: "$2.4B",
-        focus: "AI, robotics, and automation companies that underpin AIOps and DCIM software — including sensor makers, industrial automation vendors, and AI chip enablers for autonomous operations.",
-        allocation: [
-          { name: "AI/Robotics Software", pct: 36 },
-          { name: "Industrial Automation", pct: 28 },
-          { name: "AI Semiconductors", pct: 22 },
-          { name: "Sensor/IoT Hardware", pct: 14 },
-        ],
-        topHoldings: ["NVIDIA (NVDA)", "Intuitive Surgical (ISRG)", "Keyence (6861.T)", "SMC Corp", "Fanuc (6954.T)"],
-      },
-      {
-        ticker: "DTCR",
-        name: "Global X Data Center & Digital Infrastructure ETF",
-        er: "0.50%",
-        aum: "$2.3B",
-        focus: "Data center operators that also run DCIM platforms and BMS systems as part of their managed colocation services — Equinix and Digital Realty both offer full monitoring stack to tenants.",
-        allocation: [
-          { name: "Data Center REITs", pct: 55 },
-          { name: "Tower/Cell REITs", pct: 28 },
-          { name: "Digital Infra Ops", pct: 12 },
-          { name: "Other Tech Infra", pct: 5 },
-        ],
-        topHoldings: ["Equinix (14.8%)", "Digital Realty (13.5%)", "American Tower (11.6%)", "Crown Castle (8.5%)", "Marvell (2.6%)"],
-      },
-    ],
-  },
-];
-
-// Render ETF section
-const etfContainer = document.getElementById('etfContainer');
-etfData.forEach(pillarBlock => {
-  const col = catColors[pillarBlock.cat] || '#888';
-  const block = document.createElement('div');
-  block.className = 'etf-pillar-block';
-  block.innerHTML = `
-    <div class="etf-pillar-label" style="color:${col}">
-      ${pillarBlock.pillar}
-      <div class="etf-pillar-line"></div>
-    </div>
-    <div class="etf-cards" id="etf-cards-${pillarBlock.cat}"></div>
-  `;
-  etfContainer.appendChild(block);
-
-  const cardsEl = block.querySelector(`#etf-cards-${pillarBlock.cat}`);
-  pillarBlock.etfs.forEach(etf => {
-    const maxPct = Math.max(...etf.allocation.map(a => a.pct));
-    const allocHtml = etf.allocation.map(a => `
-      <div class="alloc-row">
-        <div class="alloc-name">${a.name}</div>
-        <div class="alloc-bar-wrap">
-          <div class="alloc-bar" style="width:${Math.round((a.pct/maxPct)*100)}%;background:${col}88"></div>
-        </div>
-        <div class="alloc-pct">${a.pct}%</div>
-      </div>
-    `).join('');
-
-    const holdingChips = etf.topHoldings.map(h => {
-      const sym = h.match(/\(([A-Z0-9.\-]+)\)/);
-      const url = sym
-        ? `https://www.google.com/search?q=${encodeURIComponent(sym[1]+' stock')}`
-        : `https://www.google.com/search?q=${encodeURIComponent(h+' stock')}`;
-      return `<div class="etf-chip"><a href="${url}" target="_blank" rel="noopener">${h}</a></div>`;
-    }).join('');
-
-    const tickerUrl = `https://www.google.com/search?q=${encodeURIComponent(etf.ticker+' ETF stock')}`;
-
-    const card = document.createElement('div');
-    card.className = 'etf-card';
-    card.innerHTML = `
-      <div class="etf-header">
-        <div>
-          <div class="etf-ticker" style="color:${col}">
-            <a href="${tickerUrl}" target="_blank" rel="noopener">${etf.ticker}</a>
-          </div>
-          <div class="etf-name">${etf.name}</div>
-        </div>
-        <div class="etf-meta">
-          <div class="etf-badge badge-er">ER ${etf.er}</div>
-          <div class="etf-badge badge-aum">${etf.aum}</div>
-        </div>
-      </div>
-      <div class="etf-focus">${etf.focus}</div>
-      <div class="etf-alloc-label">Sector allocation</div>
-      <div class="alloc-bars">${allocHtml}</div>
-      <div class="etf-holdings-label">Top holdings</div>
-      <div class="etf-holding-chips">${holdingChips}</div>
-    `;
-    cardsEl.appendChild(card);
-  });
-});
-
-// Company grid
-const cgEl = document.getElementById('companyGrid');
-companyData.forEach(d => {
-  const col = catColors[d.cat];
-  const card = document.createElement('div');
-  card.className = 'company-card';
-  card.innerHTML = `
-    <div class="company-pillar-name" style="color:${col}">${d.pillar}</div>
-    ${d.cos.map(c => {
-      const ticker = tickerFor(c);
-      const url    = stockLink(c);
-      const badge  = ticker ? `<span class="ticker-badge">${ticker}</span>` : '';
-      return `<div class="company-row">
-        <div class="company-dot" style="background:${col}"></div>
-        <a class="co-link" href="${url}" target="_blank" rel="noopener">${c}</a>${badge}
-      </div>`;
-    }).join('')}
-  `;
-  cgEl.appendChild(card);
 });
 </script>
 </body>
