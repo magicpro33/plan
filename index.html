@@ -25,8 +25,11 @@ h1{font-size:clamp(18px,3.5vw,32px);font-weight:700;background:linear-gradient(1
 .tab.on{background:var(--ac);color:#000;border-color:var(--ac);font-weight:700}
 .tab:hover:not(.on){border-color:var(--ac);color:var(--ac)}
 .sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:11px;margin-bottom:22px}
-.scard{background:var(--cd);border:1px solid var(--bdr);border-radius:12px;padding:12px;transition:border-color .2s}
+.scard{background:var(--cd);border:1px solid var(--bdr);border-radius:12px;padding:12px;transition:all .25s}
 .scard:hover{border-color:var(--ac)}
+#spread-card.steep{border-color:rgba(57,255,20,.45);background:rgba(57,255,20,.03)}
+#spread-card.flat{border-color:rgba(255,215,0,.45)}
+#spread-card.inv{border-color:rgba(255,59,92,.45);background:rgba(255,59,92,.03)}
 .slbl{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--mu);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
 .sval{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--ac);margin-bottom:6px}
 input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--bdr);outline:none;cursor:pointer}
@@ -38,7 +41,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .pt{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--mu);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .pt::after{content:'';flex:1;height:1px;background:var(--bdr)}
 .cw{position:relative;height:240px}
-.sgg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:7px}
+.sgg{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:7px}
 @media(max-width:680px){.sgg{grid-template-columns:repeat(3,1fr)}}
 .sgc{background:var(--sur2);border:1px solid var(--bdr);border-radius:10px;padding:10px 6px;text-align:center;transition:all .3s}
 .sgc.bu{border-color:var(--ac3);background:rgba(57,255,20,.05)}
@@ -62,7 +65,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:8px}
 .sc{background:var(--sur2);border:1px solid var(--bdr);border-radius:10px;padding:10px 12px;transition:all .2s;cursor:pointer}
-.sc:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,229,255,.1)}
+.sc{cursor:pointer}.sc:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,229,255,.1)}
 .st{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;margin-bottom:1px}
 .st a{color:inherit;text-decoration:none}
 .st a:hover{text-decoration:underline;text-underline-offset:3px}
@@ -102,40 +105,45 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 footer{border-top:1px solid var(--bdr);padding:16px 0;margin-top:22px;color:var(--mu);font-size:11px;text-align:center;line-height:1.6}
 footer a{color:inherit;text-decoration:none}
 footer a:hover{color:var(--ac)}
-.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:100;align-items:center;justify-content:center}
-.mov.on{display:flex}
-.mbox{background:var(--sur);border:1px solid var(--bdr);border-radius:16px;padding:22px;max-width:460px;width:92%;position:relative;max-height:88vh;overflow-y:auto}
-.mcls{position:absolute;top:11px;right:11px;background:var(--bdr);border:none;color:var(--tx);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
-.mtk{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--ac);margin-bottom:3px}
-.mna{font-size:13px;color:var(--mu);margin-bottom:12px}
-.mst{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.ms2{background:var(--sur2);border-radius:7px;padding:9px}
-.msl{font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--mu);margin-bottom:2px;text-transform:uppercase}
-.msv{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700}
-.mde{font-size:11px;color:var(--mu);line-height:1.6}
-.mlk{display:flex;gap:7px;margin-top:12px;flex-wrap:wrap}
-.ml{padding:5px 12px;border-radius:6px;font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:700;text-decoration:none;transition:all .2s;border:1px solid}
-.ml.yf{color:var(--ac);border-color:var(--ac);background:rgba(0,229,255,.08)}
-.ml.yf:hover{background:rgba(0,229,255,.2)}
-.ml.tv{color:var(--gold);border-color:var(--gold);background:rgba(255,215,0,.08)}
-.ml.tv:hover{background:rgba(255,215,0,.2)}
-.ml.fv{color:var(--ac3);border-color:var(--ac3);background:rgba(57,255,20,.08)}
-.ml.fv:hover{background:rgba(57,255,20,.2)}
-.scan-badge{background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:6px;padding:3px 7px;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--ac);margin-left:6px}
-
-/* ── LIVE DATA BAR ── */
-.livebar{display:flex;align-items:center;gap:10px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.22);border-radius:10px;padding:9px 14px;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-.ld{width:8px;height:8px;border-radius:50%;background:var(--ac3);flex-shrink:0;animation:pu 2s infinite}
-.ld.spin{background:var(--gold);animation:pu .8s infinite}
-.ld.err{background:var(--red);animation:none}
-.lb-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
-.lb-stat{font-size:11px;color:var(--mu);flex:1;min-width:160px}
-.lb-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ac3);white-space:nowrap;margin-left:auto}
-.lb-time.stale{color:var(--gold)}
-.rfbtn{background:rgba(0,229,255,.1);border:1px solid var(--ac);color:var(--ac);padding:5px 16px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.5px}
-.rfbtn:hover:not(:disabled){background:rgba(0,229,255,.25);box-shadow:0 0 10px rgba(0,229,255,.25)}
-.rfbtn:disabled{opacity:.4;cursor:wait}
-/* ── LIVE PRICE BADGE on cards ── */
+.sc{cursor:pointer}
+.sc.expanded,.aec.expanded,.avc.expanded{
+  grid-column:1/-1;background:var(--sur);
+  border-color:var(--ac);box-shadow:0 0 0 1px var(--ac),0 8px 40px rgba(0,229,255,.15);
+  cursor:default;transform:none;
+}
+.exp-inner{display:none}
+.sc.expanded .exp-inner,.aec.expanded .exp-inner,.avc.expanded .exp-inner{
+  display:block;margin-top:12px;border-top:1px solid var(--bdr);padding-top:12px}
+.exp-close{float:right;background:var(--bdr);border:none;color:var(--tx);
+  width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:14px;
+  line-height:22px;text-align:center;margin:-2px -2px 8px 10px}
+.exp-close:hover{background:var(--red);color:#fff}
+.exp-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:7px;margin-bottom:11px}
+.exp-stat{background:var(--sur2);border-radius:7px;padding:9px 10px}
+.exp-slbl{font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--mu);
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.exp-sval{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
+.exp-all-ret{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:11px}
+.exp-ret{background:var(--sur2);border-radius:7px;padding:8px;text-align:center}
+.exp-ret-lbl{font-size:9px;color:var(--mu);font-family:'JetBrains Mono',monospace;
+  margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.exp-ret-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
+.exp-desc{font-size:11px;color:var(--mu);line-height:1.7;margin-bottom:11px;
+  background:var(--sur2);border-radius:7px;padding:10px 12px;border-left:2px solid var(--ac)}
+.exp-links{display:flex;gap:7px;flex-wrap:wrap}
+.exp-lnk{padding:5px 14px;border-radius:6px;font-size:10px;font-family:'JetBrains Mono',monospace;
+  font-weight:700;text-decoration:none;transition:all .2s;border:1px solid;display:inline-block}
+.exp-lnk.yf{color:var(--ac);border-color:var(--ac);background:rgba(0,229,255,.08)}
+.exp-lnk.yf:hover{background:rgba(0,229,255,.2)}
+.exp-lnk.tv{color:var(--gold);border-color:var(--gold);background:rgba(255,215,0,.08)}
+.exp-lnk.tv:hover{background:rgba(255,215,0,.2)}
+.exp-lnk.fv{color:var(--ac3);border-color:var(--ac3);background:rgba(57,255,20,.08)}
+.exp-lnk.fv:hover{background:rgba(57,255,20,.2)}
+.exp-live-row{background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(57,255,20,.04));
+  border:1px solid rgba(0,229,255,.2);border-radius:8px;padding:10px 14px;
+  margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.exp-live-price{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--ac)}
+.exp-live-chg{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
 .lpx{font-family:'JetBrains Mono',monospace;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:middle;display:inline-block}
 .lpx.live{color:var(--ac);background:rgba(0,229,255,.12)}
 .lpx.up{color:var(--ac3);background:rgba(57,255,20,.12)}
@@ -152,21 +160,12 @@ footer a:hover{color:var(--ac)}
 </style>
 </head>
 <body>
-<div class="mov" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="mbox">
-    <button class="mcls" onclick="closeModal()">&#10005;</button>
-    <div class="mtk" id="m-tk"></div>
-    <div class="mna" id="m-na"></div>
-    <div id="m-lr"></div><div class="mst" id="m-st"></div>
-    <div class="mde" id="m-de"></div>
-    <div class="mlk" id="m-lk"></div>
-  </div>
-</div>
+<!-- expanded-card: no overlay needed -->
 <div class="wrap">
 <header>
   <div class="htop">
     <div>
-      <div class="eye">// Brad's Playbook v5.1 &mdash; 82 Tickers Live &bull; Historically Calibrated Returns &bull; Jun 2026</div>
+      <div class="eye">// Brad's Playbook v5.2 &mdash; 2Y-10Y Spread Engine &bull; 82 Tickers Live &bull; Chief Economist Calibration</div>
       <h1>Macro Market Simulator</h1>
       <p class="sub">Warsh Fed &middot; Iran Deal &middot; Covert QE &middot; Oil Shock &middot; AI Buildout &middot; Alt Energy &middot; Real Scan Data</p>
     </div>
@@ -198,7 +197,8 @@ footer a:hover{color:var(--ac)}
   <div class="scard"><div class="slbl">Fed Funds Rate <button class="rbtn" onclick="rv('sl-fed',525)">RST</button></div><div class="sval" id="v-fed">5.25%</div><input type="range" min="150" max="700" value="525" id="sl-fed" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.5%</span><span>7.0%</span></div></div>
   <div class="scard"><div class="slbl">Iran Deal % <button class="rbtn" onclick="rv('sl-iran',50)">RST</button></div><div class="sval" id="v-iran">50%</div><input type="range" min="0" max="100" value="50" id="sl-iran" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>Collapsed</span><span>Signed</span></div></div>
   <div class="scard"><div class="slbl">CPI Inflation <button class="rbtn" onclick="rv('sl-cpi',42)">RST</button></div><div class="sval" id="v-cpi">4.2%</div><input type="range" min="10" max="120" value="42" id="sl-cpi" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.0%</span><span>12%</span></div></div>
-  <div class="scard"><div class="slbl">10-Year Yield <button class="rbtn" onclick="rv('sl-yield',455)">RST</button></div><div class="sval" id="v-yield">4.55%</div><input type="range" min="200" max="700" value="455" id="sl-yield" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>2.0%</span><span>7.0%</span></div></div>
+  <div class="scard"><div class="slbl">10-Year Yield <button class="rbtn" onclick="rv('sl-yield',450)">RST</button></div><div class="sval" id="v-yield">4.50%</div><input type="range" min="200" max="700" value="450" id="sl-yield" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>2.0%</span><span>7.0%</span></div></div>
+  <div class="scard" id="spread-card"><div class="slbl">2-Year Yield <button class="rbtn" onclick="rv('sl-y2',424)">RST</button></div><div class="sval" id="v-y2">4.24%</div><input type="range" min="100" max="700" value="424" id="sl-y2" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.0%</span><span>7.0%</span></div><div id="spread-display" style="margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:10px"></div></div>
   <div class="scard"><div class="slbl">DXY Dollar Index <button class="rbtn" onclick="rv('sl-dxy',1025)">RST</button></div><div class="sval" id="v-dxy">102.5</div><input type="range" min="800" max="1200" value="1025" id="sl-dxy" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>80</span><span>120</span></div></div>
   <div class="scard"><div class="slbl">QE Probability <button class="rbtn" onclick="rv('sl-qe',45)">RST</button></div><div class="sval" id="v-qe">45%</div><input type="range" min="0" max="100" value="45" id="sl-qe" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>0%</span><span>100%</span></div></div>
   <div class="scard"><div class="slbl">SLR Deregulation <button class="rbtn" onclick="rv('sl-slr',40)">RST</button></div><div class="sval" id="v-slr">40%</div><input type="range" min="0" max="100" value="40" id="sl-slr" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>None</span><span>Full Dereg</span></div></div>
@@ -289,6 +289,9 @@ footer a:hover{color:var(--ac)}
 </div>
 
 <script>
+(function(){
+"use strict";
+
 // ============================================================
 // STOCK DATABASE — all figures from real scan data
 // ============================================================
@@ -639,16 +642,15 @@ avInd:[
 
 // ============================================================
 const SCENS = {
- // Base: real Jun 23 2026 data — Fed 3.63%, CPI 4.2%, 10Y 4.50%, DXY 101.0, Iran MOU 55%
- base:{oil:74,fed:363,iran:55,cpi:42,yield:450,dxy:1010,qe:45,slr:40},
+ base:{oil:74,fed:363,iran:55,cpi:42,yield:450,y2:424,dxy:1010,qe:45,slr:40},
  // Bull: Iran deal fully signed, oil crashes, Warsh cuts 75bps, dollar weakens
- bull:{oil:60,fed:275,iran:92,cpi:26,yield:340,dxy:93,qe:72,slr:82},
+ bull:{oil:60,fed:275,iran:92,cpi:26,yield:340,y2:280,dxy:93,qe:72,slr:82},
  // Bear: deal collapses, oil $110+, Warsh forced to hike to 4.25%, CPI 7%
- bear:{oil:110,fed:425,iran:5,cpi:70,yield:520,dxy:107,qe:12,slr:12},
+ bear:{oil:110,fed:425,iran:5,cpi:70,yield:520,y2:450,dxy:107,qe:12,slr:12},
  // QE Machine: SLR passes, covert QE fires, Fed cuts 100bps, dollar collapses
- qe:{oil:70,fed:250,iran:75,cpi:30,yield:320,dxy:88,qe:95,slr:95},
+ qe:{oil:70,fed:250,iran:75,cpi:30,yield:320,y2:220,dxy:88,qe:95,slr:95},
  // Stagflation: oil $120, GDP stalls, Fed trapped at 4%, CPI 8.5%, bonds revolt
- stag:{oil:120,fed:400,iran:0,cpi:85,yield:620,dxy:106,qe:8,slr:8},
+ stag:{oil:120,fed:400,iran:0,cpi:85,yield:620,y2:420,dxy:106,qe:8,slr:8},
 };
 const NARRS = {
  base:'<strong>BASE CASE:</strong> Iran deal partially holds, oil settles $70-$80. Warsh stays hawkish through Q3, pivots Q4 as trimmed PCE data justifies cuts. Banks get SLR exemption in pipeline. Covert QE begins Q1 2027. Dollar weakens gradually. Markets chop sideways then rip higher late 2026.',
@@ -671,23 +673,38 @@ const CARD_STORE={};
 
 function rv(id,v){document.getElementById(id).value=v;upd();}
 
-function gv(){return{
- oil:+document.getElementById('sl-oil').value,
- fed:+document.getElementById('sl-fed').value/100,
- iran:+document.getElementById('sl-iran').value,
- cpi:+document.getElementById('sl-cpi').value/10,
- y10:+document.getElementById('sl-yield').value/100,
- dxy:+document.getElementById('sl-dxy').value/10,
- qe:+document.getElementById('sl-qe').value,
- slr:+document.getElementById('sl-slr').value,
+function gv(){
+ const y10    = +document.getElementById('sl-yield').value / 100;
+ const y2     = +document.getElementById('sl-y2').value / 100;
+ const spread = +(y10 - y2).toFixed(2); // 2Y-10Y term spread: key recession/bank/QE signal
+ // Update spread card border color (green=steep, amber=flat, red=inverted)
+ const _sc = document.getElementById('spread-card');
+ if(_sc){ _sc.className = 'scard ' + (spread > 0.5 ? 'steep' : spread > 0 ? 'flat' : 'inv'); }
+ // Update spread display inside slider card
+ const sdEl = document.getElementById('spread-display');
+ if(sdEl){
+   const sc = spread > 0.5 ? 'var(--ac3)' : spread > 0 ? 'var(--gold)' : 'var(--red)';
+   const label = spread > 0.5 ? 'STEEP ✓' : spread > 0 ? '~ FLAT' : '⚠ INVERTED';
+   sdEl.innerHTML = `<span style="color:${sc}">Spread: ${spread>=0?'+':''}${spread.toFixed(2)}% — ${label}</span>`;
+ }
+ return{
+  oil:  +document.getElementById('sl-oil').value,
+  fed:  +document.getElementById('sl-fed').value / 100,
+  iran: +document.getElementById('sl-iran').value,
+  cpi:  +document.getElementById('sl-cpi').value / 10,
+  y10, y2, spread,
+  dxy:  +document.getElementById('sl-dxy').value / 10,
+  qe:   +document.getElementById('sl-qe').value,
+  slr:  +document.getElementById('sl-slr').value,
 };}
 
 function gkey(v){
- if(v.qe>80&&v.slr>80)return'qe';
- if(v.oil>95&&v.cpi>55)return'stag';   // CPI stored as *10 — was bug: >5.5 never fired
- if(v.iran>75&&v.oil<70)return'bull';
- if(v.iran<20&&v.oil>90)return'bear';
- return'base';
+ const sp = v.spread !== undefined ? v.spread : (v.y10 - (v.y2 || v.y10));
+ if(v.qe>80 && v.slr>80)          return 'qe';
+ if(v.oil>95 && v.cpi>55)          return 'stag';  // CPI *10 stored
+ if(v.iran>75 && v.oil<70)         return 'bull';
+ if(v.iran<20 && v.oil>90)         return 'bear';
+ return 'base';
 }
 
 function setScen(s,el){
@@ -705,41 +722,73 @@ function setScen(s,el){
  upd();
 }
 
-function openModal(t,n,d,k){
- const proj=d[k]!=null?d[k]:(d.base||0);
- const sign=proj>=0?'+':'';
- const col=proj>=0?'var(--ac3)':'var(--red)';
- document.getElementById('m-tk').textContent=t;
- document.getElementById('m-na').textContent=n+' — '+d.sec;
- // inject live row before stats
- const lrContainer = document.getElementById('m-lr');
- if(lrContainer) lrContainer.innerHTML = liveRowHTML;
- document.getElementById('m-st').innerHTML=
-  '<div class="ms2"><div class="msl">Projected</div><div class="msv" style="color:'+col+'">'+sign+proj+'%</div></div>'+
-  '<div class="ms2"><div class="msl">Price</div><div class="msv">'+(d.price||'--')+'</div></div>'+
-  '<div class="ms2"><div class="msl">Market Cap</div><div class="msv">'+(d.mcap||'--')+'</div></div>'+
-  '<div class="ms2"><div class="msl">ROIC</div><div class="msv" style="color:var(--ac)">'+(d.roic||'--')+'</div></div>'+
-  '<div class="ms2"><div class="msl">Rev Growth</div><div class="msv">'+(d.revy||'--')+'</div></div>'+
-  '<div class="ms2"><div class="msl">P/E Ratio</div><div class="msv">'+(d.pe||'--')+'</div></div>'+
-  '<div class="ms2"><div class="msl">Dividend</div><div class="msv">'+(d.div||'0.0%')+'</div></div>'+
-  (d.piotr!=null?'<div class="ms2"><div class="msl">Piotroski</div><div class="msv">'+d.piotr+'/9</div></div>':'')+
-  (d.gc!=null?'<div class="ms2"><div class="msl">Golden Cross</div><div class="msv" style="color:'+(d.gc>=1?'var(--ac3)':'var(--mu)')+'">'+( d.gc>=1?'YES ✓':'NO ✗')+'</div></div>':'')+
-  (d.score>0?'<div class="ms2"><div class="msl">Screen Score</div><div class="msv" style="color:var(--gold)">'+d.score.toFixed(1)+'</div></div>':'');
- document.getElementById('m-de').textContent=d.desc||d.r||'';
- document.getElementById('m-lk').innerHTML=
-  '<a class="ml yf" href="https://finance.yahoo.com/quote/'+t+'" target="_blank" rel="noopener">Yahoo Finance</a>'+
-  '<a class="ml tv" href="https://www.tradingview.com/chart/?symbol='+t+'" target="_blank" rel="noopener">TradingView</a>'+
-  '<a class="ml fv" href="https://finviz.com/quote.ashx?t='+t+'" target="_blank" rel="noopener">Finviz</a>';
- document.getElementById('modal').classList.add('on');
+function buildExpanded(t,n,d,k){
+ const lp=PX[t]||BASE_PX[t], bp=BASE_PX[t];
+ const pct=(lp&&bp)?((lp-bp)/bp*100):null;
+ const sign=pct!==null?(pct>=0?'+':''):'';
+ const lcol=pct===null?'var(--ac)':pct>0?'var(--ac3)':pct<0?'var(--red)':'var(--mu)';
+ const fmt=v=>!v||v==='--'?'--':(v<10?'$'+v.toFixed(2):v<1000?'$'+v.toFixed(2):'$'+v.toFixed(0));
+ const liveRow=lp?`<div class="exp-live-row">
+  <div><div style="font-size:9px;font-family:JetBrains Mono,monospace;color:var(--mu);text-transform:uppercase;margin-bottom:2px">Live Price</div>
+  <div class="exp-live-price">${fmt(lp)}</div></div>
+  ${pct!==null?`<div class="exp-live-chg" style="color:${lcol}">${sign}${pct.toFixed(2)}%<div style="font-size:9px;color:var(--mu);font-weight:400">vs Jun 23 baseline</div></div>`:''}
+  ${bp&&lp!==bp?`<div><div style="font-size:9px;font-family:JetBrains Mono,monospace;color:var(--mu)">Baseline</div><div style="font-family:JetBrains Mono,monospace;font-size:14px;color:var(--mu)">${fmt(bp)}</div></div>`:''}
+  <div style="margin-left:auto;font-size:9px;color:var(--mu);font-family:JetBrains Mono,monospace">via Stooq</div>
+ </div>`:'';
+ const scens=[{key:'base',lbl:'BASE'},{key:'bull',lbl:'BULL'},{key:'bear',lbl:'BEAR'},{key:'qe',lbl:'QE'},{key:'stag',lbl:'STAG'}];
+ const allRet=scens.map(sc=>{
+  const v=d[sc.key];
+  if(v==null)return '';
+  const c=v>0?'var(--ac3)':v<0?'var(--red)':'var(--mu)';
+  const s=v>=0?'+':'';
+  const active=sc.key===k?'border:1px solid var(--ac)':'';
+  return `<div class="exp-ret" style="${active}"><div class="exp-ret-lbl">${sc.lbl}</div><div class="exp-ret-val" style="color:${c}">${s}${v}%</div></div>`;
+ }).join('');
+ const stats=[
+  ['Ticker',t,'var(--ac)'],
+  ['Sector',d.sec||'--'],
+  ['Live Price',lp?fmt(lp):'--','var(--ac)'],
+  ['Baseline',bp?fmt(bp):'--'],
+  ['Market Cap',d.mcap||'--'],
+  ['P/E Ratio',d.pe||'--'],
+  ['ROIC',d.roic||'--','var(--ac)'],
+  ['Rev Growth',d.revy||'--'],
+  ['Earn Growth',d.earny||'--'],
+  ['Dividend',d.div||'--'],
+  ['Piotroski',d.piotr!=null?d.piotr+'/9':'--',d.piotr>=5?'var(--ac3)':null],
+  ['Golden Cross',d.gc!=null?(d.gc>=1?'YES ✓':'NO ✗'):'--',d.gc>=1?'var(--ac3)':'var(--mu)'],
+  ['Screen Score',d.score>0?d.score.toFixed(1):'--','var(--gold)'],
+ ].filter(x=>x[1]!=='--'&&x[1]!=null);
+ const statsHTML=stats.map(([lbl,val,col])=>`<div class="exp-stat"><div class="exp-slbl">${lbl}</div><div class="exp-sval"${col?` style="color:${col}"`:''}>${val}</div></div>`).join('');
+ return `<div class="exp-inner">
+  <button class="exp-close" onclick="event.stopPropagation();collapseAll()">&#10005;</button>
+  ${liveRow}
+  <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">All Scenario Returns</div>
+  <div class="exp-all-ret">${allRet}</div>
+  <div class="exp-stats">${statsHTML}</div>
+  <div class="exp-desc">${d.desc||d.r||d.why||''}</div>
+  <div class="exp-links">
+   <a class="exp-lnk yf" href="https://finance.yahoo.com/quote/${t}" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#128200; Yahoo Finance</a>
+   <a class="exp-lnk tv" href="https://www.tradingview.com/chart/?symbol=${t}" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#128202; TradingView</a>
+   <a class="exp-lnk fv" href="https://finviz.com/quote.ashx?t=${t}" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#128269; Finviz</a>
+  </div>
+ </div>`;
 }
-function closeModal(){document.getElementById('modal').classList.remove('on');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-document.addEventListener('click',e=>{
- const card=e.target.closest('[data-card]');
- if(!card)return;
- const c=CARD_STORE[card.dataset.card];
- if(c)openModal(c.t,c.n,c.d,c.k);
-});
+function expandCard(cardEl,t,n,d,k){
+ const prev=document.querySelector('.sc.expanded,.aec.expanded,.avc.expanded');
+ if(prev&&prev!==cardEl){prev.classList.remove('expanded');const pi=prev.querySelector('.exp-inner');if(pi)pi.remove();}
+ if(cardEl.classList.contains('expanded')){cardEl.classList.remove('expanded');const ei=cardEl.querySelector('.exp-inner');if(ei)ei.remove();return;}
+ cardEl.classList.add('expanded');
+ cardEl.insertAdjacentHTML('beforeend',buildExpanded(t,n,d,k));
+ setTimeout(()=>cardEl.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+function collapseAll(){
+ document.querySelectorAll('.sc.expanded,.aec.expanded,.avc.expanded').forEach(el=>{
+  el.classList.remove('expanded');const ei=el.querySelector('.exp-inner');if(ei)ei.remove();
+ });
+}
+function openModal(){}
+function closeModal(){collapseAll();}
 
 function mkGrid(arr,key,cid,cls){
  cls=cls||'sc';
@@ -758,7 +807,7 @@ function mkGrid(arr,key,cid,cls){
   const cardId=cid+'-'+i;
   CARD_STORE[cardId]={t:s.t,n:s.n,d:s,k:key};
   return '<div class="'+cls+'" data-card="'+cardId+'">'
-   +'<div class="st" style="color:'+col+'"><a href="https://finance.yahoo.com/quote/'+s.t+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+s.t+'</a>'+livePriceBadge(s.t)+'</div>'
+   +'<div class="st" style="color:'+col+'">'+s.t+livePriceBadge(s.t)+'</div>'
    +'<div class="snam">'+s.n+'</div>'
    +'<div class="sp '+pcls+'">'+sign+val+'%</div>'
    +'<div class="sm">'+rB+gcB+pB+dB+scB+'</div>'
@@ -774,7 +823,7 @@ function mkAvoid(arr,cid){
   const cardId=cid+'-'+i;
   CARD_STORE[cardId]={t:s.t,n:s.n,d:{r:s.why,sec:s.sec,base:s.bp,bear:s.bp,stag:s.sp,bull:0,qe:0,price:'--',mcap:'--',roic:'N/A',revy:'--',pe:'--',div:'--',score:0,desc:s.why},k:'bear'};
   return '<div class="avc" data-card="'+cardId+'">'
-   +'<div class="st" style="color:var(--red)"><a href="https://finance.yahoo.com/quote/'+s.t+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+s.t+'</a></div>'
+   +'<div class="st" style="color:var(--red)">'+s.t+'</div>'
    +'<div class="snam">'+s.n+'</div>'
    +'<div class="sp d">Bear:'+s.bp+'% / Stag:'+s.sp+'%</div>'
    +'<div style="font-size:9px;color:var(--mu);margin:3px 0 4px;background:rgba(255,59,92,.1);padding:2px 6px;border-radius:3px;display:inline-block">'+s.sec+'</div>'
@@ -784,16 +833,21 @@ function mkAvoid(arr,cid){
 }
 
 function updSigs(v){
+ const sp = v.spread !== undefined ? v.spread : (v.y10 - (v.y2||v.y10));
+ const spreadBull = sp > 0.50;
+ const spreadBear = sp < 0.00;
  const sig=[
-  {ic:'&#x1F4B5;',nm:'Dollar (DXY)',bu:v.dxy<98,be:v.dxy>104},
-  {ic:'&#x1F4C8;',nm:'Stocks',bu:v.qe>60&&v.iran>60,be:v.oil>95},
-  {ic:'&#x1F4C9;',nm:'10Y Yield',bu:v.y10<4.0,be:v.y10>4.8},
-  {ic:'&#x1F947;',nm:'Gold',bu:v.dxy<98&&v.qe>50,be:v.dxy>105},
-  {ic:'&#x20BF;',nm:'Bitcoin',bu:v.qe>65&&v.dxy<100,be:v.qe<20},
+  {ic:'&#x1F4B5;',nm:'Dollar (DXY)',    bu:v.dxy<98,              be:v.dxy>104,    sub:''},
+  {ic:'&#x1F4C8;',nm:'Stocks (Risk)',   bu:v.qe>60&&v.iran>60,    be:v.oil>95,     sub:''},
+  {ic:'&#x1F4C9;',nm:'10Y Yield',       bu:v.y10<4.0,             be:v.y10>4.8,    sub:''},
+  {ic:'&#x1F947;',nm:'Gold',            bu:v.dxy<98&&v.qe>50,     be:v.dxy>105,    sub:''},
+  {ic:'&#x20BF;', nm:'Bitcoin',         bu:v.qe>65&&v.dxy<100,    be:v.qe<20,      sub:''},
+  {ic:'&#x1F4CA;',nm:'2Y-10Y Spread',   bu:spreadBull,            be:spreadBear,
+   sub:(sp>=0?'+':'')+sp.toFixed(2)+'%'},
  ];
  document.getElementById('sigs').innerHTML=sig.map(s=>{
   const cls=s.bu?'bu':s.be?'be':'ne';
-  const st=s.bu?'BULLISH':s.be?'BEARISH':'NEUTRAL';
+  const st=(s.bu?'BULLISH':s.be?'BEARISH':'NEUTRAL')+(s.sub?' '+s.sub:'');
   return'<div class="sgc '+cls+'"><div class="si">'+s.ic+'</div><div class="sn">'+s.nm+'</div><div class="ss">'+st+'</div></div>';
  }).join('');
 }
@@ -817,8 +871,11 @@ function initCharts(){
 function updCharts(v,k){
  const bull=[4500,4620,4790,4960,5140,5360,5560,5720,5880,6020,6190,6370];
  const bear=[4500,4390,4240,4090,3940,3790,3710,3670,3690,3750,3810,3890];
- const m=v.iran/100, dm=Math.max(1-(v.oil-60)/100,.28);
- const proj=bull.map((b,i)=>Math.round(b*m*dm*.5+4570*.35+bear[i]*(1-m)*.15));
+ const m  = v.iran/100;
+ const dm = Math.max(1-(v.oil-60)/100, .28);
+ const sp = v.spread !== undefined ? v.spread : (v.y10 - (v.y2||v.y10));
+ const spreadMult = 1 + Math.max(Math.min(sp * 0.35, 0.25), -0.20);
+ const proj=bull.map((b,i)=>Math.round((b*m*dm*.5+4570*.35+bear[i]*(1-m)*.15)*spreadMult));
  CH.spx.data.datasets[0].data=bull;CH.spx.data.datasets[1].data=proj;CH.spx.data.datasets[2].data=bear;CH.spx.update('none');
  const RET={
   // [S&P500, Gold, Bitcoin, Oil, 10Y Bond, USD]
@@ -835,16 +892,34 @@ function updCharts(v,k){
  CH.asset.update('none');
  const SD={
   // [Financials, Energy, Technology, Materials, Utilities, Healthcare, Real Estate, Consumer Def]
-  bull: [75, 48, 88, 55, 58, 50, 72, 60],  // Utilities raised (rate cuts = huge RE/util tailwind), Energy raised (still profitable at $60 oil)
-  bear: [35, 88, 45, 82, 62, 65, 28, 52],  // Energy slightly lower (demand destruction at $110+), Healthcare defensive
-  qe:   [85, 52, 72, 68, 65, 50, 85, 58],  // QE unlocks RE/REITs big (65→85), Utilities strong on cuts
-  stag: [30, 80, 35, 88, 65, 72, 22, 52],  // Energy demand destruction at $120 oil (95→80), Utilities defensive (raise 58→65), Healthcare best defensive (70→72)
-  base: [60, 62, 66, 62, 50, 56, 52, 56],  // Utilities slightly higher (rate environment improving)
+  // FINANCIALS column driven by 2Y-10Y spread: Bull +0.60%=NIM expand; QE +1.00%=carry; Stag=distress
+  bull: [80, 48, 88, 55, 62, 50, 75, 60],
+  bear: [38, 88, 45, 82, 60, 65, 25, 52],
+  qe:   [90, 52, 72, 68, 68, 50, 88, 58],
+  stag: [25, 80, 35, 88, 65, 72, 18, 52],
+  base: [62, 62, 66, 62, 52, 56, 52, 56],
 };
  CH.sector.data.datasets[0].data=SD[k]||SD.base;CH.sector.update('none');
- const yc=[5.2,5.3,5.25,5.1,v.fed+0.1,v.y10-0.3,v.y10,v.y10+0.3,v.y10+0.5].map(x=>+x.toFixed(2));
- const dp={bull:1.2,bear:-0.3,qe:1.8,stag:-0.5,base:0.3}[k]||0.3;
- const yp=yc.map((y,i)=>+(y-dp*(i/8)*1.2).toFixed(2));
+ const y2   = v.y2 || (v.y10 - 0.26);
+ const y10  = v.y10;
+ const ycSp = y10 - y2;  // local yield curve spread (renamed to avoid redeclaring sp)
+ const y1m  = +(v.fed + 0.05).toFixed(2);
+ const y3m  = +(v.fed + 0.10).toFixed(2);
+ const y6m  = +(v.fed + 0.15).toFixed(2);
+ const y1y  = +(y2 - 0.35).toFixed(2);
+ const y5y  = +(y2 + ycSp * 0.55).toFixed(2);
+ const y20y = +(y10 + 0.25).toFixed(2);
+ const y30y = +(y10 + 0.45).toFixed(2);
+ const yc = [y1m, y3m, y6m, y1y, y2, y5y, y10, y20y, y30y];
+ const shifts = {
+   bull: [-0.80,-0.80,-0.70,-0.65,-0.55,-0.40,-0.25,-0.15,-0.10],
+   bear: [ 0.30, 0.30, 0.25, 0.20, 0.15, 0.25, 0.35, 0.45, 0.50],
+   qe:   [-1.20,-1.20,-1.10,-1.00,-0.90,-0.65,-0.45,-0.30,-0.20],
+   stag: [ 0.05, 0.05, 0.08, 0.05, 0.00, 0.60, 1.20, 1.60, 1.80],
+   base: [-0.20,-0.18,-0.15,-0.12,-0.10,-0.05, 0.00, 0.05, 0.08],
+ };
+ const sh = shifts[k] || shifts.base;
+ const yp = yc.map((y,i) => +(y + sh[i]).toFixed(2));
  CH.yield.data.datasets[0].data=yc;CH.yield.data.datasets[1].data=yp;CH.yield.update('none');
 }
 
@@ -879,11 +954,19 @@ function updBars(k){
 }
 
 function updMbar(v,k){
+ const sp = v.spread !== undefined ? v.spread : (v.y10 - (v.y2||v.y10));
+ const spreadStr = (sp>=0?'+':'')+sp.toFixed(2)+'%';
  const chips=[
-  ['⛽ $'+v.oil,v.oil<80],['Fed '+v.fed.toFixed(2)+'%',v.fed<4.5],
-  ['CPI '+v.cpi.toFixed(1)+'%',v.cpi<3.5],['10Y '+v.y10.toFixed(2)+'%',v.y10<4.2],
-  ['DXY '+v.dxy.toFixed(1),v.dxy<100],['Iran '+v.iran+'%',v.iran>70],
-  ['QE '+v.qe+'%',v.qe>60],['SLR '+v.slr+'%',v.slr>60],
+  ['⛽ $'+v.oil,         v.oil<80],
+  ['Fed '+v.fed.toFixed(2)+'%', v.fed<4.5],
+  ['2Y '+v.y2.toFixed(2)+'%',   v.y2<4.0],
+  ['10Y '+v.y10.toFixed(2)+'%', v.y10<4.2],
+  ['Spread '+spreadStr,         sp>0.5],
+  ['CPI '+v.cpi.toFixed(1)+'%', v.cpi<3.5],
+  ['DXY '+v.dxy.toFixed(1),     v.dxy<100],
+  ['Iran '+v.iran+'%',          v.iran>70],
+  ['QE '+v.qe+'%',              v.qe>60],
+  ['SLR '+v.slr+'%',            v.slr>60],
  ];
  document.getElementById('mbar').innerHTML=chips.map(([l,ok])=>{const c=ok?'var(--ac3)':'var(--red)';return'<div class="mch" style="color:'+c+';border-color:'+c+'">'+l+'</div>';}).join('');
 }
@@ -913,6 +996,7 @@ function upd(){
  document.getElementById('v-iran').textContent=v.iran+'%';
  document.getElementById('v-cpi').textContent=v.cpi.toFixed(1)+'%';
  document.getElementById('v-yield').textContent=v.y10.toFixed(2)+'%';
+ if(document.getElementById('v-y2')) document.getElementById('v-y2').textContent=v.y2.toFixed(2)+'%';
  document.getElementById('v-dxy').textContent=v.dxy.toFixed(1);
  document.getElementById('v-qe').textContent=v.qe+'%';
  document.getElementById('v-slr').textContent=v.slr+'%';
@@ -950,7 +1034,7 @@ function upd(){
 // ═══════════════════════════════════════════════════════════
 
 // ── Hardcoded baselines (June 23 2026 close / known values) ─
-const BASE_MACRO = {oil:74, fed:363, iran:55, cpi:42, yield:450, dxy:1010, qe:45, slr:40};
+const BASE_MACRO = {oil:74, fed:363, iran:55, cpi:42, yield:450, y2:424, dxy:1010, qe:45, slr:40};
 
 // Stooq symbol map  →  tickers that need remapping
 const SQ_MAP = {
@@ -982,6 +1066,7 @@ const ALL_TKS = Object.keys(BASE_PX);
 const MACRO_SQ = {
   oil:  {s:'@CL.F', lo:20,  hi:200, scale:1,    key:'oil'},
   y10:  {s:'10US.B',lo:0.5, hi:12,  scale:100,  key:'yield'},
+  y2:   {s:'2US.B', lo:0.5, hi:12,  scale:100,  key:'y2'},
   dxy:  {s:'DXY.F', lo:70,  hi:130, scale:10,   key:'dxy'},
 };
 
@@ -1052,8 +1137,8 @@ async function doRefresh(){
   }));
 
   // Apply macro to sliders
-  ['oil','fed','iran','cpi','yield','dxy','qe','slr'].forEach(k => {
-    const el = document.getElementById('sl-' + k);
+  ['oil','fed','iran','cpi','yield','y2','dxy','qe','slr'].forEach(k => {
+    const id = k==='y2'?'sl-y2':'sl-'+k; const el = document.getElementById(id);
     if (el && macroOut[k] != null) el.value = macroOut[k];
   });
   setProgress(8);
@@ -1113,7 +1198,17 @@ function livePriceBadge(ticker){
   return `<span class="lpx live" id="lpx-${ticker}" title="Loading live price...">$${fmt}</span>`;
 }
 
+// ── Card click delegation ─────────────────────────────────────
+document.addEventListener('click',function(e){
+ if(e.target.closest('a[href]')) return; // let real links through unchanged
+ const card=e.target.closest('[data-card]');
+ if(!card) return;
+ const c=CARD_STORE[card.dataset.card];
+ if(c) expandCard(card,c.t,c.n,c.d,c.k);
+});
+
 window.addEventListener('load',()=>{initCharts();bldAngles();doRefresh();});
+})();
 </script>
 </body>
 </html>
