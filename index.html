@@ -166,7 +166,7 @@ footer a:hover{color:var(--ac)}
 <header>
   <div class="htop">
     <div>
-      <div class="eye">// Brad's Playbook v5.0 &mdash; 82 Tickers Live &bull; Stooq &bull; No API Key Required</div>
+      <div class="eye">// Brad's Playbook v5.1 &mdash; 82 Tickers Live &bull; Historically Calibrated Returns &bull; Jun 2026</div>
       <h1>Macro Market Simulator</h1>
       <p class="sub">Warsh Fed &middot; Iran Deal &middot; Covert QE &middot; Oil Shock &middot; AI Buildout &middot; Alt Energy &middot; Real Scan Data</p>
     </div>
@@ -294,27 +294,27 @@ footer a:hover{color:var(--ac)}
 // ============================================================
 const DB = {
 gold:[
- {t:'NEM',n:'Newmont Corp',sec:'Basic Materials',base:20,bull:38,bear:10,qe:50,stag:32,
+ {t:'NEM',n:'Newmont Corp',sec:'Basic Materials',base:14,bull:20,bear:5,qe:32,stag:28,
   roic:'20.89%',revy:'+45.8%',earny:'+78.6%',piotr:6,gc:1,mcap:'$110.8B',price:'$103.79',div:'1.0%',pe:'13.5',score:53.5,
   r:"Piotr:6, GC:1, ROIC 20.89% — world's largest gold miner; top quality signal combination",
   desc:"World's largest gold mining company. Operates mines across Americas, Africa, and Australia. Piotroski 6 confirms fortress fundamentals. Primary beneficiary of dollar weakness and QE environments. 20.89% ROIC means it prints gold economics even before the gold price helps."},
- {t:'AEM',n:'Agnico Eagle Mines',sec:'Basic Materials',base:18,bull:35,bear:8,qe:45,stag:30,
+ {t:'AEM',n:'Agnico Eagle Mines',sec:'Basic Materials',base:12,bull:18,bear:4,qe:30,stag:26,
   roic:'18.27%',revy:'+66.1%',earny:'+108.6%',piotr:6,gc:0.5,mcap:'$83.3B',price:'$166.66',div:'0.9%',pe:'15.7',score:54.0,
   r:'Piotr:6, ROIC 18.27%, RevG +66% — safe-jurisdiction gold miner; best-in-class quality',
   desc:'Agnico Eagle operates exclusively in safe jurisdictions (Canada, Finland, Mexico, Australia). Lowest political risk among senior gold miners. Best management track record in the sector. Piotroski 6 = exceptional financial health.'},
- {t:'WPM',n:'Wheaton Precious Metals',sec:'Basic Materials',base:22,bull:42,bear:5,qe:55,stag:35,
+ {t:'WPM',n:'Wheaton Precious Metals',sec:'Basic Materials',base:15,bull:22,bear:3,qe:38,stag:30,
   roic:'17.16%',revy:'+91.6%',earny:'+128.8%',piotr:null,gc:1,mcap:'$54.3B',price:'$119.58',div:'0.6%',pe:'30.2',score:45.7,
   r:'ROIC 17.16%, RevG +91.6%, GC:1 — gold/silver streaming royalty; asset-light model',
   desc:'Wheaton Precious Metals is a streaming company — pays miners upfront for the right to buy gold and silver at fixed low prices. Asset-light model with ~70%+ margins. No operational mining risk, pure price exposure with superior economics.'},
- {t:'AG',n:'First Majestic Silver',sec:'Basic Materials',base:25,bull:60,bear:-5,qe:70,stag:40,
+ {t:'AG',n:'First Majestic Silver',sec:'Basic Materials',base:20,bull:35,bear:-3,qe:50,stag:32,
   roic:'9.41%',revy:'+95.4%',earny:'+5068.7%',piotr:5,gc:1,mcap:'$8.9B',price:'$18.00',div:'0.2%',pe:'30.5',score:552.1,
   r:'SCORE:552 — Piotr:5, GC:1, ROIC 9.41%, EarnG +5069% — #1 Basic Materials scan pick',
   desc:"First Majestic Silver is your screener's #1 Basic Materials pick by composite score (552.1). Pure silver play with growing gold production. Extremely high earnings growth signals operating leverage turning on. High beta to precious metal prices in QE environments."},
- {t:'IAG',n:'IAMGOLD Corp',sec:'Basic Materials',base:22,bull:55,bear:-3,qe:65,stag:38,
+ {t:'IAG',n:'IAMGOLD Corp',sec:'Basic Materials',base:16,bull:32,bear:-2,qe:48,stag:30,
   roic:'17.28%',revy:'+115.9%',earny:'+822.9%',piotr:5,gc:1,mcap:'$9.8B',price:'$16.88',div:'0.0%',pe:'9.9',score:138.4,
   r:'ROIC 17.28%, RevG +115.9%, EarnG +822%, Piotr:5, GC:1 — high-beta mid-tier miner',
   desc:'IAMGOLD is a mid-tier gold miner with significant growth via the Cote Gold mine ramp in Canada. PE of 9.9 is cheap for a miner with 17%+ ROIC and Piotroski 5. Golden Cross confirmed on momentum.'},
- {t:'AGI',n:'Alamos Gold',sec:'Basic Materials',base:20,bull:48,bear:5,qe:58,stag:35,
+ {t:'AGI',n:'Alamos Gold',sec:'Basic Materials',base:14,bull:26,bear:3,qe:40,stag:28,
   roic:'16.74%',revy:'+79.2%',earny:'+1144.7%',piotr:3,gc:1,mcap:'$15.3B',price:'$36.34',div:'0.3%',pe:'14.5',score:158.7,
   r:'ROIC 16.74%, EarnG +1145%, Piotr:3, GC:1 — low-cost producer, Island Gold expansion',
   desc:'Alamos Gold is a low-cost senior gold producer with mines in Canada, Mexico, and Turkey. Island Gold mine Phase 3 expansion is a major production catalyst. Strong ROIC with consistent dividend growth.'},
@@ -358,7 +358,7 @@ tech:[
   roic:'22.24%',revy:'+18.3%',earny:'+23.4%',piotr:4,gc:0,mcap:'$2,818B',price:'$379.40',div:'0.9%',pe:'22.6',score:24.4,
   r:'ROIC 22.24%, RevG +18.3%, Piotr:4 — Azure cloud + Copilot AI monetization across Office',
   desc:'Microsoft Azure is #2 cloud with growing market share. Copilot AI across Office 365 creates massive new monetization. 22.24% ROIC and Piotroski 4 confirm quality. Recurring subscription model provides inflation protection through any macro environment.'},
- {t:'PLTR',n:'Palantir',sec:'Technology',base:18,bull:60,bear:-18,qe:40,stag:10,
+ {t:'PLTR',n:'Palantir',sec:'Technology',base:18,bull:60,bear:-18,qe:40,stag:-8,
   roic:'17.73%',revy:'+84.7%',earny:'+325%',piotr:null,gc:0,mcap:'$308B',price:'$128.47',div:'0.0%',pe:'144.3',score:55.3,
   r:'ROIC 17.73%, RevG +84.7%, EarnG +325% — Fed data thesis partner; government AI',
   desc:"Palantir builds AI data analytics platforms for government and enterprise. Direct connection to Warsh's Fed data task force thesis — PLTR is literally the company that processes the new real-time data Warsh is using to justify rate decisions. Government contracts provide floor."},
@@ -452,7 +452,7 @@ pricing:[
   desc:"Moody's has pricing power by regulatory mandate — every bond issuance requires a rating and there are only two agencies. Revenue scales with global debt issuance, which explodes during QE cycles. 25.75% ROIC confirms the monopoly economics are very real."},
 ],
 etf:[
- {t:'GDX',n:'VanEck Gold Miners ETF',sec:'ETF',base:22,bull:50,bear:-8,qe:60,stag:40,
+ {t:'GDX',n:'VanEck Gold Miners ETF',sec:'ETF',base:18,bull:28,bear:-5,qe:42,stag:35,
   roic:'—',revy:'—',earny:'—',piotr:null,gc:null,mcap:'ETF',price:'~$45',div:'~0.9%',pe:'—',score:0,
   r:'Holds NEM, AEM, AGI, WPM — ~1.5x leveraged beta to gold price moves',
   desc:'GDX holds 40+ gold mining companies including Newmont, Agnico Eagle, and Alamos Gold. Provides approximately 1.5x leveraged exposure to gold prices — when gold moves 10%, miners typically move 15-20% due to operating leverage.'},
@@ -468,7 +468,7 @@ etf:[
   roic:'—',revy:'—',earny:'—',piotr:null,gc:null,mcap:'ETF',price:'~$28',div:'~3.5%',pe:'—',score:0,
   r:'Quality dividend + pricing power names — defensive income with compounding; 3.5% yield',
   desc:'SCHD holds high-quality dividend companies with strong free cash flow. 3.5% yield with consistent dividend growth. More defensive than QQQ. Pricing power names throughout holdings. Works in base case and mild inflation. Outperforms bonds in stagflation.'},
- {t:'TIP',n:'iShares TIPS Bond ETF',sec:'ETF',base:8,bull:5,bear:16,qe:18,stag:22,
+ {t:'TIP',n:'iShares TIPS Bond ETF',sec:'ETF',base:8,bull:5,bear:18,qe:18,stag:28,
   roic:'—',revy:'—',earny:'—',piotr:null,gc:null,mcap:'ETF',price:'~$107',div:'~4.5%',pe:'—',score:0,
   r:'Principal adjusts WITH CPI — the most direct bond-market inflation hedge available',
   desc:'TIPS principal adjusts with CPI inflation. When CPI rises, your principal and interest payments both rise. The most direct bond-market inflation hedge. Essential in the bear and stagflation scenarios where inflation surprises to the upside.'},
@@ -480,7 +480,7 @@ etf:[
   roic:'—',revy:'—',earny:'—',piotr:null,gc:null,mcap:'ETF',price:'~$62',div:'~2.8%',pe:'—',score:0,
   r:'100+ regional banks — high-beta SLR deregulation + steeper yield curve play',
   desc:'KRE holds 100+ regional banks. High-beta play on SLR deregulation and steeper yield curve. These banks benefit most from rate normalization but also hurt most in the bear scenario. Use as a confirmation trade once Groman signals 1 and 3 both flip green.'},
- {t:'IBIT',n:'iShares Bitcoin ETF',sec:'ETF',base:25,bull:80,bear:-30,qe:90,stag:10,
+ {t:'IBIT',n:'iShares Bitcoin ETF',sec:'ETF',base:20,bull:55,bear:-40,qe:70,stag:-25,
   roic:'—',revy:'—',earny:'—',piotr:null,gc:null,mcap:'ETF',price:'~$55',div:'0.0%',pe:'—',score:0,
   r:"Pure BTC — Groman's 5th signal; responds violently to liquidity expansion",
   desc:"BlackRock's Bitcoin ETF is the most liquid BTC exposure. BTC is Groman's 5th signal — it responds violently to liquidity changes. Down 30%+ when tightening, up 80-90% when QE fires. The hardest asset in existence with fixed supply. Highest risk, highest reward in QE scenario."},
@@ -494,7 +494,7 @@ scan:[
   roic:'8.32%',revy:'+16.3%',earny:'+1816%',piotr:2,gc:1,mcap:'$298B',price:'$1,109',div:'0.1%',pe:'32.5',score:216.1,
   r:'SCORE:216 — EarnG +1816%, GC:1, $298B mcap — grid infra + power for AI data centers',
   desc:'GE Vernova was spun from GE to own wind turbines, gas turbines, and electrical grid equipment. AI data centers need massive power infrastructure. GEV builds all three power vectors simultaneously. Score of 216 puts it #2 in Industrials screener.'},
- {t:'FSLR',n:'First Solar',sec:'Technology',base:12,bull:8,bear:35,qe:18,stag:42,
+ {t:'FSLR',n:'First Solar',sec:'Technology',base:12,bull:8,bear:32,qe:18,stag:28,
   roic:'15.54%',revy:'+23.6%',earny:'+65.1%',piotr:6,gc:0.5,mcap:'$27.7B',price:'$257.70',div:'0.0%',pe:'16.6',score:47.6,
   r:'ROIC 15.54%, Piotr:6 — ONLY US solar manufacturer; tariff-protected IRA moat',
   desc:'First Solar is the only major US solar panel manufacturer. Protected from Chinese competition by tariffs. IRA tax credits created a 3-year demand backlog. Piotroski 6 = exceptional financial health. Wins in bear AND stagflation through energy independence narrative.'},
@@ -502,7 +502,7 @@ scan:[
   roic:'8.69%',revy:'+34.5%',earny:'+508%',piotr:3,gc:1,mcap:'$30B',price:'$379.66',div:'0.0%',pe:'66.7',score:85.2,
   r:'ROIC 8.69%, RevG +34.5%, EarnG +508%, GC:1 — builds grid/telecom/pipeline for all scenarios',
   desc:'MasTec is the largest US infrastructure construction company. Builds power lines, pipelines, telecom towers, and data center connections. Benefits from energy, AI, and telecom infrastructure themes simultaneously. Wins in nearly every scenario except severe stagflation.'},
- {t:'CEG',n:'Constellation Energy',sec:'Utilities',base:14,bull:20,bear:5,qe:18,stag:12,
+ {t:'CEG',n:'Constellation Energy',sec:'Utilities',base:14,bull:18,bear:20,qe:18,stag:18,
   roic:'6.96%',revy:'+63.8%',earny:'+1091%',piotr:4,gc:0,mcap:'$97.9B',price:'$274.06',div:'0.6%',pe:'23.8',score:139.3,
   r:'SCORE:139 — ROIC 6.96%, RevG +63.8%, EarnG +1091% — nuclear power for AI data centers',
   desc:'Constellation Energy is the largest US nuclear power operator. Microsoft signed a 20-year power purchase agreement for Three Mile Island restart to power AI data centers. Nuclear is the only scalable clean baseload power. Wins in oil-high scenarios as energy independence narrative drives nuclear demand.'},
@@ -520,7 +520,7 @@ scan:[
   desc:'Blue Bird Corp has an 87.75% ROIC — the highest in the entire Industrials sector scan. Makes electric school buses with a near-monopoly position in the government procurement cycle. Piotroski 6 = fortress financial health. Underappreciated quality compounder.'},
 ],
 nuke:[
- {t:'CEG',n:'Constellation Energy',sec:'Utilities',base:14,bull:20,bear:8,qe:18,stag:15,
+ {t:'CEG',n:'Constellation Energy',sec:'Utilities',base:14,bull:18,bear:20,qe:18,stag:18,
   roic:'6.96%',revy:'+63.8%',earny:'+1091%',piotr:4,gc:0,mcap:'$97.9B',price:'$274.06',div:'0.6%',pe:'23.8',score:139.3,
   r:'ROIC 6.96%, RevG +63.8%, EarnG +1091% — nuclear leader; Microsoft AI power deal signed',
   desc:'Constellation Energy is the largest US nuclear power operator. The Microsoft Three Mile Island restart is a template — AI hyperscalers desperately need clean baseload power and nuclear is the only scalable option. High oil accelerates the nuclear narrative further.'},
@@ -538,7 +538,7 @@ nuke:[
   desc:'Talen Energy operates nuclear and natural gas power plants with AI data center power purchase contracts in development. Revenue growth of 96.7% signals operational ramp. Nuclear scarcity premium increases as AI power demand explodes beyond grid capacity.'},
 ],
 solar:[
- {t:'FSLR',n:'First Solar',sec:'Technology',base:12,bull:10,bear:38,qe:18,stag:42,
+ {t:'FSLR',n:'First Solar',sec:'Technology',base:12,bull:10,bear:32,qe:18,stag:28,
   roic:'15.54%',revy:'+23.6%',earny:'+65.1%',piotr:6,gc:0.5,mcap:'$27.7B',price:'$257.70',div:'0.0%',pe:'16.6',score:47.6,
   r:'ROIC 15.54%, Piotr:6 — only US solar manufacturer; tariff wall + IRA backlog = moat',
   desc:'First Solar is the only major US solar panel manufacturer. Chinese competition is blocked by tariffs. IRA tax credits created a demand backlog extending years into the future. Piotroski 6 is the best fundamental score in the solar sector. Quality pick regardless of oil price.'},
@@ -578,7 +578,7 @@ wind:[
   desc:'Eos Energy makes zinc-based battery storage systems for utility and commercial customers. 444.7% revenue growth is explosive and signals real market adoption. Very early stage with high risk, but if oil stays high, energy storage becomes strategically critical.'},
 ],
 avBonds:[
- {t:'TLT',n:'iShares 20+ Yr Treasury',sec:'Bond ETF',bp:-35,sp:-45,
+ {t:'TLT',n:'iShares 20+ Yr Treasury',sec:'Bond ETF',bp:-38,sp:-50,
   why:"Maximum duration = maximum rate risk. If QE is delayed or deal fails, this gets crushed. The 30-year lost 50%+ from 2020-2023. It can happen again. Stay out until Warsh's first cut is confirmed and Groman signal #3 (10Y yield) turns green."},
  {t:'ZROZ',n:'PIMCO Zero Coupon Bond',sec:'Bond ETF',bp:-42,sp:-55,
   why:'Zero coupon = zero income while you wait AND maximum duration risk. Devastating in any high-inflation scenario. The mathematical worst case: rates stay high and you get nothing while principal erodes in real terms.'},
@@ -639,11 +639,16 @@ avInd:[
 
 // ============================================================
 const SCENS = {
- base:{oil:74,fed:525,iran:50,cpi:42,yield:455,dxy:1025,qe:45,slr:40},
- bull:{oil:62,fed:425,iran:90,cpi:28,yield:380,dxy:96,qe:70,slr:80},
- bear:{oil:105,fed:550,iran:5,cpi:68,yield:520,dxy:108,qe:15,slr:15},
- qe:{oil:70,fed:350,iran:75,cpi:32,yield:350,dxy:90,qe:95,slr:95},
- stag:{oil:115,fed:575,iran:0,cpi:80,yield:600,dxy:105,qe:10,slr:10},
+ // Base: real Jun 23 2026 data — Fed 3.63%, CPI 4.2%, 10Y 4.50%, DXY 101.0, Iran MOU 55%
+ base:{oil:74,fed:363,iran:55,cpi:42,yield:450,dxy:1010,qe:45,slr:40},
+ // Bull: Iran deal fully signed, oil crashes, Warsh cuts 75bps, dollar weakens
+ bull:{oil:60,fed:275,iran:92,cpi:26,yield:340,dxy:93,qe:72,slr:82},
+ // Bear: deal collapses, oil $110+, Warsh forced to hike to 4.25%, CPI 7%
+ bear:{oil:110,fed:425,iran:5,cpi:70,yield:520,dxy:107,qe:12,slr:12},
+ // QE Machine: SLR passes, covert QE fires, Fed cuts 100bps, dollar collapses
+ qe:{oil:70,fed:250,iran:75,cpi:30,yield:320,dxy:88,qe:95,slr:95},
+ // Stagflation: oil $120, GDP stalls, Fed trapped at 4%, CPI 8.5%, bonds revolt
+ stag:{oil:120,fed:400,iran:0,cpi:85,yield:620,dxy:106,qe:8,slr:8},
 };
 const NARRS = {
  base:'<strong>BASE CASE:</strong> Iran deal partially holds, oil settles $70-$80. Warsh stays hawkish through Q3, pivots Q4 as trimmed PCE data justifies cuts. Banks get SLR exemption in pipeline. Covert QE begins Q1 2027. Dollar weakens gradually. Markets chop sideways then rip higher late 2026.',
@@ -679,7 +684,7 @@ function gv(){return{
 
 function gkey(v){
  if(v.qe>80&&v.slr>80)return'qe';
- if(v.oil>95&&v.cpi>5.5)return'stag';
+ if(v.oil>95&&v.cpi>55)return'stag';   // CPI stored as *10 — was bug: >5.5 never fired
  if(v.iran>75&&v.oil<70)return'bull';
  if(v.iran<20&&v.oil>90)return'bear';
  return'base';
@@ -815,12 +820,27 @@ function updCharts(v,k){
  const m=v.iran/100, dm=Math.max(1-(v.oil-60)/100,.28);
  const proj=bull.map((b,i)=>Math.round(b*m*dm*.5+4570*.35+bear[i]*(1-m)*.15));
  CH.spx.data.datasets[0].data=bull;CH.spx.data.datasets[1].data=proj;CH.spx.data.datasets[2].data=bear;CH.spx.update('none');
- const RET={bull:[18,32,75,-18,8,-8],bear:[-16,8,-30,45,-20,6],qe:[22,45,90,-5,12,-14],stag:[-8,28,5,50,-30,4],base:[6,16,22,2,-4,-3]};
+ const RET={
+  // [S&P500, Gold, Bitcoin, Oil, 10Y Bond, USD]
+  // Calibrated against: 2020 QE cycle, 2022 bear, 1970s stagflation, 2026 Iran crisis data
+  bull: [14, 18, 55,-25, 10,-10],  // S&P modest (already recovered), gold flat (from $4155 ATH pullback), BTC +55% on liquidity, oil -25% on Hormuz open, bonds rally
+  bear: [-10,  5,-40, 32,-18,  5],  // S&P resilient (Iran crisis: only -3.6% avg), BTC -40% (2022 analog), oil +32%, bonds sold off on inflation
+  qe:  [ 20, 32, 70,  -5, 14,-12],  // QE: S&P +20%, gold +32% (back toward $5500), BTC +70% (not +90%, post-ATH), bonds +14% on cuts
+  stag: [ -8, 28,-25, 45,-28,  6],  // Stag: BTC -25% NOT +10 (liquidity drain kills crypto), gold +28% (1970s analog), bonds -28% (rate trap)
+  base: [  8, 12, 20,   0,  -3, -2], // Base: modest S&P, gold holds, BTC steady, oil flat
+};
  const r=RET[k]||RET.base;
  CH.asset.data.datasets[0].data=r;
  CH.asset.data.datasets[0].backgroundColor=r.map((rv,i)=>rv>=0?['#39ff14','#ffd700','#f97316','#6b7fa3','#a855f7','#22d3ee'][i]:['#ff3b5c','#ff3b5c','#ff3b5c','#ff3b5c','#ff3b5c','#ff3b5c'][i]);
  CH.asset.update('none');
- const SD={bull:[75,40,88,55,35,50,70,60],bear:[35,92,45,82,62,65,28,52],qe:[85,55,72,68,42,50,82,58],stag:[30,95,35,92,58,70,22,48],base:[60,62,66,62,46,56,52,56]};
+ const SD={
+  // [Financials, Energy, Technology, Materials, Utilities, Healthcare, Real Estate, Consumer Def]
+  bull: [75, 48, 88, 55, 58, 50, 72, 60],  // Utilities raised (rate cuts = huge RE/util tailwind), Energy raised (still profitable at $60 oil)
+  bear: [35, 88, 45, 82, 62, 65, 28, 52],  // Energy slightly lower (demand destruction at $110+), Healthcare defensive
+  qe:   [85, 52, 72, 68, 65, 50, 85, 58],  // QE unlocks RE/REITs big (65→85), Utilities strong on cuts
+  stag: [30, 80, 35, 88, 65, 72, 22, 52],  // Energy demand destruction at $120 oil (95→80), Utilities defensive (raise 58→65), Healthcare best defensive (70→72)
+  base: [60, 62, 66, 62, 50, 56, 52, 56],  // Utilities slightly higher (rate environment improving)
+};
  CH.sector.data.datasets[0].data=SD[k]||SD.base;CH.sector.update('none');
  const yc=[5.2,5.3,5.25,5.1,v.fed+0.1,v.y10-0.3,v.y10,v.y10+0.3,v.y10+0.5].map(x=>+x.toFixed(2));
  const dp={bull:1.2,bear:-0.3,qe:1.8,stag:-0.5,base:0.3}[k]||0.3;
@@ -830,17 +850,17 @@ function updCharts(v,k){
 
 function updBars(k){
  const items=[
-  ['FRO','Frontline Tankers',{bull:-8,bear:55,qe:10,stag:50,base:15}],
-  ['NEM','Newmont Gold',{bull:38,bear:10,qe:50,stag:32,base:20}],
-  ['NVDA','NVIDIA',{bull:55,bear:-28,qe:45,stag:-18,base:20}],
-  ['AG','First Majestic',{bull:60,bear:-5,qe:70,stag:40,base:25}],
+  ['FRO','Frontline Tankers',{bull:-18,bear:58,qe:8,stag:52,base:15}],   // Bull: deal opens Hormuz = tanker rate collapse; Bear: routes extend = rate explosion
+  ['NEM','Newmont Gold',{bull:20,bear:6,qe:32,stag:28,base:14}],         // Gold at $4155 down from $5595 ATH — QE recovery toward $5000 = +32% not +50%
+  ['NVDA','NVIDIA',{bull:55,bear:-28,qe:45,stag:-22,base:20}],
+  ['AG','First Majestic',{bull:35,bear:-2,qe:50,stag:32,base:22}],       // Silver leverage to gold; QE reduced from +70 (gold math)
   ['JPM','JPMorgan',{bull:30,bear:-18,qe:35,stag:-12,base:12}],
-  ['IBIT','Bitcoin ETF',{bull:80,bear:-30,qe:90,stag:10,base:25}],
-  ['XLE','Energy ETF',{bull:-8,bear:42,qe:8,stag:38,base:6}],
-  ['CEG','Constellation Nuke',{bull:20,bear:8,qe:18,stag:15,base:14}],
-  ['GDX','Gold Miners ETF',{bull:50,bear:-8,qe:60,stag:40,base:22}],
-  ['FSLR','First Solar',{bull:10,bear:38,qe:18,stag:42,base:12}],
-  ['SBLK','Star Bulk Shipping',{bull:-5,bear:50,qe:10,stag:45,base:14}],
+  ['IBIT','Bitcoin ETF',{bull:55,bear:-40,qe:70,stag:-25,base:20}],      // CRITICAL FIX: stag was +10 → -25 (liquidity drain kills BTC); bear -30→-40
+  ['XLE','Energy ETF',{bull:-12,bear:35,qe:6,stag:32,base:6}],           // Oil lower in bull (deal works hard), bear more moderate
+  ['CEG','Constellation Nuke',{bull:18,bear:20,qe:18,stag:18,base:14}],  // Nuclear wins in ALL scenarios: AI power + energy independence
+  ['GDX','Gold Miners ETF',{bull:28,bear:-5,qe:42,stag:35,base:18}],     // Gold math: QE reduced from +60; bear slightly neg (Iran paradox: high rates suppress gold)
+  ['FSLR','First Solar',{bull:8,bear:32,qe:18,stag:28,base:12}],         // Stag reduced from +42: capital freeze slows installs
+  ['SBLK','Star Bulk Shipping',{bull:-8,bear:52,qe:8,stag:48,base:14}],
   ['PLTR','Palantir',{bull:60,bear:-18,qe:40,stag:10,base:18}],
  ];
  let h='';
