@@ -105,6 +105,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .mch{padding:4px 11px;border-radius:100px;font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:500;border:1px solid;transition:all .3s}
 .rbtn{background:transparent;border:1px solid var(--bdr);color:var(--mu);padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:10px;cursor:pointer;transition:all .2s}
 .rbtn:hover{border-color:var(--ac);color:var(--ac)}
+/* ── HELP ICON & TOOLTIP ── */
+.hlp{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(107,127,163,.2);border:1px solid var(--bdr);color:var(--mu);font-size:9px;font-family:'JetBrains Mono',monospace;cursor:pointer;transition:all .2s;margin-left:4px;flex-shrink:0;line-height:1;font-weight:700}
+.hlp:hover{background:rgba(0,229,255,.15);border-color:var(--ac);color:var(--ac)}
+.hlp-wrap{position:relative;display:inline-flex;align-items:center}
+.hlp-tip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:#0a1628;border:1px solid var(--ac);border-radius:10px;padding:11px 14px;
+  width:260px;font-size:11px;line-height:1.6;color:var(--tx);z-index:50;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);font-family:'Space Grotesk',sans-serif;font-weight:400;pointer-events:none}
+.hlp-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:var(--ac)}
+.hlp-tip strong{color:var(--ac);display:block;margin-bottom:4px;font-size:12px}
+.hlp-tip .tip-why{color:var(--mu);font-size:10px;margin-top:5px;padding-top:5px;border-top:1px solid var(--bdr)}
+.hlp-wrap:hover .hlp-tip,.hlp-wrap:focus-within .hlp-tip{display:block}
 footer{border-top:1px solid var(--bdr);padding:16px 0;margin-top:22px;color:var(--mu);font-size:11px;text-align:center;line-height:1.6}
 footer a{color:inherit;text-decoration:none}
 footer a:hover{color:var(--ac)}
@@ -196,15 +209,15 @@ footer a:hover{color:var(--ac)}
 <div class="narr" id="narr"></div>
 <div class="oil-alert" id="oil-alert"><strong>&#9889; HIGH OIL ALERT (WTI $90+):</strong> Alternative Energy section below is now in play. Solar, nuclear, wind &amp; storage names gain strategic tailwind as energy independence becomes a national priority. High short interest in solar = potential squeeze.</div>
 <div class="sliders">
-  <div class="scard"><div class="slbl">WTI Oil Price <button class="rbtn" onclick="rv('sl-oil',74)">RST</button></div><div class="sval" id="v-oil">$74</div><input type="range" min="40" max="140" value="74" id="sl-oil" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>$40</span><span>$140</span></div></div>
-  <div class="scard"><div class="slbl">Fed Funds Rate <button class="rbtn" onclick="rv('sl-fed',525)">RST</button></div><div class="sval" id="v-fed">5.25%</div><input type="range" min="150" max="700" value="525" id="sl-fed" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.5%</span><span>7.0%</span></div></div>
-  <div class="scard"><div class="slbl">Iran Deal % <button class="rbtn" onclick="rv('sl-iran',50)">RST</button></div><div class="sval" id="v-iran">50%</div><input type="range" min="0" max="100" value="50" id="sl-iran" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>Collapsed</span><span>Signed</span></div></div>
-  <div class="scard"><div class="slbl">CPI Inflation <button class="rbtn" onclick="rv('sl-cpi',42)">RST</button></div><div class="sval" id="v-cpi">4.2%</div><input type="range" min="10" max="120" value="42" id="sl-cpi" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.0%</span><span>12%</span></div></div>
-  <div class="scard"><div class="slbl">10-Year Yield <button class="rbtn" onclick="rv('sl-yield',450)">RST</button></div><div class="sval" id="v-yield">4.50%</div><input type="range" min="200" max="700" value="450" id="sl-yield" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>2.0%</span><span>7.0%</span></div></div>
-  <div class="scard" id="spread-card"><div class="slbl">2-Year Yield <button class="rbtn" onclick="rv('sl-y2',424)">RST</button></div><div class="sval" id="v-y2">4.24%</div><input type="range" min="100" max="700" value="424" id="sl-y2" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.0%</span><span>7.0%</span></div><div id="spread-display" style="margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:10px"></div></div>
-  <div class="scard"><div class="slbl">DXY Dollar Index <button class="rbtn" onclick="rv('sl-dxy',1025)">RST</button></div><div class="sval" id="v-dxy">102.5</div><input type="range" min="800" max="1200" value="1025" id="sl-dxy" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>80</span><span>120</span></div></div>
-  <div class="scard"><div class="slbl">QE Probability <button class="rbtn" onclick="rv('sl-qe',45)">RST</button></div><div class="sval" id="v-qe">45%</div><input type="range" min="0" max="100" value="45" id="sl-qe" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>0%</span><span>100%</span></div></div>
-  <div class="scard"><div class="slbl">SLR Deregulation <button class="rbtn" onclick="rv('sl-slr',40)">RST</button></div><div class="sval" id="v-slr">40%</div><input type="range" min="0" max="100" value="40" id="sl-slr" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>None</span><span>Full Dereg</span></div></div>
+  <div class="scard"><div class="slbl">WTI Oil Price <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>WTI Crude Oil Price ($/barrel)</strong>West Texas Intermediate — the US benchmark for crude oil. Directly drives CPI (gas prices), energy sector earnings, tanker rates, and the Iran deal narrative. Above $90 activates the Alt Energy section.<div class="tip-why">Why it matters: Oil is the single biggest swing variable. A $30 move in oil changes CPI by ~1.5%, alters Fed policy, and flips sector leadership from tech to energy.</div></div></span><button class="rbtn" onclick="rv('sl-oil',74)">RST</button></div><div class="sval" id="v-oil">$74</div><input type="range" min="40" max="140" value="74" id="sl-oil" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>$40</span><span>$140</span></div></div>
+  <div class="scard"><div class="slbl">Fed Funds Rate <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>Fed Funds Rate (%)</strong>The interest rate the Federal Reserve charges banks for overnight lending. Set by the FOMC. Under Warsh, this is tied to new real-time PCE data — cuts require inflation to fall first.<div class="tip-why">Why it matters: The single most powerful lever in all of finance. Every 25bps cut adds ~2-3% to S&P forward P/E multiples and unlocks bank carry trades via SLR deregulation.</div></div></span><button class="rbtn" onclick="rv('sl-fed',363)">RST</button></div><div class="sval" id="v-fed">5.25%</div><input type="range" min="150" max="700" value="525" id="sl-fed" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.5%</span><span>7.0%</span></div></div>
+  <div class="scard"><div class="slbl">Iran Deal % <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>Iran Deal Status (%)</strong>Probability the Iran nuclear deal holds and the Strait of Hormuz stays open. 0% = full closure, supply shock. 100% = deal signed, Iranian oil floods market, WTI crashes to $55-60.<div class="tip-why">Why it matters: ~20% of global oil supply transits Hormuz. A closure would spike oil $30-40/barrel within weeks, re-accelerating inflation and trapping the Fed.</div></div></span><button class="rbtn" onclick="rv('sl-iran',50)">RST</button></div><div class="sval" id="v-iran">50%</div><input type="range" min="0" max="100" value="50" id="sl-iran" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>Collapsed</span><span>Signed</span></div></div>
+  <div class="scard"><div class="slbl">CPI Inflation <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>CPI Inflation (% YoY)</strong>Consumer Price Index — year-over-year price change for a basket of goods. The Fed's stated target is 2.0%. Current: 4.2% (May 2026). Warsh uses a new trimmed-mean PCE variant.<div class="tip-why">Why it matters: Inflation above 3.5% keeps the Fed on hold. Below 2.5% unlocks cuts. It's the gatekeeper between the current environment and the QE machine scenario.</div></div></span><button class="rbtn" onclick="rv('sl-cpi',42)">RST</button></div><div class="sval" id="v-cpi">4.2%</div><input type="range" min="10" max="120" value="42" id="sl-cpi" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.0%</span><span>12%</span></div></div>
+  <div class="scard"><div class="slbl">10-Year Yield <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>10-Year Treasury Yield (%)</strong>The yield on 10-year US government bonds — the world's risk-free benchmark. Drives mortgage rates, corporate bond rates, and REIT valuations. Current: ~4.50%.<div class="tip-why">Why it matters: The 10Y is the long anchor of the yield curve. Rising = bond market revolt (inflation fear). Falling = QE/growth optimism. Directly sets the 2Y-10Y spread.</div></div></span><button class="rbtn" onclick="rv('sl-yield',450)">RST</button></div><div class="sval" id="v-yield">4.50%</div><input type="range" min="200" max="700" value="450" id="sl-yield" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>2.0%</span><span>7.0%</span></div></div>
+  <div class="scard" id="spread-card"><div class="slbl">2-Year Yield <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>2-Year Treasury Yield (%)</strong>The yield on 2-year US Treasuries — the bond market's real-time prediction of where Fed Funds will be in 2 years. More honest than the Fed's own dot plot. Current: ~4.24%.<div class="tip-why">Why it matters: The 2Y-10Y spread (shown below) is the #1 recession predictor. When 2Y > 10Y (inverted), banks lose money on lending and credit tightens. Every recession since 1955 was preceded by inversion.</div></div></span><button class="rbtn" onclick="rv('sl-y2',424)">RST</button></div><div class="sval" id="v-y2">4.24%</div><input type="range" min="100" max="700" value="424" id="sl-y2" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>1.0%</span><span>7.0%</span></div><div id="spread-display" style="margin-top:5px;font-family:'JetBrains Mono',monospace;font-size:10px"></div></div>
+  <div class="scard"><div class="slbl">DXY Dollar Index <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>US Dollar Index (DXY)</strong>Measures the USD against a basket of 6 currencies (EUR, JPY, GBP, CAD, SEK, CHF). A weaker dollar is Groman Signal #1 — it means liquidity is expanding globally.<div class="tip-why">Why it matters: DXY below 100 is bullish for gold, commodities, and emerging markets. QE scenarios push DXY to 88-92. Dollar strength (DXY 105+) crushes everything denominated in USD abroad.</div></div></span><button class="rbtn" onclick="rv('sl-dxy',1010)">RST</button></div><div class="sval" id="v-dxy">102.5</div><input type="range" min="800" max="1200" value="1025" id="sl-dxy" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>80</span><span>120</span></div></div>
+  <div class="scard"><div class="slbl">QE Probability <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>QE Probability (%)</strong>Probability the Fed resumes Quantitative Easing — buying bonds to expand the money supply. Currently indirect via SLR deregulation: banks buy treasuries with leverage, creating 'covert QE.'<div class="tip-why">Why it matters: Every major asset rally since 2008 has been powered by QE. When this flips above 80%, hard assets (gold, BTC, commodities) historically rip 30-90% within 12 months.</div></div></span><button class="rbtn" onclick="rv('sl-qe',45)">RST</button></div><div class="sval" id="v-qe">45%</div><input type="range" min="0" max="100" value="45" id="sl-qe" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>0%</span><span>100%</span></div></div>
+  <div class="scard"><div class="slbl">SLR Deregulation <span class="hlp-wrap"><span class="hlp" tabindex="0">?</span><div class="hlp-tip"><strong>SLR Deregulation (%)</strong>Supplementary Leverage Ratio — a rule limiting how much banks can lever up. Deregulating it lets banks exclude US Treasuries from their leverage calculations, effectively letting JPM/GS/BAC buy unlimited bonds.<div class="tip-why">Why it matters: This is the mechanism of Warsh's 'covert QE.' Banks borrow at the 2Y rate, buy 10Y bonds, pocket the spread. At 95% deregulation + QE, banks could absorb $800B+ in new Treasury supply.</div></div></span><button class="rbtn" onclick="rv('sl-slr',40)">RST</button></div><div class="sval" id="v-slr">40%</div><input type="range" min="0" max="100" value="40" id="sl-slr" oninput="upd()"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--mu);margin-top:3px"><span>None</span><span>Full Dereg</span></div></div>
 </div>
 <div class="fp"><div class="pt">Groman 5-Signal Macro Dashboard</div><div class="sgg" id="sigs"></div><div style="font-size:10px;color:var(--mu);margin-top:5px">All 5 GREEN = QE confirmed &bull; All RED = plan failing &bull; Watch for divergence between signals</div></div>
 <div class="g2"><div class="panel"><div class="pt">S&amp;P 500 &mdash; 12-Month Projection</div><div class="cw"><canvas id="spxC"></canvas></div></div><div class="panel"><div class="pt">Asset Class 12M Return (%)</div><div class="cw"><canvas id="assetC"></canvas></div></div></div>
@@ -245,6 +258,18 @@ footer a:hover{color:var(--ac)}
 </div>
 
 <!-- DANGER ZONE -->
+<div class="fp" id="hioil-panel">
+  <div class="pt" style="color:var(--ac2)">&#9981; HIGH OIL + HIGH DOLLAR BUY LIST <span id="hioil-badge" style="font-size:9px;background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.4);border-radius:4px;padding:2px 8px;margin-left:6px;color:var(--ac2);font-family:'JetBrains Mono',monospace;letter-spacing:.5px">WTI $90+ / DXY 100+</span></div>
+  <div style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:9px;padding:12px 14px;margin-bottom:14px;font-size:11px;line-height:1.7;color:var(--tx)">The <strong style="color:var(--ac2)">high oil + strong dollar</strong> scenario: Iran deal fails or collapses, WTI stays above $90, and the dollar remains elevated as a flight-to-safety trade. This pressures consumers globally but creates clear winners: <strong style="color:var(--tx)">energy producers with USD revenues, domestic consumer necessities, defense contractors, and companies with proven pricing power</strong> that can pass input costs through. These stocks outperformed in 2022 (oil spike), 1990 (Gulf War), and the 1973-74 oil shock.</div>
+  <div id="hioil-trigger-msg" style="display:none;background:rgba(57,255,20,.06);border:1px solid rgba(57,255,20,.2);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:11px;color:var(--ac3);font-family:'JetBrains Mono',monospace">&#9889; ACTIVE: WTI $90+ AND DXY 100+ detected. This scenario is live right now.</div>
+  <div class="sh"><span class="dot" style="background:var(--ac2)"></span>ENERGY -- USD Revenue Producers + Refiners</div>
+  <div class="sg" id="g-hioil-energy"></div>
+  <div class="sh"><span class="dot" style="background:var(--ac3)"></span>CONSUMER NECESSITIES -- Pricing Power + Domestic Revenue</div>
+  <div class="sg" id="g-hioil-consumer"></div>
+  <div class="sh"><span class="dot" style="background:var(--pur)"></span>DEFENSE -- Geopolitical Tension Beneficiaries</div>
+  <div class="sg" id="g-hioil-defense"></div>
+</div>
+
 <div class="fp">
   <div class="pt" style="color:var(--red)">DANGER ZONE &mdash; Avoid / Short by Sector</div>
 
@@ -639,8 +664,58 @@ avInd:[
  {t:'RIDE',n:'Lordstown Motors',sec:'EV Truck',bp:-70,sp:-85,
   why:"EV truck startup with negative ROIC, no production scale, and funding crisis. Existential in any tight-money environment. Your screener's signals (ROIC, Piotroski) all fail simultaneously."},
  {t:'NKLA',n:'Nikola Corp',sec:'EV/Hydrogen',bp:-65,sp:-80,
-  why:'Hydrogen truck startup with history of fraud allegations, no revenue, massive burn rate. Avoid entirely — company-specific risk plus macro headwind creates double danger.'},
+  why:'Hydrogen truck startup with history of fraud allegations, no revenue, massive burn rate. Avoid entirely — company-specific risk plus macro headwind creates double danger.'}
 ],
+hioil:[
+ {t:'XOM',n:'ExxonMobil',sec:'Energy',base:8,bull:-8,bear:40,qe:5,stag:38,
+  roic:'11.2%',revy:'+5.1%',earny:'+12.3%',piotr:5,gc:1,mcap:'$488B',price:'$109.82',div:'3.4%',pe:'14.2',score:42.1,
+  r:'ROIC 11.2%, Piotr:5, GC:1, 3.4% div -- high oil = peak earnings; USD revenues dominate',
+  desc:'ExxonMobil generates ~70% of revenue in USD. High oil directly expands margins -- every $10/barrel increase adds ~$4B to annual earnings. Strong dollar means international competitors are less competitive. 3.4% dividend is secure at $60+ oil.'},
+ {t:'CVX',n:'Chevron',sec:'Energy',base:7,bull:-6,bear:35,qe:4,stag:33,
+  roic:'9.8%',revy:'+3.2%',earny:'+8.1%',piotr:5,gc:1,mcap:'$268B',price:'$143.11',div:'4.1%',pe:'13.8',score:38.4,
+  r:'ROIC 9.8%, 4.1% div -- Permian Basin low break-even; high oil + strong dollar = cash machine',
+  desc:'Chevron is the lowest break-even major oil company. Permian Basin operations generate strong free cash flow at $60+ oil. At $90+, Chevron becomes a cash machine. 4.1% dividend growing. Strong balance sheet -- can buy back stock aggressively at high oil prices.'},
+ {t:'OXY',n:'Occidental Petroleum',sec:'Energy',base:10,bull:-6,bear:48,qe:6,stag:44,
+  roic:'8.9%',revy:'+4.5%',earny:'+18.2%',piotr:4,gc:1,mcap:'$48B',price:'$53.22',div:'1.9%',pe:'12.1',score:34.7,
+  r:'Buffett-backed; high oil = massive FCF; OxyChem chemical division benefits from USD strength',
+  desc:'Buffett owns 28%+ of OXY -- when oil is high, the cash flow is extraordinary. OxyChem (chemicals) benefits from USD strength as competing global producers face FX headwinds. Most leveraged to oil price of the majors.'},
+ {t:'WMT',n:'Walmart',sec:'Consumer Defensive',base:7,bull:12,bear:4,qe:9,stag:10,
+  roic:'15.31%',revy:'+7.3%',earny:'+19.4%',piotr:4,gc:1,mcap:'$933B',price:'$117.18',div:'0.8%',pe:'41.3',score:40.1,
+  r:'ROIC 15.31%, GC:1 -- consumers shift TO Walmart when energy costs squeeze budgets',
+  desc:'When gas prices are high and real incomes fall, consumers trade down to Walmart. Domestic US revenue base protects from dollar strength. Grocery dominance = inelastic demand. The classic high-oil defensive play.'},
+ {t:'COST',n:'Costco',sec:'Consumer Defensive',base:8,bull:14,bear:2,qe:10,stag:9,
+  roic:'33.56%',revy:'+21.5%',earny:'+45.5%',piotr:5,gc:1,mcap:'$422B',price:'$951.45',div:'0.6%',pe:'47.8',score:45.0,
+  r:'ROIC 33.56%, Piotr:5, GC:1 -- bulk buying saves members money; membership fee is inflation-proof',
+  desc:'Costco bulk model is designed for high-cost environments. Members join to beat inflation. Annual membership fee is recession-proof recurring revenue. Domestic US bias protects from dollar headwinds. 33.56% ROIC is exceptional for retail.'},
+ {t:'MPC',n:'Marathon Petroleum',sec:'Energy',base:9,bull:4,bear:32,qe:8,stag:28,
+  roic:'10.98%',revy:'+8.8%',earny:'+0%',piotr:5,gc:1,mcap:'$70.9B',price:'$242.91',div:'1.6%',pe:'16.0',score:28.9,
+  r:'ROIC 10.98%, Piotr:5, GC:1 -- refiner margins widen when crude stays high; USD revenues',
+  desc:'Refiners like Marathon benefit from supply-constrained high oil because crack spreads (refining margins) widen. They buy crude and sell refined products, both priced in USD. Strong dollar makes imported refined products more expensive, protecting domestic margins.'},
+ {t:'PG',n:'Procter and Gamble',sec:'Consumer Defensive',base:5,bull:9,bear:2,qe:7,stag:6,
+  roic:'20.91%',revy:'+7.4%',earny:'+5.8%',piotr:3,gc:0.5,mcap:'$350B',price:'$150.38',div:'2.8%',pe:'22.0',score:42.4,
+  r:'ROIC 20.91%, 2.8% div -- Tide/Gillette/Pampers have 60yr proven pricing power through oil shocks',
+  desc:'P&G has raised prices through every inflationary cycle since 1962 without losing market share. USD revenue base benefits from dollar strength. Essential products like Tide, diapers, and toothpaste have near-zero demand elasticity regardless of oil prices.'},
+ {t:'LMT',n:'Lockheed Martin',sec:'Industrials',base:8,bull:5,bear:22,qe:6,stag:20,
+  roic:'N/A',revy:'+5.8%',earny:'+9.2%',piotr:null,gc:1,mcap:'$114B',price:'$476.82',div:'2.9%',pe:'17.3',score:28.0,
+  r:'GC:1, 2.9% div -- high oil = Middle East tension = defense budgets surge; USD contracts only',
+  desc:'Lockheed is a direct geopolitical tension beneficiary. High oil from Middle East instability always triggers defense budget increases across NATO and Gulf states. 100% USD-denominated contracts -- dollar strength is a direct tailwind. F-35 and missile defense backlog extends 5+ years.'},
+ {t:'RTX',n:'RTX Corporation',sec:'Industrials',base:7,bull:4,bear:20,qe:5,stag:18,
+  roic:'N/A',revy:'+8.9%',earny:'+15.2%',piotr:null,gc:1,mcap:'$163B',price:'$142.37',div:'2.1%',pe:'22.4',score:25.0,
+  r:'GC:1 -- Patriot/Tomahawk/Pratt+Whitney; Iran tension = defense demand spike; all USD contracts',
+  desc:'RTX makes Patriot missile systems, Tomahawk cruise missiles, and Pratt & Whitney jet engines. Iran tensions directly drive demand for Raytheon air defense systems. All US government contracts in USD. High oil = more Middle East tension = more defense orders.'},
+ {t:'KO',n:'Coca-Cola',sec:'Consumer Defensive',base:6,bull:10,bear:3,qe:8,stag:7,
+  roic:'19.03%',revy:'+12.1%',earny:'+18.2%',piotr:5,gc:1,mcap:'$342B',price:'$79.39',div:'2.6%',pe:'25.0',score:36.2,
+  r:'ROIC 19.03%, Piotr:5, 2.6% div -- 130yr brand; passes oil-driven input costs through every time',
+  desc:'Coca-Cola has survived and profited through every oil shock in history. When transportation and packaging costs rise (both oil-driven), KO raises prices and consumers keep buying. The dividend has grown for 62 consecutive years through every inflationary cycle. Recession-proof cash flow machine.'},
+ {t:'MKC',n:'McCormick and Co',sec:'Consumer Defensive',base:5,bull:10,bear:2,qe:8,stag:6,
+  roic:'8.73%',revy:'+16.7%',earny:'+528.3%',piotr:4,gc:0,mcap:'$12.5B',price:'$46.64',div:'3.9%',pe:'7.6',score:80.2,
+  r:'ROIC 8.73%, PE:7.6, 3.9% div -- spice/flavor monopoly; zero substitution under cost pressure',
+  desc:'McCormick supplies spices and flavorings to every major food manufacturer globally. They cannot be substituted. PE of 7.6 is extremely cheap for a monopoly. In high-oil scenarios, food companies pass costs through and McCormick rides along with 3.9% yield.'},
+ {t:'EOG',n:'EOG Resources',sec:'Energy',base:8,bull:-4,bear:38,qe:5,stag:35,
+  roic:'11.92%',revy:'+15.6%',earny:'+39.6%',piotr:3,gc:1,mcap:'$69.2B',price:'$129.98',div:'3.0%',pe:'12.8',score:30.4,
+  r:'ROIC 11.92%, Piotr:3, GC:1 -- break-even below $40; high oil = extraordinary FCF; USD revenues',
+  desc:'EOG is the best-run US shale company. Break-even below $40/barrel means at $90+ oil, EOG generates extraordinary free cash flow. Pays a growing dividend and buys back stock aggressively. Pure USD revenue stream -- dollar strength is neutral to positive.'},
+]
 };
 
 // ============================================================
@@ -673,8 +748,22 @@ const ANGLES = [
 
 let CH={};
 const CARD_STORE={};
+// Stores the most recently fetched live macro values
+// doRefresh() populates this; rv() restores from it
+const LIVE_MACRO = {oil:74, fed:363, iran:55, cpi:42, yield:450, y2:424, dxy:1010, qe:45, slr:40};
 
-function rv(id,v){document.getElementById(id).value=v;upd();}
+function rv(id, hardcoded){
+  // Map slider id → LIVE_MACRO key
+  const keyMap = {
+    'sl-oil':'oil','sl-fed':'fed','sl-iran':'iran','sl-cpi':'cpi',
+    'sl-yield':'yield','sl-y2':'y2','sl-dxy':'dxy','sl-qe':'qe','sl-slr':'slr'
+  };
+  const k = keyMap[id];
+  // Use live-fetched value if available, otherwise fall back to hardcoded
+  const val = (k && LIVE_MACRO[k] != null) ? LIVE_MACRO[k] : hardcoded;
+  document.getElementById(id).value = val;
+  upd();
+}
 
 function gv(){
  const y10    = +document.getElementById('sl-yield').value / 100;
@@ -1024,6 +1113,27 @@ function upd(){
  mkAvoid(DB.avReit,'av-reit');
  mkAvoid(DB.avStory,'av-story');
  mkAvoid(DB.avInd,'av-ind');
+ // High Oil + High Dollar section -- split into 3 grids by category
+ const energyTks  = ['XOM','CVX','OXY','MPC','EOG'];
+ const consumerTks = ['WMT','COST','PG','KO','MKC'];
+ const defenseTks  = ['LMT','RTX'];
+ const hioilE = DB.hioil.filter(s=>energyTks.includes(s.t));
+ const hioilC = DB.hioil.filter(s=>consumerTks.includes(s.t));
+ const hioilD = DB.hioil.filter(s=>defenseTks.includes(s.t));
+ mkGrid(hioilE, k, 'g-hioil-energy');
+ mkGrid(hioilC, k, 'g-hioil-consumer');
+ mkGrid(hioilD, k, 'g-hioil-defense');
+ // Active indicator when both conditions are met
+ const hioilActive = v.oil >= 90 && v.dxy >= 100;
+ const trigMsg = document.getElementById('hioil-trigger-msg');
+ if(trigMsg) trigMsg.style.display = hioilActive ? 'block' : 'none';
+ const badge = document.getElementById('hioil-badge');
+ if(badge){
+   badge.style.background  = hioilActive ? 'rgba(57,255,20,.15)' : 'rgba(255,107,53,.15)';
+   badge.style.borderColor = hioilActive ? 'rgba(57,255,20,.4)'  : 'rgba(255,107,53,.4)';
+   badge.style.color       = hioilActive ? 'var(--ac3)'          : 'var(--ac2)';
+   badge.textContent       = hioilActive ? 'ACTIVE NOW'          : 'WTI $90+ / DXY 100+';
+ }
 }
 
 
@@ -1139,10 +1249,14 @@ async function doRefresh(){
 
   await Promise.allSettled(Object.values(MACRO_SQ).map(cfg => sqFetchT(cfg.s, cfg)));
 
-  // Apply macro to sliders
+  // Apply macro to sliders AND store as live reference for RST buttons
   ['oil','fed','iran','cpi','yield','y2','dxy','qe','slr'].forEach(k => {
-    const id = k==='y2'?'sl-y2':'sl-'+k; const el = document.getElementById(id);
-    if (el && macroOut[k] != null) el.value = macroOut[k];
+    const id = k==='y2'?'sl-y2':'sl-'+k;
+    const el = document.getElementById(id);
+    if (el && macroOut[k] != null){
+      el.value = macroOut[k];
+      LIVE_MACRO[k] = macroOut[k]; // store for RST button restore
+    }
   });
   setProgress(8);
 
@@ -1216,10 +1330,11 @@ window.addEventListener('load',()=>{
   upd();          // render cards immediately with baseline data — never wait for network
   doRefresh();    // then fetch live data in background; upd() called again when done
 });
-// ── Expose functions needed by HTML onclick attributes ──────────
-window.rv         = rv;
-window.setScen    = setScen;
-window.doRefresh  = doRefresh;
+// ── Expose ALL functions called from HTML attributes ────────────
+window.rv          = rv;
+window.upd         = upd;         // oninput="upd()" on every slider
+window.setScen     = setScen;
+window.doRefresh   = doRefresh;
 window.collapseAll = collapseAll;
 })();
 </script>
