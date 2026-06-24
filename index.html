@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Macro Market Simulator v4 — Brad's Playbook</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
+/* Google Fonts loaded async — system fonts used as immediate fallback */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 :root{--bg:#080c14;--sur:#0d1420;--sur2:#111b2e;--bdr:#1e2d45;--ac:#00e5ff;--ac2:#ff6b35;--ac3:#39ff14;--gold:#ffd700;--red:#ff3b5c;--pur:#a855f7;--tx:#e8edf5;--mu:#6b7fa3;--cd:#0f1928}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--tx);font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+body{background:var(--bg);color:var(--tx);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.028) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
 .wrap{position:relative;z-index:1;max-width:1420px;margin:0 auto;padding:0 20px}
 header{padding:28px 0 20px;border-bottom:1px solid var(--bdr);margin-bottom:22px}
@@ -1126,15 +1129,15 @@ async function doRefresh(){
   setStat('Fetching macro data (oil · yields · dollar)...');
   const macroOut = {...BASE_MACRO};
 
-  await Promise.allSettled(Object.values(MACRO_SQ).map(async cfg => {
-    try {
-      const v = await sqFetch(cfg.s);
-      if (v >= cfg.lo && v <= cfg.hi){
-        macroOut[cfg.key] = Math.round(v * cfg.scale);
-        macroLive++;
-      }
-    } catch(_){}
-  }));
+  // Wrap each stooq fetch in a 6-second timeout — GitHub/CORS failures hang indefinitely
+  const sqFetchT = (sym, cfg) => Promise.race([
+    sqFetch(sym).then(v => {
+      if(v >= cfg.lo && v <= cfg.hi){ macroOut[cfg.key] = Math.round(v * cfg.scale); macroLive++; }
+    }).catch(()=>{}),
+    new Promise(res => setTimeout(res, 6000)) // 6s timeout per fetch
+  ]);
+
+  await Promise.allSettled(Object.values(MACRO_SQ).map(cfg => sqFetchT(cfg.s, cfg)));
 
   // Apply macro to sliders
   ['oil','fed','iran','cpi','yield','y2','dxy','qe','slr'].forEach(k => {
@@ -1149,11 +1152,11 @@ async function doRefresh(){
 
   await Promise.allSettled(ALL_TKS.map(async (tk, i) => {
     try {
-      const v = await sqFetch(sqSym(tk));
-      if (v > 0){
-        PX[tk] = v;
-        liveCount++;
-      }
+      const v = await Promise.race([
+        sqFetch(sqSym(tk)),
+        new Promise((_,rej) => setTimeout(()=>rej(new Error('timeout')), 8000))
+      ]);
+      if (v > 0){ PX[tk] = v; liveCount++; }
     } catch(_){}
     setProgress(8 + Math.round((i + 1) * step));
     updateBadge(tk);
@@ -1178,8 +1181,8 @@ async function doRefresh(){
     setTime(`Updated ${ds} ${ts}`, 'stale');
   } else {
     setDot('err');
-    setStat(`Stooq unreachable — showing Jun 23 2026 baseline · ${macroStr}`);
-    setTime('Baseline data', 'stale');
+    setStat(`Live data unavailable (CORS/network) — baseline Jun 23 2026 · ${macroStr}`);
+    setTime('Baseline prices shown', 'stale');
   }
 
   btn.disabled = false;
@@ -1207,7 +1210,17 @@ document.addEventListener('click',function(e){
  if(c) expandCard(card,c.t,c.n,c.d,c.k);
 });
 
-window.addEventListener('load',()=>{initCharts();bldAngles();doRefresh();});
+window.addEventListener('load',()=>{
+  initCharts();
+  bldAngles();
+  upd();          // render cards immediately with baseline data — never wait for network
+  doRefresh();    // then fetch live data in background; upd() called again when done
+});
+// ── Expose functions needed by HTML onclick attributes ──────────
+window.rv         = rv;
+window.setScen    = setScen;
+window.doRefresh  = doRefresh;
+window.collapseAll = collapseAll;
 })();
 </script>
 </body>
